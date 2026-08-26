@@ -59,6 +59,37 @@ design** (its audit decision D8). Two processes cost one extra deploy target and
 buy back all of the above. Revisit if operating two services becomes the real
 pain — nothing here forecloses it.
 
+## The flow
+
+```
+home  ──▶  /reading  ──▶  /reading/:publicId  ──▶  /designer/:publicId  ──▶  saved design
+ │          birth form     chart + stones        palette, size, strand      (publicId)
+ │
+ └─ app-custom-bracelet-section, between Best Sellers and Intention Shop
+```
+
+Two entrances and one exit, and before they existed the designer was live,
+seeded and solvable with nothing anywhere linking to it.
+
+**Into the reading** — `app-custom-bracelet-section` on the home page. It offers
+"Read my chart" to a new visitor and "Continue my reading" to anyone
+`LastReadingService` has an id for.
+
+**Into the designer** — a CTA at the foot of the recommendations, drawn only when
+the engine ranked something. D21: a designer with no palette has nothing honest
+to show, so a reading that ranked nothing offers no door. Never on
+`/shared/:shareToken`, which holds a token the designer cannot use.
+
+**`LastReadingService`** exists because a reading is anonymous behind an
+`sc_anon` HttpOnly cookie with no screen that lists it — close the tab and it is
+unreachable forever, saved bracelet included. It keeps the opaque `publicId` in
+`localStorage` and **throws on anything with structure**, so "cache the form so
+they don't have to retype it" fails loudly instead of quietly writing birth data
+to disk.
+
+**The exit is still a dead end**, and deliberately: saving yields a `publicId`
+and no way to order. That is Q-12, below.
+
 ## The rules, and where they are enforced
 
 These are not style preferences. Each is a test that will fail.
@@ -73,6 +104,9 @@ These are not style preferences. Each is a test that will fail.
 | Every backend error code has specific copy | `core/models/error-copy.spec.ts` |
 | Every rulepack reason key has copy | `core/content/reason-key-coverage.spec.ts` |
 | Focus indicators survive forced-colors mode | `features/designer/focus-indicators.spec.ts` |
+| en / ka / ru carry the same keys | `core/content/translation-parity.spec.ts` |
+| The reading remembers only an opaque id | `core/services/last-reading.service.spec.ts` |
+| The designer is offered only where there is a palette | `features/reading/recommendations/design-cta.spec.ts` |
 
 Run them with `pnpm test`.
 
@@ -111,12 +145,18 @@ is in `Directory.Packages.props` and referenced nowhere in `src/`. There is no
 `ClaimTypes.NameIdentifier` / `sub`, so linking a reading to a WitchLab account
 is small — but it is code to write, not a key to set.
 
-**Q-8, the bead catalogue.** `bead_variants` is empty; no supplier catalogue
-exists and nothing invented one. `GET /bracelets/templates` returns `[]`,
-`GET /bracelets/sizing` announces `status: PROVISIONAL` and `openQuestion: Q-8`
-on the wire, and `POST /bracelets/configurations` returns `400
-BEAD_CATALOG_EMPTY`. The designer asks the real endpoint, so it stops saying "not
-yet" on its own the day this changes.
+**Q-8, the bead catalogue.** No supplier catalogue exists and nothing invented
+one. `GET /bracelets/sizing` announces `status: PROVISIONAL` and
+`openQuestion: Q-8` on the wire, and in a default deployment
+`POST /bracelets/configurations` answers `400 BEAD_CATALOG_EMPTY` — which stays
+correct until real stock exists.
+
+Locally the picture differs and it is worth knowing why: StoneCraft-B seeds
+provisional beads behind `Seed:ProvisionalBeads`, **off by default**. The dev
+database this was built against has that flag on, so it holds 1040 bead variants
+across four diameters and one template, and the designer solves real geometry.
+Those beads are a development fixture. They do not answer Q-8, and a production
+deployment that leaves the flag off will correctly refuse to build anything.
 
 **Q-12, the handoff contract.** This is the actual commerce integration.
 `IBraceletHandoff` exists, has one implementation and is tested — but it is
@@ -137,13 +177,28 @@ facts only — and should be shaped by the screen that consumes it.
 
 ## Copy
 
-`STONECRAFT` is one top-level key in `public/i18n/content/en.json`. `ka.json` and
-`ru.json` carry none of it — they need a fluent author rather than a translation
-pass — so `translateConfig` sets `fallbackLang: 'en'`; without it those two
-languages would render raw key paths.
+`STONECRAFT` is one top-level key, and all three bundles carry it in full — 360
+keys each in `en.json`, `ka.json` and `ru.json`. `translation-parity.spec.ts`
+fails the build if a key exists in one bundle and not the others, in either
+direction. That check is load-bearing: `translateConfig` sets
+`fallbackLang: 'en'`, so a key added in English only renders English rather than
+a raw key path — the correct failure, and a silent one.
 
-`STONECRAFT.REASONS` is **generated**. Edit `reason-keys.en.json` (flat, because
-that is the shape a person can review) and run `pnpm i18n:reasons`.
+**The Georgian still wants a native reader.** StoneCraft-F left `ka`/`ru` empty
+on the grounds that they needed a fluent author rather than a translation pass,
+and what is here is a translation pass. Russian astrological vocabulary is
+settled and the register is safe. Georgian is lower-resource and the esoteric
+terminology is not standardised, so treat it as a good draft rather than final
+copy.
+
+`STONECRAFT.REASONS` is **generated**, in every language. Edit
+`reason-keys.{en,ka,ru}.json` (flat, because that is the shape a person can
+review) and run `pnpm i18n:reasons`. The translated reason copy is built from
+term tables rather than typed out per key, which is what holds the register
+steady across 57 keys and gets Russian gender agreement right per planet.
+`reason-keys.en.json`'s `_meta.voice` block states the rules every language must
+keep: frame each claim as belonging to a tradition, never name a book or author,
+never promise an outcome, and say *counselled against* rather than *forbidden*.
 `tools/extract-rulepack-keys.mjs` regenerates the coverage fixture from
 StoneCraft-B's seed:
 
