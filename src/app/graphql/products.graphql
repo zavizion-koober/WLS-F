@@ -1,0 +1,163 @@
+query GetProducts(
+    $skip: Int
+    $take: Int
+    $where: ProductFilterInput
+    $order: [ProductSortInput!]
+) {
+    products(skip: $skip, take: $take, where: $where, order: $order) {
+        items {
+            id
+            status
+            zodiac
+            slug {
+                value
+            }
+            inventory {
+                stockQuantity
+            }
+            pricing {
+                price {
+                    amount
+                }
+                salePrice {
+                    amount
+                }
+            }
+            images(order: [{ displayOrder: ASC }]) {
+                url
+                altText
+                isPrimary
+            }
+            category {
+                id
+                translations {
+                    name
+                    language
+                }
+            }
+            intention {
+                id
+                translations {
+                    name
+                    language
+                }
+            }
+            translations {
+                name
+                shortDescription
+                language
+            }
+        }
+        totalCount
+    }
+}
+
+query GetProductBySlug($slug: String!) {
+    products(where: { slug: { value: { eq: $slug } } }, take: 1) {
+        items {
+            id
+            status
+            zodiac
+            slug {
+                value
+            }
+            inventory {
+                stockQuantity
+                lowStockThreshold
+            }
+            pricing {
+                price {
+                    amount
+                }
+                salePrice {
+                    amount
+                }
+            }
+            images(order: [{ displayOrder: ASC }]) {
+                id
+                url
+                altText
+                isPrimary
+            }
+            category {
+                id
+                translations {
+                    name
+                    language
+                }
+            }
+            intention {
+                id
+                translations {
+                    name
+                    language
+                }
+            }
+            translations {
+                name
+                shortDescription
+                longDescription
+                howToUse
+                materials
+                language
+            }
+        }
+        totalCount
+    }
+}
+
+query GetBestSellerProducts(
+    $skip: Int
+    $take: Int
+    $period: BestSellerPeriod
+) {
+    bestSellerProducts(skip: $skip, take: $take, period: $period) {
+        totalCount
+        items {
+            soldCount
+            product {
+                id
+                status
+                zodiac
+                slug {
+                    value
+                }
+                inventory {
+                    stockQuantity
+                }
+                pricing {
+                    price {
+                        amount
+                    }
+                    salePrice {
+                        amount
+                    }
+                }
+                images(order: [{ displayOrder: ASC }]) {
+                    url
+                    altText
+                    isPrimary
+                }
+                category {
+                    id
+                    translations {
+                        name
+                        language
+                    }
+                }
+                intention {
+                    id
+                    translations {
+                        name
+                        language
+                    }
+                }
+                translations {
+                    name
+                    shortDescription
+                    language
+                }
+            }
+        }
+    }
+}

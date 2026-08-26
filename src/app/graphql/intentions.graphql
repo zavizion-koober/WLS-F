@@ -1,0 +1,72 @@
+query GetIntentions {
+    categories(
+        where: { type: { eq: INTENTION }, status: { eq: PUBLISHED } }
+        order: [{ type: ASC }]
+    ) {
+        items {
+            id
+            imageUrl
+            status
+            type
+            translations {
+                name
+                description
+                language
+            }
+        }
+        totalCount
+    }
+}
+
+query GetIntentionProducts($intentionId: UUID!, $skip: Int, $take: Int) {
+    products(
+        skip: $skip
+        take: $take
+        where: { intentionId: { eq: $intentionId }, status: { eq: PUBLISHED }, isDeleted: { eq: false } }
+    ) {
+        items {
+            id
+            status
+            zodiac
+            slug {
+                value
+            }
+            inventory {
+                stockQuantity
+            }
+            images(order: [{ displayOrder: ASC }]) {
+                url
+                altText
+                isPrimary
+            }
+            pricing {
+                price {
+                    amount
+                }
+                salePrice {
+                    amount
+                }
+            }
+            category {
+                id
+                translations {
+                    name
+                    language
+                }
+            }
+            intention {
+                id
+                translations {
+                    name
+                    language
+                }
+            }
+            translations {
+                name
+                shortDescription
+                language
+            }
+        }
+        totalCount
+    }
+}

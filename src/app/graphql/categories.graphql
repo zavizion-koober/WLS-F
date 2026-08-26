@@ -1,0 +1,21 @@
+query GetCategories(
+    $skip: Int
+    $take: Int
+    $where: CategoryFilterInput
+    $order: [CategorySortInput!]
+) {
+    categories(skip: $skip, take: $take, where: $where, order: $order) {
+        items {
+            id
+            imageUrl
+            status
+            type
+            translations {
+                name
+                description
+                language
+            }
+        }
+        totalCount
+    }
+}

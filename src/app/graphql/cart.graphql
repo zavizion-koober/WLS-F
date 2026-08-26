@@ -1,0 +1,76 @@
+query GetCart($language: Language!) {
+    cart {
+        id
+        quantity
+        product {
+            id
+            zodiac
+            category {
+                id
+            }
+            intention {
+                id
+            }
+            slug {
+                value
+            }
+            inventory {
+                stockQuantity
+            }
+            pricing {
+                price {
+                    amount
+                }
+                salePrice {
+                    amount
+                }
+            }
+            images(order: [{ displayOrder: ASC }]) {
+                url
+                altText
+            }
+            translations(where: { language: { eq: $language } }) {
+                name
+                language
+            }
+        }
+    }
+}
+
+query GetCartProducts($ids: [UUID!], $language: Language!) {
+    products(where: { id: { in: $ids }, status: { eq: PUBLISHED } }) {
+        items {
+            id
+            zodiac
+            category {
+                id
+            }
+            intention {
+                id
+            }
+            slug {
+                value
+            }
+            inventory {
+                stockQuantity
+            }
+            pricing {
+                price {
+                    amount
+                }
+                salePrice {
+                    amount
+                }
+            }
+            images(order: [{ displayOrder: ASC }]) {
+                url
+                altText
+            }
+            translations(where: { language: { eq: $language } }) {
+                name
+                language
+            }
+        }
+        totalCount
+    }
+}

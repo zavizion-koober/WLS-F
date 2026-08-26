@@ -1,0 +1,525 @@
+{
+  "NAVBAR": {
+    "HOME": "Home",
+    "SHOP": "Shop",
+    "INTENTIONS": "Intentions",
+    "OUR_STORY": "Our Story",
+    "FAQ": "FAQ",
+    "CONTACT": "Contact",
+    "LANGUAGE": "Language",
+    "BRAND_SUBTITLE": "Luxury Rituals",
+    "ATELIER_SHOP": "Atelier & Shop",
+    "SEARCH": "Search Products",
+    "ACCOUNT": "My Account",
+    "LOGIN": "Log In",
+    "RITUAL_BAG": "Ritual Bag",
+    "COLLECTIONS": "Collections"
+  },
+  "SEARCH": {
+    "SUBTITLE": "Occult Discovery",
+    "TITLE": "Search",
+    "HEADING": "Search the Atelier",
+    "PLACEHOLDER": "Search by object name or essence...",
+    "RESULTS_FOR": "Results for \"{{query}}\": {{count}} items",
+    "BROWSE_ALL": "Browse All Objects: {{count}} items",
+    "POPULAR": "Popular Searches",
+    "EMPTY_TITLE": "No sacred objects found",
+    "EMPTY_DESC": "We couldn't find any objects matching your search query. Try searching for candles, oils, or ritual tools.",
+    "EMPTY_ACTION": "Explore Full Shop"
+  },
+  "FAQ": {
+    "SUBTITLE": "Enquiries & Verities",
+    "TITLE": "Frequently Asked",
+    "DESCRIPTION": "Find answers about celestial alignments, product sourcing, ritual safety, and shipping logistics.",
+    "CATEGORIES": {
+      "ALL": "All",
+      "PHILOSOPHY": "Philosophy",
+      "SHIPPING_PACKAGING": "Shipping & Packaging",
+      "CARE_SAFETY": "Care & Safety"
+    },
+    "ITEMS": {
+      "CHOOSE_COLLECTION": {
+        "QUESTION": "How do I choose the correct collection for my intention?",
+        "ANSWER": "We recommend taking our interactive Ritual Quiz on the home page. Alternatively, you can browse by \"Intention\" in the shop menu. If you seek release and clean spaces, choose Cleansing. If you seek career growth or business progress, choose Finance."
+      },
+      "MOON_PHASES": {
+        "QUESTION": "What is the significance of the Moon Phases in your pouring cycle?",
+        "ANSWER": "We align our crafting process with celestial cycles. Products intended for release, clearing, and boundary-protection are poured during the Waning Moon. Products designed for growth, wealth attraction, and love are poured during the Waxing Moon or Full Moon. This anchors the physical creation process in alignment with cosmic tides."
+      },
+      "CRYSTAL_CHIPS": {
+        "QUESTION": "Are the crystal chips in the candles safe to burn?",
+        "ANSWER": "Yes. The crystal points (clear quartz, rose quartz, pyrite) embedded in our soy candles are naturally heat-resistant. As the wax pools, the crystals sinks down, charging the hot wax. Once the candle is fully burned, you can carefully wash the crystals in warm water and keep them as talismanic tokens."
+      },
+      "SHELF_LIFE": {
+        "QUESTION": "What is the shelf life of your anointing oils?",
+        "ANSWER": "Since we use pure cold-pressed carrier oils and organic botanical essential oils without synthetic stabilizers, our elixirs remain at maximum potency for 12 to 18 months. Store them in a cool, dark place away from direct sunlight."
+      },
+      "ENERGETIC_FREQUENCY": {
+        "QUESTION": "How is the energetic frequency of the products protected during transit?",
+        "ANSWER": "Every order is packed in a heavy-duty, double-walled black presentation box lined with velvet shielding material and sealed with hot wax. We also place a small clear quartz chip inside every package to stabilize the vibration during long-distance shipping."
+      },
+      "INTERNATIONAL_SHIPPING": {
+        "QUESTION": "Do you offer international shipping and standard delivery times?",
+        "ANSWER": "We ship worldwide from our atelier. Domestic orders are processed in 2 business days and arrive in 3-5 days. International orders take 7-14 business days. Signature is required for all talismans and crystal bottles to ensure safe delivery."
+      }
+    },
+    "CONTACT": {
+      "TITLE": "Have an Unlisted Inquiry?",
+      "DESCRIPTION": "Our ritual consulting team is available to assist you with specific questions regarding customized spell work, corporate gifting, or wholesale orders.",
+      "CTA": "Contact the Atelier"
+    }
+  },
+  "MESSAGES": {
+    "TITLES": {
+      "SUCCESS": "Success",
+      "WARNING": "Warning",
+      "ERROR": "Error",
+      "AUTH_ERROR": "Authorization Error",
+      "UNKNOWN_ERROR": "Unknown Error",
+      "NETWORK_ERROR": "Network Error"
+    },
+    "ERRORS": {
+      "DATA_LOAD_FAILED": "Failed to load data",
+      "NETWORK": "Could not connect to the server"
+    },
+    "AUTH": {
+      "REGISTER_SUCCESS": "You registered successfully. Check your email :)",
+      "LOGIN_SUCCESS": "You logged in successfully.",
+      "EMAIL_VERIFIED": "Your email has been verified successfully",
+      "VERIFICATION_RESENT": "Verification code has been resent to your email",
+      "PASSWORD_RESET_SENT": "Password reset link has been sent to your email",
+      "PASSWORD_RESET_SUCCESS": "Your password has been reset successfully",
+      "EMAIL_NOT_VERIFIED": "Your email is not verified. Check your email :)"
+    }
+  },
+  "AUTH": {
+    "CREATE_ACCOUNT": "Create an Account",
+    "CREATE_ACCOUNT_DESC": "Join the circle to begin your practice.",
+    "LOG_IN": "Log In to Your Account",
+    "LOG_IN_DESC": "Continue to your account to participate and stay updated.",
+    "LOG_IN_BTN": "Log In",
+    "SIGN_UP": "Sign Up",
+    "DONT_HAVE_ACCOUNT": "Don't have an account?",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "OR": "Or",
+    "FORGOT_PASSWORD": "Forgot Password?",
+    "RESET_PASSWORD": "Reset Your Password",
+    "RESET_PASSWORD_DESC": "Enter your email and we'll send you instructions to reset your password.",
+    "SEND_RESET_LINK": "Send Reset Link",
+    "BACK_TO_LOGIN": "Back to Log In",
+    "CREATE_NEW_PASSWORD": "Create a New Password",
+    "CREATE_NEW_PASSWORD_DESC": "Enter a new password for your account. Make sure it's secure and easy for you to remember.",
+    "NEW_PASSWORD": "Create New Password",
+    "NEW_PASSWORD_PLACEHOLDER": "Create Password",
+    "UPDATE_PASSWORD": "Update Password",
+    "CHECK_YOUR_EMAIL": "Check Your Email",
+    "RESET_EMAIL_SENT_DESC": "If an account exists with this email address, we've sent instructions to reset your password.",
+    "DIDNT_RECEIVE_CODE": "Didn't receive the code?",
+    "RESEND_CODE": "Resend Code",
+    "RESEND_CODE_COUNTDOWN": "Resend Code ({{seconds}}s)",
+    "BACK_TO_REGISTRATION": "Back to Registration",
+    "VERIFY_EMAIL": "Verify Your Email Address",
+    "VERIFY_EMAIL_DESC": "We've sent a verification code to your email. Enter the 6-digit code below to activate your account."
+  },
+  "FORM": {
+    "LABELS": {
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email Address",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "OPTIONAL": "Optional",
+      "NECESSARY": "Necessary",
+      "SHOW_PASSWORD": "Show Password",
+      "HIDE_PASSWORD": "Hide Password"
+    },
+    "PLACEHOLDERS": {
+      "FULL_NAME": "John Doe",
+      "EMAIL": "example@gmail.com",
+      "PASSWORD": "Enter Password",
+      "CONFIRM_PASSWORD": "Repeat Password"
+    }
+  },
+  "ERRORS": {
+    "REQUIRED": "This field is required",
+    "PATTERN": "Invalid format",
+    "MINLENGTH": "Must contain at least {{requiredLength}} characters",
+    "MAXLENGTH": "Must not exceed {{requiredLength}} characters",
+    "EMAIL": "Enter a valid email address",
+    "PASSWORD_MISMATCH": "Passwords do not match",
+    "HAS_UPPERCASE": "Password must contain at least 1 uppercase letter",
+    "HAS_LOWERCASE": "Password must contain at least 1 lowercase letter",
+    "HAS_NUMBER": "Password must contain at least 1 number",
+    "HAS_SPECIAL_CHARACTER": "Password must contain at least 1 special character",
+    "PHONE": "Enter a valid phone number",
+    "INVALID_NAME": "Enter a valid name",
+    "INVALID_URL": "Enter a valid URL",
+    "INVALID_CODE": "Enter a valid code",
+    "INVALID_AMOUNT": "Enter a valid amount",
+    "INVALID_ENUM": "Select a valid option",
+    "INVALID_CARD_NUMBER": "Enter a valid card number",
+    "INVALID_FORMAT": "Invalid format",
+    "INVALID_MONTH": "Enter a valid month",
+    "EXPIRED": "This card has expired",
+    "TOO_YOUNG": "You are too young",
+    "TOO_OLD": "Please check the date",
+    "DATE_IN_FUTURE": "The date cannot be in the future",
+    "MUST_BE_POSITIVE": "Must be a positive number",
+    "MAX_AMOUNT": "Amount is too large",
+    "MIN": "Value is too small",
+    "MAX": "Value is too large"
+  },
+  "PASSWORD_RULES": {
+    "MIN_CHARACTERS": "Minimum 8 characters",
+    "ONE_NUMBER": "At least one number",
+    "ONE_UPPERCASE": "At least one uppercase letter",
+    "ONE_SPECIAL": "At least one special character"
+  },
+  "ABOUT": {
+    "HEADER_SUBTITLE": "Our Origin & Creed",
+    "HEADER_TITLE": "The Lunar Atelier",
+    "NARRATIVE_HEADING": "Beyond the Occult: Contemporary Alchemy",
+    "NARRATIVE_P1": "WitchLab was born out of a desire to bridge the gap between ancient botanical wisdom and high-end modern design. We believe that rituals are not primitive superstitions; they are deliberate psychological and energetic focus structures.",
+    "NARRATIVE_P2": "By engaging the senses—the crackle of an herb-infused candle, the rich scent of cold-pressed oils, the tactile weight of an engraved talisman—we anchor our intentions in physical reality.",
+    "PILLARS": {
+      "SOURCED_TITLE": "100% Sustainably Sourced",
+      "SOURCED_DESC": "All of our wildcrafted herbs are harvested with permission, respecting local bio-networks. We reject commercial monoculture cultivation in favor of small, biodynamic partners.",
+      "LUNAR_TITLE": "Solar & Lunar Alignments",
+      "LUNAR_DESC": "We schedule our production schedules in alignment with celestial patterns. Cleansing items are poured during the waning moon; prosperity collections are finalized during the waxing moon.",
+      "ARTIST_TITLE": "The Artist's Hand",
+      "ARTIST_DESC": "Every bottle is individually layered, corked, and sealed by hand in our physical studio. Our talismans are hand-engraved, ensuring no two products are identical."
+    },
+    "CTA_HEADING": "Join the Synthesis",
+    "CTA_DESC": "Browse our apothecary collections or consult our ritual guide to discover your own manifestational path.",
+    "CTA_BTN": "Shop Collections"
+  },
+  "FOOTER": {
+    "SUBTITLE": "Occult Botanical Atelier",
+    "BRAND_TAG": "Same Brand • Different Environment",
+    "PHILOSOPHY": "Handcrafted ritual tools designed to align intention with execution. A bridge between contemporary art, luxury, and spiritual alchemy.",
+    "COLLECTIONS_TITLE": "Shop Collections",
+    "GUIDE_TITLE": "Atelier Guide",
+    "UPDATES_TITLE": "Atelier Updates",
+    "FAQ": "Atelier FAQ",
+    "SUPPORT": "Atelier Support",
+    "DESC": "Charged botanicals, consecrated soy wax, pure organic essential oils. Handcrafted with reverence.",
+    "PRIVATE_CONSULTATION": "Private Consultation",
+    "ACCOUNT_DASHBOARD": "Account Dashboard",
+    "NEWSLETTER_DESC": "Receive lunar alignment guides, astrological reports, and access to exclusive ritual product releases.",
+    "NEWSLETTER_SUCCESS": "Welcome to the circle. Watch your inbox at the next new moon.",
+    "NEWSLETTER_PLACEHOLDER": "your.email@domain.com",
+    "SUBSCRIBE": "Subscribe",
+    "COPYRIGHT": "© 2026 WitchLab LLC. All Rights Reserved.",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "TERMS": "Terms of Initiation",
+    "SHIPPING_RETURNS": "Shipping & Returns",
+    "SOCIALS": {
+      "FACEBOOK": "Facebook",
+      "INSTAGRAM": "Instagram"
+    }
+  },
+  "HOME": {
+    "HERO": {
+      "SUBTITLE": "Lunar Atelier • Handcrafted Alchemy",
+      "TITLE": "OBJECTS FOR YOUR PRACTICE.",
+      "TITLE_PART1": "Craft Your Intention.",
+      "TITLE_PART2": "Transform Your Energy.",
+      "DESC": "Handcrafted ritual tools designed for manifestation, healing, prosperity, protection, and spiritual growth. Born of soil, stars, and ceremony.",
+      "SHOP_CTA": "Shop Collection",
+      "RITUAL_CTA": "Find Your Ritual",
+      "SCROLL": "Scroll to Begin",
+      "ARTISANAL_BADGE": "Artisanal Production • Small Batch",
+      "PILLARS": {
+        "HAND_POURED": "Hand-Poured",
+        "BOTANICAL_ESSENCES": "Botanical Essences",
+        "LUNAR_CYCLES": "Lunar Cycles"
+      }
+    },
+    "PHILOSOPHY": {
+      "SUBTITLE": "The Alchemy of WitchLab",
+      "TITLE": "From Form to Formless",
+      "QUOTE": "\"We do not create objects. We create space for alignment. Every oil is pressed under specific lunar phases, and every candle is layered with botanical frequency.\"",
+      "CTA": "Read Full Atelier Manifesto →",
+      "PILLARS": {
+        "I_TITLE": "Intention",
+        "I_DESC": "The starting point of all creation. We select botanicals and gems possessing the exact energetic signature aligned with your desires.",
+        "II_TITLE": "Ritual",
+        "II_DESC": "Anointment, smoke, and concentration. The deliberate acts of focus that charge physical matter with spiritual direction.",
+        "III_TITLE": "Transformation",
+        "III_DESC": "The shift in internal state. Our tools serve as mirrors, catalyzing the physical alignment of health, love, harmony, and abundance."
+      }
+    },
+    "FEATURED_CATEGORIES": {
+      "SUBTITLE": "Curated Realms",
+      "TITLE": "Shop by Category",
+      "VIEW_ALL": "View All Products →"
+    },
+    "BEST_SELLERS": {
+      "SUBTITLE": "Most Coveted Rituals",
+      "TITLE": "Selected Objects",
+      "EXPLORE_ALL": "Explore All Objects →",
+      "QUICK_ADD": "Quick Add",
+      "DETAILS": "Details"
+    },
+    "INTENTION_SHOP": {
+      "SUBTITLE": "Outcome-Driven Manifestation",
+      "TITLE": "Shop by Intention",
+      "DESC": "Occult results manifest when mind meets energy. Filter our atelier catalog by the transformation you are actively seeking.",
+      "ANOINT": "Anoint (Add)",
+      "EMPTY": "Select an intention above to preview aligned ritual tools."
+    },
+    "QUIZ": {
+      "SUBTITLE": "The Ritual Finder Quiz",
+      "TITLE": "Uncover Your Ceremony",
+      "DESC": "Synthesize your energetic goals and natural elements to find a personalized ritual recommendation set.",
+      "BEGIN": "Begin Spiritual Synthesis",
+      "STEP_1_OF_2": "Step 1 of 2",
+      "STEP_2_OF_2": "Step 2 of 2",
+      "GOAL_QUESTION": "What are you seeking to manifest?",
+      "ELEMENT_QUESTION": "Which elemental energy speaks to you?",
+      "COMPLETE_SUBTITLE": "Your Synthesis is Complete",
+      "COMPLETE_TITLE": "The Recommended Ritual Bundle",
+      "CANDLE": "1. Candle",
+      "OIL": "2. Oil",
+      "TALISMAN": "3. Talisman",
+      "TOTAL_VALUE": "Total Bundle Value",
+      "RESTART": "Restart",
+      "ANOINT_ALL": "Anoint All (Add Bundle)",
+      "GOALS": {
+        "LOVE": "Manifesting Deep Love & Harmony",
+        "WEALTH": "Attracting Prosperity & Financial Flow",
+        "PROTECTION": "Energetic Shielding & Personal Warding",
+        "RESTORATION": "Physical Vitality & Rejuvenating Health",
+        "ASTRAL": "Astral Connection & Lucid Dreaming"
+      },
+      "ELEMENTS": {
+        "FIRE": "Fire — Passion, transformation, active drive",
+        "WATER": "Water — Intuition, flow, emotional release",
+        "EARTH": "Earth — Grounding, abundance, stable security",
+        "AIR": "Air — Clarity, intellect, astral dreaming"
+      }
+    },
+    "NEWSLETTER": {
+      "SUBTITLE": "Cross the Threshold",
+      "TITLE": "Ready To Begin Your Ritual?",
+      "DESC": "Cross the threshold today. Equip your temple, invoke your desires, and manifest your true trajectory.",
+      "CTA": "Shop Collection"
+    }
+  },
+  "ZODIAC": {
+    "AQUARIUS": "Aquarius",
+    "ARIES": "Aries",
+    "CANCER": "Cancer",
+    "CAPRICORN": "Capricorn",
+    "GEMINI": "Gemini",
+    "LEO": "Leo",
+    "LIBRA": "Libra",
+    "PISCES": "Pisces",
+    "SAGITTARIUS": "Sagittarius",
+    "SCORPIO": "Scorpio",
+    "TAURUS": "Taurus",
+    "VIRGO": "Virgo"
+  },
+  "PRODUCT": {
+    "VIEW_DETAILS": "View Details",
+    "VIEW": "View",
+    "SPECIAL": "Special",
+    "OUT_OF_STOCK": "Out of Stock",
+    "ADD_TO_BAG": "Add to Bag"
+  },
+  "SHOP": {
+    "HEADER": {
+      "SUBTITLE": "The Apothecary Catalog",
+      "TITLE": "Atelier Collection",
+      "DESC": "Browse our lunar-charged collections. Select tools aligned with your specific path of transformation."
+    },
+    "CONTROLS": {
+      "DISPLAYING": "Displaying",
+      "ITEMS": "Alchemical Items",
+      "SORT_BY": "Sort by",
+      "SORT_FEATURED": "Featured",
+      "SORT_PRICE_ASC": "Price: Low to High",
+      "SORT_PRICE_DESC": "Price: High to Low"
+    },
+    "EMPTY": {
+      "NO_PRODUCTS": "No products found matching these synthesis configurations.",
+      "CLEAR_FILTERS": "Clear Filters"
+    },
+    "FILTERS": {
+      "TITLE": "Filters",
+      "CLEAR_ALL": "Clear All",
+      "ACTIVE": "Active:",
+      "CATEGORY": "Category",
+      "ALL_COLLECTIONS": "All Collections",
+      "INTENTION": "Intention Outcome",
+      "ALL_INTENTIONS": "All Intentions",
+      "ASTROLOGICAL": "Astrological Sign",
+      "ALL_SIGNS": "All Signs",
+      "PRICE_RANGE": "Price Range",
+      "MIN": "Min",
+      "MAX": "Max",
+      "APPLY_PRICE": "Apply Price",
+      "DONE": "Done"
+    }
+  },
+  "PRODUCT_DETAIL": {
+    "HOME": "Home",
+    "SHOP": "Shop",
+    "DESCRIPTION": "Description",
+    "MATERIALS": "Materials",
+    "HOW_TO_USE": "How To Use",
+    "NOT_SPECIFIED": "Not specified.",
+    "ADD_TO_BAG": "Add to Ritual Bag",
+    "CHARGED_UNDER_MOON": "Charged under the full moon • Artisanal craft batch",
+    "PRODUCT_NOT_FOUND": "Offering Not Found",
+    "NOT_FOUND_DESC": "This sacred object may have completed its cycle or returned to the archive.",
+    "RETURN_SHOP": "Return to Atelier Shop",
+    "UNAVAILABLE": "Currently Unavailable",
+    "LIMITED_BATCH": "Limited Batch (Only {{count}} left)",
+    "IN_STOCK_CONSECRATED": "In Stock • Consecrated Batch",
+    "ONLY_STOCK": "Only {{count}} available in stock",
+    "SHIPPING_TITLE": "Shipping & Packaging",
+    "SHIPPING_DESC": "Every order is packaged with sacred intention in protective linen and double-walled presentation boxes, charged with natural quartz to preserve energetic integrity during transit.",
+    "COMPLEMENTARY_SUBTITLE": "Complementary Objects",
+    "COMPLEMENTARY_TITLE": "Complete Your Ritual Practice"
+  },
+  "CHECKOUT": {
+    "EYEBROW": "Secure Checkout",
+    "TITLE": "Complete Your Ritual",
+    "STEPS": {
+      "CART": "Cart",
+      "ADDRESS": "Address",
+      "CONTACT": "Contact",
+      "PAYMENT": "Payment",
+      "REVIEW": "Review"
+    },
+    "ACTIONS": {
+      "CONTINUE": "Continue",
+      "BACK": "Back",
+      "CANCEL": "Cancel",
+      "PLACE_ORDER": "Place Order",
+      "PLACING": "Placing...",
+      "PROCEED": "Proceed to Checkout",
+      "VIEW_FULL_BAG": "View Full Bag",
+      "CONTINUE_SHOPPING": "Continue Shopping"
+    },
+    "CART": {
+      "YOUR_BAG": "Your Ritual Bag",
+      "REVIEW": "Order Review",
+      "CLEAR": "Clear Entire Bag",
+      "EMPTY": "Your ritual bag is currently empty",
+      "EMPTY_DESC": "Select botanical essences, candles, or ritual tools to begin your practice.",
+      "BROWSE": "Explore Atelier Shop",
+      "REMOVE": "Remove",
+      "INCREASE": "Increase quantity",
+      "DECREASE": "Decrease quantity",
+      "MAX_STOCK": "Maximum stock reached",
+      "ADDED_TO_BAG": "Item added to bag"
+    },
+    "ADDRESS": {
+      "ADD_NEW": "+ Add a new address",
+      "SAVE": "Save address",
+      "COUNTRY": "Country",
+      "CITY": "City",
+      "STREET": "Street",
+      "ZIP": "Zip code",
+      "ADDITIONAL": "Additional info"
+    },
+    "CONTACT": {
+      "FULL_NAME": "Full name",
+      "PHONE": "Phone number",
+      "HINT": "We use this only to reach you about this order."
+    },
+    "PAYMENT": {
+      "CARD_NAME": "Name on card",
+      "CARD_NUMBER": "Card number",
+      "EXPIRY": "Expiry",
+      "CVV": "CVV"
+    },
+    "REVIEW": {
+      "ITEMS": "Items",
+      "SHIPPING_TO": "Shipping to",
+      "CONTACT": "Contact"
+    },
+    "SUMMARY": {
+      "TITLE": "Order Summary",
+      "TOTAL_ITEMS": "Total Items:",
+      "SUBTOTAL": "Subtotal",
+      "TOTAL": "Total",
+      "SHIPPING_NOTE": "Shipping, taxes, and discounts calculated at checkout.",
+      "NOTE": "Shipping and delivery address will be finalized during checkout. All orders are hand-packaged with consecrated protective packaging."
+    },
+    "SUCCESS": {
+      "TITLE": "Your order is sealed",
+      "MESSAGE": "We have received your order and will begin preparing it.",
+      "ORDER_NUMBER": "Order number",
+      "VIEW_ORDERS": "My orders",
+      "CONTINUE_SHOPPING": "Continue shopping"
+    }
+  },
+  "PROFILE": {
+    "EYEBROW": "Your Account",
+    "LOGOUT": "Sign out",
+    "NAV": {
+      "OVERVIEW": "Overview",
+      "ORDERS": "Orders",
+      "ADDRESSES": "Addresses",
+      "DETAILS": "Details",
+      "SECURITY": "Security"
+    },
+    "ACTIONS": {
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "EDIT": "Edit",
+      "DELETE": "Delete"
+    },
+    "OVERVIEW": {
+      "TITLE": "Overview",
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "MEMBER_SINCE": "Member since",
+      "NOT_SET": "Not set"
+    },
+    "ORDERS": {
+      "TITLE": "Your orders",
+      "LOADING": "Loading your orders...",
+      "EMPTY": "You have no orders yet",
+      "BROWSE": "Browse the shop",
+      "CANCEL": "Cancel order",
+      "CANCEL_CONFIRM": "Cancel this order?",
+      "CANCEL_CONFIRMED": "Order cancelled successfully",
+      "CANCEL_YES": "Yes, cancel",
+      "KEEP": "Keep it",
+      "STATUS": {
+        "PENDING": "Pending",
+        "CONFIRMED": "Confirmed",
+        "SHIPPED": "Shipped",
+        "DELIVERED": "Delivered",
+        "CANCELLED": "Cancelled"
+      }
+    },
+    "ADDRESSES": {
+      "TITLE": "Address book",
+      "EMPTY": "You have no saved addresses",
+      "ADD_NEW": "+ Add a new address",
+      "ADD_TITLE": "New address",
+      "EDIT_TITLE": "Edit address",
+      "DELETE_CONFIRM": "Delete this address?"
+    },
+    "DETAILS": {
+      "TITLE": "Personal details",
+      "SAVED": "Saved"
+    },
+    "SECURITY": {
+      "TITLE": "Password",
+      "CURRENT_PASSWORD": "Current password",
+      "NEW_PASSWORD": "New password",
+      "UPDATE_PASSWORD": "Update password",
+      "PASSWORD_CHANGED": "Password updated",
+      "DANGER_ZONE": "Danger zone",
+      "DELETE_WARNING": "Deleting your account removes access to your orders and saved addresses. This cannot be undone.",
+      "DELETE_ACCOUNT": "Delete my account",
+      "DELETE_TYPE_TO_CONFIRM": "Type {{phrase}} to confirm"
+    }
+  }
+}

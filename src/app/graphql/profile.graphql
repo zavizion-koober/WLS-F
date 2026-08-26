@@ -1,0 +1,21 @@
+query GetProfile {
+    profile {
+        id
+        fullName
+        email
+        role
+        createdAt
+        details {
+            phoneNumber
+        }
+        addresses {
+            id
+            country
+            city
+            street
+            zipCode
+            additionalInfo
+            isDefault
+        }
+    }
+}

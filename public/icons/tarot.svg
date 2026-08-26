@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+  <!-- Card Border -->
+  <rect x="4" y="2" width="16" height="20" rx="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Inner border -->
+  <rect x="5.5" y="3.5" width="13" height="17" rx="0.5" stroke-linecap="round" stroke-linejoin="round"
+        stroke-dasharray="1 1" />
+  <!-- Central Eye -->
+  <path d="M7.5 12c1.5-2 3.5-3 4.5-3s3 1 4.5 3c-1.5 2-3.5 3-4.5 3s-3-1-4.5-3z" stroke-linecap="round"
+        stroke-linejoin="round" />
+  <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+  <!-- Small details -->
+  <path d="M12 7V6M12 18v-1" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

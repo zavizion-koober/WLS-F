@@ -1,0 +1,39 @@
+query GetMyOrders($skip: Int, $take: Int, $language: Language!) {
+    myOrders(skip: $skip, take: $take, order: [{ createdAt: DESC }]) {
+        totalCount
+        items {
+            id
+            status
+            totalPrice
+            createdAt
+            shippingAddress {
+                country
+                city
+                street
+                zipCode
+                additionalInfo
+            }
+            items {
+                id
+                quantity
+                price {
+                    amount
+                }
+                product {
+                    id
+                    slug {
+                        value
+                    }
+                    images(order: [{ displayOrder: ASC }]) {
+                        url
+                        altText
+                    }
+                    translations(where: { language: { eq: $language } }) {
+                        name
+                        language
+                    }
+                }
+            }
+        }
+    }
+}

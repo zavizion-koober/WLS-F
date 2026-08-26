@@ -1,0 +1,775 @@
+"""
+The purpose of the `cost` directive is to define a `weight` for GraphQL types, fields, and arguments. Static analysis can use these weights when calculating the overall cost of a query or response.
+"""
+directive @cost(
+  """
+  The `weight` argument defines what value to add to the overall cost for every appearance, or possible appearance, of a type, field, argument, etc.
+  """
+  weight: String!
+) on ARGUMENT_DEFINITION | ENUM | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | OBJECT | SCALAR
+
+"""
+The purpose of the `@listSize` directive is to either inform the static analysis about the size of returned lists (if that information is statically available), or to point the analysis to where to find that information.
+"""
+directive @listSize(
+  """
+  The `assumedSize` argument can be used to statically define the maximum length of a list returned by a field.
+  """
+  assumedSize: Int
+
+  """
+  The `requireOneSlicingArgument` argument can be used to inform the static analysis that it should expect that exactly one of the defined slicing arguments is present in a query. If that is not the case (i.e., if none or multiple slicing arguments are present), the static analysis may throw an error.
+  """
+  requireOneSlicingArgument: Boolean = true
+
+  """
+  The `sizedFields` argument can be used to define that the value of the `assumedSize` argument or of a slicing argument does not affect the size of a list returned by a field itself, but that of a list returned by one of its sub-fields.
+  """
+  sizedFields: [String!]
+
+  """
+  The `slicingArgumentDefaultValue` argument can be used to define a default value for a slicing argument, which is used if the argument is not present in a query.
+  """
+  slicingArgumentDefaultValue: Int
+
+  """
+  The `slicingArguments` argument can be used to define which of the field's arguments with numeric type are slicing arguments, so that their value determines the size of the list returned by that field. It may specify a list of multiple slicing arguments.
+  """
+  slicingArguments: [String!]
+) on FIELD_DEFINITION
+
+type Address {
+  additionalInfo: String
+  city: String!
+  country: String!
+  id: UUID!
+  isDefault: Boolean!
+  street: String!
+  zipCode: String!
+}
+
+"""Defines when a policy shall be executed."""
+enum ApplyPolicy {
+  """After the resolver was executed."""
+  AFTER_RESOLVER
+
+  """Before the resolver was executed."""
+  BEFORE_RESOLVER
+
+  """The policy is applied in the validation step before the execution."""
+  VALIDATION
+}
+
+enum AuthProvider {
+  APPLE
+  GOOGLE
+  PASSWORD
+}
+
+enum BestSellerPeriod {
+  ALL_TIME
+  LAST_7_DAYS
+  LAST_30_DAYS
+  LAST_90_DAYS
+}
+
+"""A segment of a collection."""
+type BestSellerSummariesCollectionSegment {
+  """A flattened list of the items."""
+  items: [BestSellerSummary!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+type BestSellerSummary {
+  product: Product!
+  soldCount: Int!
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+type CartItem {
+  id: UUID!
+  product: Product!
+  quantity: Int!
+}
+
+"""A segment of a collection."""
+type CategoriesCollectionSegment {
+  """A flattened list of the items."""
+  items: [Category!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+type Category {
+  id: UUID!
+  imageUrl: String
+  products(order: [ProductSortInput!], where: ProductFilterInput): [Product!]
+  status: CategoryStatus!
+  translations(order: [CategoryTranslationSortInput!], where: CategoryTranslationFilterInput): [CategoryTranslation!]
+  type: CategoryType!
+}
+
+input CategoryFilterInput {
+  and: [CategoryFilterInput!]
+  id: UuidOperationFilterInput
+  or: [CategoryFilterInput!]
+  status: CategoryStatusOperationFilterInput
+  translations: ListFilterInputTypeOfCategoryTranslationFilterInput
+  type: CategoryTypeOperationFilterInput
+}
+
+input CategorySortInput {
+  status: SortEnumType
+  type: SortEnumType
+}
+
+enum CategoryStatus {
+  ARCHIVED
+  DRAFT
+  PUBLISHED
+}
+
+input CategoryStatusOperationFilterInput {
+  eq: CategoryStatus
+  in: [CategoryStatus!]
+  neq: CategoryStatus
+  nin: [CategoryStatus!]
+}
+
+type CategoryTranslation {
+  description: String
+  language: Language!
+  name: String!
+}
+
+input CategoryTranslationFilterInput {
+  and: [CategoryTranslationFilterInput!]
+  description: StringOperationFilterInput
+  language: LanguageOperationFilterInput
+  name: StringOperationFilterInput
+  or: [CategoryTranslationFilterInput!]
+}
+
+input CategoryTranslationSortInput {
+  description: SortEnumType
+  name: SortEnumType
+}
+
+enum CategoryType {
+  CATEGORY
+  DRAFT
+  INTENTION
+}
+
+input CategoryTypeOperationFilterInput {
+  eq: CategoryType
+  in: [CategoryType!]
+  neq: CategoryType
+  nin: [CategoryType!]
+}
+
+"""Information about the offset pagination."""
+type CollectionSegmentInfo {
+  """
+  Indicates whether more items exist following the set defined by the clients arguments.
+  """
+  hasNextPage: Boolean!
+
+  """
+  Indicates whether more items exist prior the set defined by the clients arguments.
+  """
+  hasPreviousPage: Boolean!
+}
+
+"""
+The `DateTime` scalar type represents a date and time with time zone offset information.
+"""
+scalar DateTime @specifiedBy(url: "https://scalars.graphql.org/chillicream/date-time.html")
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  neq: DateTime
+  ngt: DateTime
+  ngte: DateTime
+  nin: [DateTime]
+  nlt: DateTime
+  nlte: DateTime
+}
+
+"""
+The `Decimal` scalar type represents a decimal floating-point number with high precision.
+"""
+scalar Decimal @specifiedBy(url: "https://scalars.graphql.org/chillicream/decimal.html")
+
+input DecimalOperationFilterInput {
+  eq: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal]
+  lt: Decimal
+  lte: Decimal
+  neq: Decimal
+  ngt: Decimal
+  ngte: Decimal
+  nin: [Decimal]
+  nlt: Decimal
+  nlte: Decimal
+}
+
+input EmailFilterInput {
+  and: [EmailFilterInput!]
+  or: [EmailFilterInput!]
+  value: StringOperationFilterInput
+}
+
+input FloatOperationFilterInput {
+  eq: Float
+  gt: Float
+  gte: Float
+  in: [Float]
+  lt: Float
+  lte: Float
+  neq: Float
+  ngt: Float
+  ngte: Float
+  nin: [Float]
+  nlt: Float
+  nlte: Float
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  neq: Int
+  ngt: Int
+  ngte: Int
+  nin: [Int]
+  nlt: Int
+  nlte: Int
+}
+
+enum Language {
+  EN
+  KA
+  RU
+}
+
+input LanguageOperationFilterInput {
+  eq: Language
+  in: [Language!]
+  neq: Language
+  nin: [Language!]
+}
+
+input ListFilterInputTypeOfCategoryTranslationFilterInput {
+  all: CategoryTranslationFilterInput
+  any: Boolean
+  none: CategoryTranslationFilterInput
+  some: CategoryTranslationFilterInput
+}
+
+input ListFilterInputTypeOfOrderItemFilterInput {
+  all: OrderItemFilterInput
+  any: Boolean
+  none: OrderItemFilterInput
+  some: OrderItemFilterInput
+}
+
+input ListFilterInputTypeOfProductTranslationFilterInput {
+  all: ProductTranslationFilterInput
+  any: Boolean
+  none: ProductTranslationFilterInput
+  some: ProductTranslationFilterInput
+}
+
+type Money {
+  amount: Decimal!
+}
+
+input MoneyFilterInput {
+  amount: DecimalOperationFilterInput
+  and: [MoneyFilterInput!]
+  or: [MoneyFilterInput!]
+}
+
+input MoneySortInput {
+  amount: SortEnumType
+}
+
+"""A segment of a collection."""
+type MyOrdersCollectionSegment {
+  """A flattened list of the items."""
+  items: [Order!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+input NullableOfZodiacOperationFilterInput {
+  eq: Zodiac
+  in: [Zodiac]
+  neq: Zodiac
+  nin: [Zodiac]
+}
+
+type Order {
+  createdAt: DateTime!
+  id: UUID!
+  items: [OrderItem!]
+  shippingAddress: ShippingAddress!
+  status: OrderStatus!
+  totalPrice: Decimal!
+  updatedAt: DateTime
+  user: User!
+}
+
+input OrderFilterInput {
+  and: [OrderFilterInput!]
+  createdAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+  items: ListFilterInputTypeOfOrderItemFilterInput
+  or: [OrderFilterInput!]
+  shippingAddress: ShippingAddressFilterInput
+  status: OrderStatusOperationFilterInput
+  totalPrice: MoneyFilterInput
+}
+
+type OrderItem {
+  id: UUID!
+  price: Money!
+  product: Product
+  quantity: Int!
+}
+
+input OrderItemFilterInput {
+  and: [OrderItemFilterInput!]
+  createdAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+  or: [OrderItemFilterInput!]
+  order: OrderFilterInput
+  orderId: UuidOperationFilterInput
+  price: MoneyFilterInput
+  product: ProductFilterInput
+  productId: UuidOperationFilterInput
+  quantity: IntOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  user: UserFilterInput
+  userId: UuidOperationFilterInput
+}
+
+input OrderSortInput {
+  createdAt: SortEnumType
+  id: SortEnumType
+  status: SortEnumType
+  totalPrice: MoneySortInput
+}
+
+enum OrderStatus {
+  CANCELLED
+  CONFIRMED
+  DELIVERED
+  PENDING
+  PROCESSING
+  REFUNDED
+  SHIPPED
+}
+
+input OrderStatusOperationFilterInput {
+  eq: OrderStatus
+  in: [OrderStatus!]
+  neq: OrderStatus
+  nin: [OrderStatus!]
+}
+
+"""A segment of a collection."""
+type OrdersByUserIdCollectionSegment {
+  """A flattened list of the items."""
+  items: [Order!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+"""A segment of a collection."""
+type OrdersCollectionSegment {
+  """A flattened list of the items."""
+  items: [Order!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+type Product {
+  category: Category
+  id: UUID!
+  images(order: [ProductImageSortInput!], where: ProductImageFilterInput): [ProductImage!]
+  intention: Category
+  inventory: ProductInventory
+  isDeleted: Boolean!
+  pricing: ProductPricing
+  reviews(order: [ReviewSortInput!], where: ReviewFilterInput): [Review!]
+  slug: Slug
+  status: ProductStatus!
+  translations(order: [ProductTranslationSortInput!], where: ProductTranslationFilterInput): [ProductTranslation!]
+  zodiac: Zodiac
+}
+
+input ProductFilterInput {
+  and: [ProductFilterInput!]
+  categoryId: UuidOperationFilterInput
+  id: UuidOperationFilterInput
+  intentionId: UuidOperationFilterInput
+  inventory: ProductInventoryFilterInput
+  isDeleted: BooleanOperationFilterInput
+  or: [ProductFilterInput!]
+  pricing: ProductPricingFilterInput
+  slug: SlugFilterInput
+  status: ProductStatusOperationFilterInput
+  translations: ListFilterInputTypeOfProductTranslationFilterInput
+  zodiac: NullableOfZodiacOperationFilterInput
+}
+
+type ProductImage {
+  altText: String!
+  displayOrder: Int!
+  id: UUID!
+  isPrimary: Boolean!
+  url: String!
+}
+
+input ProductImageFilterInput {
+  altText: StringOperationFilterInput
+  and: [ProductImageFilterInput!]
+  createdAt: DateTimeOperationFilterInput
+  displayOrder: IntOperationFilterInput
+  id: UuidOperationFilterInput
+  isPrimary: BooleanOperationFilterInput
+  or: [ProductImageFilterInput!]
+  productId: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  url: StringOperationFilterInput
+}
+
+input ProductImageSortInput {
+  altText: SortEnumType
+  createdAt: SortEnumType
+  displayOrder: SortEnumType
+  id: SortEnumType
+  isPrimary: SortEnumType
+  productId: SortEnumType
+  updatedAt: SortEnumType
+  url: SortEnumType
+}
+
+type ProductInventory {
+  lowStockThreshold: Int!
+  sku: String!
+  stockQuantity: Int!
+}
+
+input ProductInventoryFilterInput {
+  and: [ProductInventoryFilterInput!]
+  lowStockThreshold: IntOperationFilterInput
+  or: [ProductInventoryFilterInput!]
+  sku: StringOperationFilterInput
+  stockQuantity: IntOperationFilterInput
+}
+
+input ProductInventorySortInput {
+  lowStockThreshold: SortEnumType
+  sku: SortEnumType
+  stockQuantity: SortEnumType
+}
+
+type ProductPricing {
+  price: Money
+  salePrice: Money
+}
+
+input ProductPricingFilterInput {
+  and: [ProductPricingFilterInput!]
+  or: [ProductPricingFilterInput!]
+  price: MoneyFilterInput
+  salePrice: MoneyFilterInput
+}
+
+input ProductPricingSortInput {
+  price: MoneySortInput
+  salePrice: MoneySortInput
+}
+
+input ProductSortInput {
+  inventory: ProductInventorySortInput
+  pricing: ProductPricingSortInput
+  status: SortEnumType
+  zodiac: SortEnumType
+}
+
+enum ProductStatus {
+  ARCHIVED
+  DRAFT
+  PUBLISHED
+}
+
+input ProductStatusOperationFilterInput {
+  eq: ProductStatus
+  in: [ProductStatus!]
+  neq: ProductStatus
+  nin: [ProductStatus!]
+}
+
+type ProductTranslation {
+  howToUse: String
+  language: Language!
+  longDescription: String!
+  materials: String
+  name: String!
+  shortDescription: String!
+}
+
+input ProductTranslationFilterInput {
+  and: [ProductTranslationFilterInput!]
+  language: LanguageOperationFilterInput
+  longDescription: StringOperationFilterInput
+  name: StringOperationFilterInput
+  or: [ProductTranslationFilterInput!]
+  shortDescription: StringOperationFilterInput
+}
+
+input ProductTranslationSortInput {
+  name: SortEnumType
+}
+
+type ProductsCollectionSegment {
+  """A flattened list of the items."""
+  items: [Product!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+type Query {
+  bestSellerProducts(period: BestSellerPeriod, skip: Int, take: Int): BestSellerSummariesCollectionSegment
+  cart: [CartItem!]!
+  categories(order: [CategorySortInput!], skip: Int, take: Int, where: CategoryFilterInput): CategoriesCollectionSegment
+  myOrders(order: [OrderSortInput!], skip: Int, take: Int, where: OrderFilterInput): MyOrdersCollectionSegment
+  orders(order: [OrderSortInput!], skip: Int, take: Int, where: OrderFilterInput): OrdersCollectionSegment
+  ordersByUserId(order: [OrderSortInput!], skip: Int, take: Int, userId: UUID!, where: OrderFilterInput): OrdersByUserIdCollectionSegment
+  products(order: [ProductSortInput!], skip: Int, take: Int, where: ProductFilterInput): ProductsCollectionSegment
+  profile: User
+  reviews(order: [ReviewSortInput!], skip: Int, take: Int, where: ReviewFilterInput): ReviewsCollectionSegment
+  reviewsByUserId(order: [ReviewSortInput!], skip: Int, take: Int, userId: UUID!, where: ReviewFilterInput): ReviewsByUserIdCollectionSegment
+  userById(id: UUID!): User
+  users(order: [UserSortInput!], skip: Int, take: Int, where: UserFilterInput): UsersCollectionSegment
+}
+
+type Review {
+  comment: String
+  createdAt: DateTime
+  id: UUID!
+  isApproved: Boolean!
+  product: Product!
+  productId: UUID!
+  rating: Float
+  updatedAt: DateTime
+  user: User!
+  userId: UUID!
+}
+
+input ReviewFilterInput {
+  and: [ReviewFilterInput!]
+  comment: StringOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  isApproved: BooleanOperationFilterInput
+  or: [ReviewFilterInput!]
+  product: ProductFilterInput
+  productId: UuidOperationFilterInput
+  rating: FloatOperationFilterInput
+  user: UserFilterInput
+  userId: UuidOperationFilterInput
+}
+
+input ReviewSortInput {
+  comment: SortEnumType
+  createdAt: SortEnumType
+  productId: SortEnumType
+  rating: SortEnumType
+}
+
+"""A segment of a collection."""
+type ReviewsByUserIdCollectionSegment {
+  """A flattened list of the items."""
+  items: [Review!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+"""A segment of a collection."""
+type ReviewsCollectionSegment {
+  """A flattened list of the items."""
+  items: [Review!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+type ShippingAddress {
+  additionalInfo: String
+  city: String!
+  country: String!
+  street: String!
+  zipCode: String!
+}
+
+input ShippingAddressFilterInput {
+  additionalInfo: StringOperationFilterInput
+  and: [ShippingAddressFilterInput!]
+  city: StringOperationFilterInput
+  country: StringOperationFilterInput
+  or: [ShippingAddressFilterInput!]
+  street: StringOperationFilterInput
+  zipCode: StringOperationFilterInput
+}
+
+type Slug {
+  value: String!
+}
+
+input SlugFilterInput {
+  and: [SlugFilterInput!]
+  or: [SlugFilterInput!]
+  value: StringOperationFilterInput
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  contains: String
+  endsWith: String
+  eq: String
+  in: [String]
+  ncontains: String
+  nendsWith: String
+  neq: String
+  nin: [String]
+  nstartsWith: String
+  or: [StringOperationFilterInput!]
+  startsWith: String
+}
+
+"""
+The `UUID` scalar type represents a Universally Unique Identifier (UUID) as defined by RFC 9562.
+"""
+scalar UUID @specifiedBy(url: "https://scalars.graphql.org/chillicream/uuid.html")
+
+type User {
+  addresses: [Address!]
+  authProvider: AuthProvider!
+  createdAt: DateTime!
+  details: UserDetails
+  email: String!
+  fullName: String!
+  id: UUID!
+  isVerified: Boolean!
+  role: UserRole!
+}
+
+type UserDetails {
+  phoneNumber: String
+}
+
+input UserFilterInput {
+  and: [UserFilterInput!]
+  email: EmailFilterInput
+  fullName: StringOperationFilterInput
+  isVerified: BooleanOperationFilterInput
+  or: [UserFilterInput!]
+  role: UserRoleOperationFilterInput
+}
+
+enum UserRole {
+  ADMIN
+  SUPER_ADMIN
+  USER
+}
+
+input UserRoleOperationFilterInput {
+  eq: UserRole
+  in: [UserRole!]
+  neq: UserRole
+  nin: [UserRole!]
+}
+
+input UserSortInput {
+  createdAt: SortEnumType
+  fullName: SortEnumType
+}
+
+"""A segment of a collection."""
+type UsersCollectionSegment {
+  """A flattened list of the items."""
+  items: [User!]
+
+  """Information to aid in pagination."""
+  pageInfo: CollectionSegmentInfo!
+  totalCount: Int!
+}
+
+input UuidOperationFilterInput {
+  eq: UUID
+  gt: UUID
+  gte: UUID
+  in: [UUID]
+  lt: UUID
+  lte: UUID
+  neq: UUID
+  ngt: UUID
+  ngte: UUID
+  nin: [UUID]
+  nlt: UUID
+  nlte: UUID
+}
+
+enum Zodiac {
+  AQUARIUS
+  ARIES
+  CANCER
+  CAPRICORN
+  GEMINI
+  LEO
+  LIBRA
+  PISCES
+  SAGITTARIUS
+  SCORPIO
+  TAURUS
+  VIRGO
+}

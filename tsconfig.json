@@ -1,0 +1,45 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "@environments/*": ["src/environments/*"],
+      "@features/*": ["src/app/features/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@layout/*": ["src/app/layout/*"],
+      "@store/*": ["src/app/store/*"],
+      "@core/*": ["src/app/core/*"],
+      "@app/*": ["src/app/*"],
+      "@spartan/sonner": ["src/app/shared/libs/ui/sonner/src/index.ts"],
+      "@spartan/utils": ["src/app/shared/libs/ui/utils/src/index.ts"],
+      "@spartan/accordion": ["src/app/shared/libs/ui/accordion/src/index.ts"],
+      "@spartan/icon": ["src/app/shared/libs/ui/icon/src/index.ts"],
+      "@spartan/tabs": ["src/app/shared/libs/ui/tabs/src/index.ts"],
+      "@spartan/button": ["./src/app/shared/libs/ui/button/src/index.ts"],
+      "@spartan/select": ["./src/app/shared/libs/ui/select/src/index.ts"]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    }
+  ]
+}
