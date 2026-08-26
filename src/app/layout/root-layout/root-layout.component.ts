@@ -20,12 +20,12 @@ import { ToastNotificationsComponent } from '@shared/components/toast-notificati
     ToastNotificationsComponent,
   ],
   template: `
-    <div class="min-h-screen flex flex-col bg-[#F4F1EA] text-[#1A1A1D] selection:bg-[#CBB26A] selection:text-[#0D2B1D] overflow-x-hidden max-w-full w-full">
+    <div class="min-h-screen flex flex-col bg-[#F4F1EA] text-[#1A1A1D] selection:bg-[#CBB26A] selection:text-[#0D2B1D] overflow-x-clip max-w-full w-full">
       <!-- Global Shop Header -->
       <app-header />
 
       <!-- Main Router Content -->
-      <main class="flex-1 w-full max-w-full overflow-x-hidden">
+      <main class="flex-1 w-full max-w-full overflow-x-clip">
         <router-outlet />
       </main>
 

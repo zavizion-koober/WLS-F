@@ -59,6 +59,19 @@
     font-display: swap;
   }
 
+  /*
+    `clip`, not `hidden`, and the difference is not cosmetic.
+
+    `overflow-x: hidden` forces `overflow-y` to `auto`, which makes this element
+    a scroll container. It never actually scrolls — its height is its content —
+    but `position: sticky` inside it then resolves against a scrollport that
+    never moves, so every sticky descendant silently stops sticking. That is how
+    the bracelet designer's mobile stage came to scroll off the top of the screen
+    while its computed style still said `position: sticky; top: 0`.
+
+    `clip` suppresses horizontal overflow exactly the same way and creates no
+    scroll container, so sticky keeps working.
+  */
   html {
     background-color: var(--bg-primary);
     color: var(--text-primary);
@@ -66,7 +79,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
   }
 
@@ -74,7 +87,7 @@
     background-color: var(--bg-primary);
     color: var(--text-primary);
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100%;
     width: 100%;
     position: relative;
@@ -84,7 +97,7 @@
   app-root,
   app-root-layout {
     display: block;
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100%;
     width: 100%;
   }

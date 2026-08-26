@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { stonecraftRoutes } from '@features/stonecraft.routes';
+
 export const routes: Routes = [
   {
     path: '',
@@ -22,6 +24,12 @@ export const routes: Routes = [
         path: 'account',
         loadChildren: () => import('@features/account/account.routes'),
       },
+
+      // The reading and the bracelet designer. Inside the root layout so a
+      // reading is not a dead end — the header, footer and cart stay reachable.
+      // Spread from a static array rather than lazy-loaded because the privacy
+      // specs walk this table; see stonecraft.routes.ts.
+      ...stonecraftRoutes,
     ],
   },
   {
