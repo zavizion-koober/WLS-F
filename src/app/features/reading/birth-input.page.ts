@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { isError, isLoading, isSuccess } from '@core/api/request-state';
+import { LastReadingService } from '@core/services/last-reading.service';
 import { ApiErrorComponent } from '@shared/components/api-error.component';
 
 import {
@@ -291,6 +292,7 @@ export class BirthInputPage {
   private readonly store = inject(ReadingStore);
   protected readonly places = inject(PlaceLookupService);
   private readonly router = inject(Router);
+  private readonly lastReading = inject(LastReadingService);
 
   protected readonly earliest = '1800-01-01';
 
@@ -351,6 +353,17 @@ export class BirthInputPage {
       if (isSuccess(state)) {
         // Route on the returned publicId. Nothing typed above goes in the URL.
         void this.router.navigate(['/reading', state.value.publicId]);
+
+        // Then remember it, so closing the tab does not strand the reading —
+        // the id only, see LastReadingService. Deliberately after the navigate
+        // and inside a catch: keeping a bookmark is a convenience, and a guard
+        // that refused an id must never be able to strand someone on the form
+        // holding a reading that was successfully created.
+        try {
+          this.lastReading.remember(state.value.publicId);
+        } catch (error) {
+          console.error(error);
+        }
       }
     });
   }

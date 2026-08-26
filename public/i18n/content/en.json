@@ -583,7 +583,10 @@
       "SHARE_START": "Create a share link",
       "SHARE_LINK": "Share link",
       "SHARE_COPY": "Copy",
-      "SHARE_COPIED": "Copied"
+      "SHARE_COPIED": "Copied",
+      "DESIGN_TITLE": "Build a bracelet from these stones",
+      "DESIGN_DESC": "Choose which of the stones above to string, and the size that fits your wrist.",
+      "DESIGN_CTA": "Open the designer"
     },
     "TIER": {
       "PRIMARY": "Primary",
@@ -1110,6 +1113,21 @@
           }
         }
       }
+    },
+    "PROMO": {
+      "SUBTITLE": "Made to order",
+      "TITLE": "A bracelet strung from your own chart",
+      "DESC": "Tell us when and where you were born. We read the chart, and the traditions name the stones that answer it — each one traceable to the book it came from. Then you choose which of them to string, and at what size.",
+      "POINT_ONE_TITLE": "Your chart, not a birth month",
+      "POINT_ONE_DESC": "The stones follow the whole chart — the rising sign, the ruling planet, where the weight of it sits.",
+      "POINT_TWO_TITLE": "Every stone cites its source",
+      "POINT_TWO_DESC": "Each recommendation traces back to a named book and a page, so you can see why it was offered.",
+      "POINT_THREE_TITLE": "Strung to your wrist",
+      "POINT_THREE_DESC": "You pick the stones and the bead size; the fit is solved for the wrist you give us.",
+      "CTA": "Read my chart",
+      "CTA_RESUME": "Continue my reading",
+      "RESUME_NOTE": "You started a reading on this device.",
+      "NOTE": "Nothing is taken from stock. Stones are sourced and the bracelet strung after you order."
     }
   }
 }

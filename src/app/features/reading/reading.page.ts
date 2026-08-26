@@ -95,7 +95,10 @@ import { UnavailableSectionComponent } from './unavailable-section.component';
 
         <sc-chart-section [chart]="reading.chart" />
 
-        <sc-recommendations-section [recommendations]="reading.recommendations" />
+        <sc-recommendations-section
+          [recommendations]="reading.recommendations"
+          [designPublicId]="publicId()"
+        />
 
         <sc-cautions-section [cautions]="reading.cautions" />
 

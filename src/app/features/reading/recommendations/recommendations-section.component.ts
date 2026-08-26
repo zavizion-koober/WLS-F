@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import type { CustomerRecommendation, SharedRecommendation } from '@core/models/gemstones.models';
@@ -24,7 +25,7 @@ type AnyRecommendation = CustomerRecommendation | SharedRecommendation;
 @Component({
   selector: 'sc-recommendations-section',
   standalone: true,
-  imports: [TranslatePipe, StoneCardComponent, ScEmptyStateComponent],
+  imports: [RouterLink, TranslatePipe, StoneCardComponent, ScEmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="mt-14" aria-labelledby="recommendations-heading">
@@ -61,12 +62,56 @@ type AnyRecommendation = CustomerRecommendation | SharedRecommendation;
             </div>
           </div>
         }
+
+        <!--
+          The door into the designer, and the only one in the app.
+
+          Drawn only on the branch that has groups, on purpose: a reading that
+          ranked nothing has no palette, and D21 says a designer with no palette
+          has nothing honest to show — not an empty state, and not a fallback
+          listing the whole catalogue. Offering the door anyway would send
+          someone to a screen that cannot open.
+
+          (Written without the block sigil: the template parser reads one inside
+          an HTML comment as real control flow, and the file stops compiling.)
+
+          No price, because none exists to show: the backend computes none, and a
+          bracelet is quoted after the stones are sourced.
+        -->
+        @if (designPublicId(); as publicId) {
+          <div
+            class="mt-12 rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-6 sm:p-8"
+          >
+            <h3 class="font-display text-card-title text-[var(--brand-green)]">
+              {{ 'STONECRAFT.READING.DESIGN_TITLE' | translate }}
+            </h3>
+            <p class="mt-2 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)]">
+              {{ 'STONECRAFT.READING.DESIGN_DESC' | translate }}
+            </p>
+            <a
+              class="btn-primary mt-5 inline-block"
+              data-testid="design-cta"
+              [routerLink]="['/designer', publicId]"
+            >
+              {{ 'STONECRAFT.READING.DESIGN_CTA' | translate }}
+            </a>
+          </div>
+        }
       }
     </section>
   `,
 })
 export class RecommendationsSectionComponent {
   public readonly recommendations = input.required<readonly AnyRecommendation[]>();
+
+  /**
+   * The owner's reading id, when there is one.
+   *
+   * Null on a shared reading, which is read through a `shareToken` the designer
+   * cannot use — and echoing an id that could is exactly what the shared
+   * projection exists never to do.
+   */
+  public readonly designPublicId = input<string | null>(null);
 
   protected readonly groups = computed(() => groupByTier(this.recommendations()));
 }

@@ -16,6 +16,7 @@ import { ProductCardComponent } from '@shared/components/product-card/product-ca
 import { LoadingSkeletonComponent } from '@shared/components/loading-skeleton/loading-skeleton.component';
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { AssetUrlPipe } from '@shared/pipes/asset-url.pipe';
+import { CustomBraceletSectionComponent } from './custom-bracelet-section.component';
 import { PricePipe } from '@shared/pipes/price.pipe';
 import { BestSellerPeriod } from 'src/generated/graphql';
 import { ProductListItem } from '@store/products/products.models';
@@ -34,6 +35,7 @@ import { IntentionItem } from '@store/intentions/intentions.models';
     IconComponent,
     AssetUrlPipe,
     PricePipe,
+    CustomBraceletSectionComponent,
   ],
   template: `
     <div class="space-y-20 sm:space-y-28 lg:space-y-36 pb-24">
@@ -305,6 +307,15 @@ import { IntentionItem } from '@store/intentions/intentions.models';
           </div>
         }
       </section>
+
+      <!--
+        3b. THE BRACELET FLOW.
+
+        Placed between the product grids and the intention shop, and styled as a
+        band rather than a grid: this is made to order, not something on a shelf,
+        and it should not read like the rows of candles above it.
+      -->
+      <app-custom-bracelet-section />
 
       <!-- 4. DISCOVERY: PATH 2 - SHOP BY INTENTION (EDITORIAL FOCUS) -->
       <section class="bg-[#FCFBF9] border-y border-[#E2DDD2] py-16 sm:py-24">

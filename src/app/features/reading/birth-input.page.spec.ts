@@ -105,7 +105,7 @@ describe('sc-birth-input-page', () => {
     expect(request.request.body.birthInput.localDate).toBe('1990-05-14');
 
     request.flush({
-      publicId: 'abc-123',
+      publicId: 'fdc0bbe0-2986-4e19-a327-41c1f79f5a11',
       anonymousSessionId: null,
       expiresAtUtc: null,
       result: {},
@@ -118,12 +118,12 @@ describe('sc-birth-input-page', () => {
     submitValid();
     http
       .expectOne('/api/gemstones/sessions')
-      .flush({ publicId: 'abc-123', anonymousSessionId: null, expiresAtUtc: null, result: {} });
+      .flush({ publicId: 'fdc0bbe0-2986-4e19-a327-41c1f79f5a11', anonymousSessionId: null, expiresAtUtc: null, result: {} });
 
     fixture.detectChanges();
     await fixture.whenStable();
 
-    expect(navigate).toHaveBeenCalledWith(['/reading', 'abc-123']);
+    expect(navigate).toHaveBeenCalledWith(['/reading', 'fdc0bbe0-2986-4e19-a327-41c1f79f5a11']);
 
     // The whole point, asserted on the navigation itself: no fragment of the
     // birth input is anywhere in the route that gets pushed to history.
@@ -183,7 +183,7 @@ describe('sc-birth-input-page', () => {
     submitValid();
     http
       .expectOne('/api/gemstones/sessions')
-      .flush({ publicId: 'abc-123', anonymousSessionId: null, expiresAtUtc: null, result: {} });
+      .flush({ publicId: 'fdc0bbe0-2986-4e19-a327-41c1f79f5a11', anonymousSessionId: null, expiresAtUtc: null, result: {} });
 
     const persisted = [
       ...Object.values(globalThis.localStorage ?? {}),
