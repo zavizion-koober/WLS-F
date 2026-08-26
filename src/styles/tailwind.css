@@ -473,9 +473,25 @@ html[lang="en"] .font-logo {
   outline: none;
 }
 
+/*
+  The focus ring is an outline, not a box-shadow.
+
+  Windows High Contrast — `forced-colors: active` — suppresses `box-shadow`
+  entirely and preserves `outline`, recolouring it to a system colour. Carrying
+  the whole indicator in a shadow therefore leaves a High Contrast user with no
+  visible focus on a text field at all: WCAG 2.4.7 failed completely rather than
+  cosmetically, for the people who depend on focus indicators most.
+
+  `:focus` rather than `:focus-visible` here, deliberately — a text field someone
+  is typing into should show where the typing is going however the focus arrived.
+
+  Enforced by `src/app/features/designer/focus-indicators.spec.ts`, which greps
+  this file along with the three designer components.
+*/
 .atelier-input:focus {
   border-color: var(--action-green);
-  box-shadow: 0 0 0 1px var(--action-green);
+  outline: 1px solid var(--action-green);
+  outline-offset: 1px;
 }
 
 .atelier-input::placeholder {
