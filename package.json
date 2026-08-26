@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "codegen": "npx graphql-codegen",
-    "serve:ssr:WLS-F": "node dist/WLS-F/server/server.mjs"
+    "serve:ssr:WLS-F": "node dist/WLS-F/server/server.mjs",
+    "i18n:reasons": "node tools/build-reason-keys.mjs"
   },
   "private": true,
   "packageManager": "pnpm@10.33.2",

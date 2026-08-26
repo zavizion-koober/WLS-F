@@ -1,0 +1,248 @@
+{
+  "_meta": {
+    "purpose": "Display copy for every reasonKey the StoneCraft-B rulepack can emit. The backend returns keys, never prose (hard rule 2). This file is the only place those keys become sentences.",
+    "keyCount": 57,
+    "coverage": "Complete for rulepack-v1 as of seed c07ca95. A test fails the build if the rulepack emits a key absent from this file, or if this file holds a key the rulepack does not contain. One of the 57 belongs to a DORMANT rule: reason.prohibition.venusAfflicted is Pavitt's caution against opal, and opal was withdrawn from the catalogue at D23, so the rule sleeps and the key cannot currently reach a customer. The sentence is kept deliberately — restoring opal restores the warning, and the Georgian and Russian batch should be asked once rather than twice.",
+    "voice": [
+      "Frame every claim as belonging to a tradition, never as a fact about the world (hard rule 5).",
+      "Never name a book, an author, or quote a source (D16).",
+      "Never promise an outcome, a benefit, or anything health-adjacent (hard rules 4 and 5).",
+      "Elegant and calm. Not clinical, not diagnostic, not a medical recommendation system.",
+      "'Counselled against' and 'offered', never 'forbidden' and 'prescribed'."
+    ],
+    "variants": {
+      "short": "One line, on the stone card. No sentence-ending period — it sits as a label.",
+      "long": "Progressive disclosure, in the detail panel. One or two sentences."
+    },
+    "interpolation": "None required. The response's factors[] already carry planet, sign, house and dignity if a screen wants to render them alongside.",
+    "prohibitions": "The twelve prohibition keys are named after the chapter that states them, NOT the sign they apply to. reason.prohibition.leo fires for people whose Sun is in Taurus or Virgo. Never surface the key's own sign name to a customer — it is provenance, and it would name the wrong sign."
+  },
+  "reason.sign.aries.sun": {
+    "short": "Your Sun is in Aries",
+    "long": "In the western magical tradition these are the stones of Aries — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.taurus.sun": {
+    "short": "Your Sun is in Taurus",
+    "long": "In the western magical tradition these are the stones of Taurus — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.gemini.sun": {
+    "short": "Your Sun is in Gemini",
+    "long": "In the western magical tradition these are the stones of Gemini — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.cancer.sun": {
+    "short": "Your Sun is in Cancer",
+    "long": "In the western magical tradition these are the stones of Cancer — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.leo.sun": {
+    "short": "Your Sun is in Leo",
+    "long": "In the western magical tradition these are the stones of Leo — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.virgo.sun": {
+    "short": "Your Sun is in Virgo",
+    "long": "In the western magical tradition these are the stones of Virgo — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.libra.sun": {
+    "short": "Your Sun is in Libra",
+    "long": "In the western magical tradition these are the stones of Libra — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.scorpio.sun": {
+    "short": "Your Sun is in Scorpio",
+    "long": "In the western magical tradition these are the stones of Scorpio — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.sagittarius.sun": {
+    "short": "Your Sun is in Sagittarius",
+    "long": "In the western magical tradition these are the stones of Sagittarius — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.capricorn.sun": {
+    "short": "Your Sun is in Capricorn",
+    "long": "In the western magical tradition these are the stones of Capricorn — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.aquarius.sun": {
+    "short": "Your Sun is in Aquarius",
+    "long": "In the western magical tradition these are the stones of Aquarius — the sign the Sun occupied at your birth."
+  },
+  "reason.sign.pisces.sun": {
+    "short": "Your Sun is in Pisces",
+    "long": "In the western magical tradition these are the stones of Pisces — the sign the Sun occupied at your birth."
+  },
+  "reason.planet.sun.dignified": {
+    "short": "Your Sun is strongly placed",
+    "long": "The Sun sits in a sign this tradition counts as its own or its exaltation. Stones carrying the Sun are read as answering to what is already well placed in you."
+  },
+  "reason.planet.moon.dignified": {
+    "short": "Your Moon is strongly placed",
+    "long": "The Moon sits in a sign this tradition counts as its own or its exaltation. Stones carrying the Moon are read as answering to what is already well placed in you."
+  },
+  "reason.planet.mercury.dignified": {
+    "short": "Your Mercury is strongly placed",
+    "long": "Mercury sits in a sign this tradition counts as its own or its exaltation. Stones carrying Mercury are read as answering to what is already well placed in you."
+  },
+  "reason.planet.venus.dignified": {
+    "short": "Your Venus is strongly placed",
+    "long": "Venus sits in a sign this tradition counts as its own or its exaltation. Stones carrying Venus are read as answering to what is already well placed in you."
+  },
+  "reason.planet.mars.dignified": {
+    "short": "Your Mars is strongly placed",
+    "long": "Mars sits in a sign this tradition counts as its own or its exaltation. Stones carrying Mars are read as answering to what is already well placed in you."
+  },
+  "reason.planet.jupiter.dignified": {
+    "short": "Your Jupiter is strongly placed",
+    "long": "Jupiter sits in a sign this tradition counts as its own or its exaltation. Stones carrying Jupiter are read as answering to what is already well placed in you."
+  },
+  "reason.planet.saturn.dignified": {
+    "short": "Your Saturn is strongly placed",
+    "long": "Saturn sits in a sign this tradition counts as its own or its exaltation. Stones carrying Saturn are read as answering to what is already well placed in you."
+  },
+  "reason.planet.uranus.dignified": {
+    "short": "Your Uranus is strongly placed",
+    "long": "Uranus sits in a sign this tradition counts as its exaltation. Stones carrying Uranus are read as answering to what is already well placed in you."
+  },
+  "reason.planet.neptune.dignified": {
+    "short": "Your Neptune is strongly placed",
+    "long": "Neptune sits in a sign this tradition counts as its own or its exaltation. Stones carrying Neptune are read as answering to what is already well placed in you."
+  },
+  "reason.planet.pluto.dignified": {
+    "short": "Your Pluto is strongly placed",
+    "long": "Pluto sits in a sign this tradition counts as its exaltation. Stones carrying Pluto are read as answering to what is already well placed in you."
+  },
+  "reason.planet.sun.supportive": {
+    "short": "Your Sun is weakly placed",
+    "long": "The Sun sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.moon.supportive": {
+    "short": "Your Moon is weakly placed",
+    "long": "The Moon sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.mercury.supportive": {
+    "short": "Your Mercury is weakly placed",
+    "long": "Mercury sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.venus.supportive": {
+    "short": "Your Venus is weakly placed",
+    "long": "Venus sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.mars.supportive": {
+    "short": "Your Mars is weakly placed",
+    "long": "Mars sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.jupiter.supportive": {
+    "short": "Your Jupiter is weakly placed",
+    "long": "Jupiter sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.saturn.supportive": {
+    "short": "Your Saturn is weakly placed",
+    "long": "Saturn sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.uranus.supportive": {
+    "short": "Your Uranus is weakly placed",
+    "long": "Uranus sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.neptune.supportive": {
+    "short": "Your Neptune is weakly placed",
+    "long": "Neptune sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.pluto.supportive": {
+    "short": "Your Pluto is weakly placed",
+    "long": "Pluto sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+  },
+  "reason.planet.moon.chartRuler": {
+    "short": "The Moon rules your chart",
+    "long": "The Moon governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+  },
+  "reason.planet.mercury.chartRuler": {
+    "short": "Mercury rules your chart",
+    "long": "Mercury governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+  },
+  "reason.planet.venus.chartRuler": {
+    "short": "Venus rules your chart",
+    "long": "Venus governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+  },
+  "reason.planet.mars.chartRuler": {
+    "short": "Mars rules your chart",
+    "long": "Mars governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+  },
+  "reason.planet.jupiter.chartRuler": {
+    "short": "Jupiter rules your chart",
+    "long": "Jupiter governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+  },
+  "reason.planet.saturn.chartRuler": {
+    "short": "Saturn rules your chart",
+    "long": "Saturn governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+  },
+  "reason.element.fire.deficient": {
+    "short": "Fire is thin in your chart",
+    "long": "Few of your planets fall in the Fire signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+  },
+  "reason.element.earth.deficient": {
+    "short": "Earth is thin in your chart",
+    "long": "Few of your planets fall in the Earth signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+  },
+  "reason.element.air.deficient": {
+    "short": "Air is thin in your chart",
+    "long": "Few of your planets fall in the Air signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+  },
+  "reason.element.water.deficient": {
+    "short": "Water is thin in your chart",
+    "long": "Few of your planets fall in the Water signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+  },
+  "reason.energy.projective.corrective": {
+    "short": "Your chart leans receptive",
+    "long": "Most of your planets fall in signs this tradition reads as receptive. These stones carry the projective current it offers as the counterweight."
+  },
+  "reason.energy.receptive.corrective": {
+    "short": "Your chart leans projective",
+    "long": "Most of your planets fall in signs this tradition reads as projective. These stones carry the receptive current it offers as the counterweight."
+  },
+  "reason.prohibition.aries": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.cancer": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.gemini": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.leo": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.virgo": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.venusAfflicted": {
+    "short": "Your Venus is weakly placed",
+    "long": "This tradition counsels against this stone for those whose Venus sits in a difficult sign. A caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.libra": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.scorpio": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.sagittarius": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.capricorn": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.aquarius": {
+    "short": "Counselled against for your sign",
+    "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+  },
+  "reason.prohibition.saturnAfflicted": {
+    "short": "Your Saturn is weakly placed",
+    "long": "This tradition counsels against these stones for those whose Saturn sits in a difficult sign. A caution rather than a rule, and the choice stays yours."
+  },
+  "reason.calendar.birthDay": {
+    "short": "The stone of your birth day",
+    "long": "The Georgian day-calendar gives every day of the year its own stone. This one belongs to the day you were born. It is a separate tradition from your chart, and is kept apart from it."
+  }
+}

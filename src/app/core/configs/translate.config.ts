@@ -50,10 +50,18 @@ export function createTranslateLoader(http: HttpClient): TranslateLoader {
   return new HttpTranslateLoader(http, isPlatformBrowser(platformId));
 }
 
+/**
+ * `fallbackLang` is what makes `ka` and `ru` render English rather than raw key
+ * paths. It matters for the StoneCraft copy specifically: `STONECRAFT` lives in
+ * `en.json` only, because its Georgian and Russian bundles need a fluent author
+ * rather than a translation pass. Without a fallback those two languages would
+ * show `STONECRAFT.READING.TITLE` on the page.
+ */
 export const translateConfig: TranslateModuleConfig = {
   loader: {
     provide: TranslateLoader,
     useFactory: createTranslateLoader,
     deps: [HttpClient],
   },
+  fallbackLang: 'en',
 };

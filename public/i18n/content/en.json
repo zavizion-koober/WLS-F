@@ -521,5 +521,595 @@
       "DELETE_ACCOUNT": "Delete my account",
       "DELETE_TYPE_TO_CONFIRM": "Type {{phrase}} to confirm"
     }
+  },
+  "STONECRAFT": {
+    "NAV": {
+      "READING": "Reading",
+      "DESIGNER": "Designer",
+      "SHARED": "Shared reading"
+    },
+    "BIRTH": {
+      "TITLE": "Your birth details",
+      "LEAD": "The reading is calculated from where and when you were born. Nothing here is stored in a link, and nothing is shared unless you choose to share it.",
+      "DATE_LABEL": "Date of birth",
+      "TIME_LABEL": "Time of birth",
+      "TIME_UNKNOWN": "I don't know my birth time",
+      "TIME_UNKNOWN_NOTE": "That is a fine answer. The reading will leave out everything that depends on an exact time rather than guessing at it, and it will tell you what it left out.",
+      "PLACE_LABEL": "Place of birth",
+      "SUBMIT": "Read my chart",
+      "PLACE_PLACEHOLDER": "Start typing a city or town",
+      "PLACE_CHANGE": "Change",
+      "PLACE_MANUAL": "I can't find my birthplace",
+      "PLACE_MANUAL_NOTE": "The list covers cities and towns, not every village. If your birthplace isn't in it, enter the coordinates directly — a nearby town is fine for the planets, but the rising sign and houses are sensitive to longitude.",
+      "LATITUDE": "Latitude",
+      "LONGITUDE": "Longitude",
+      "PRIVACY_NOTE": "Your birth details go straight from this page to the calculation. They are never put in a web address, never written to a log, and never shown to anyone you share a reading with.",
+      "ERRORS": {
+        "DATE_REQUIRED": "Please enter your date of birth.",
+        "DATE_TOO_EARLY": "Readings start from 1 January 1800 — that is as far back as the calculation reaches.",
+        "DATE_IN_FUTURE": "That date is in the future.",
+        "TIME_REQUIRED": "Please enter a time, or tick the box to say you don't know it.",
+        "PLACE_REQUIRED": "Please choose a birthplace, or enter its coordinates.",
+        "LATITUDE_RANGE": "Latitude must be between -90 and 90.",
+        "LONGITUDE_RANGE": "Longitude must be between -180 and 180."
+      },
+      "PLACE_LIST_FAILED": "The place list couldn't be loaded. You can still enter coordinates directly below.",
+      "PLACE_CREDIT": "Place data from"
+    },
+    "READING": {
+      "TITLE": "Your reading",
+      "RULEPACK": "Rule set {{version}}",
+      "RECOMMENDED_TITLE": "Stones offered to you",
+      "CAUTIONED_TITLE": "Stones counselled against",
+      "CAUTIONED_LEAD": "The traditions consulted here warn about these for you. They are shown rather than hidden, with the warning attached.",
+      "CALENDAR_TITLE": "Your calendar stone",
+      "CALENDAR_DISPUTED": "The lists disagree about this date, so both readings are shown.",
+      "CALENDAR_UNRESOLVED": "This calendar names a stone the catalogue cannot yet identify.",
+      "DISCOVER_MORE": "Discover more",
+      "DISCOVER_LESS": "Show less",
+      "SOURCES_AGREE": "{{count}} traditions agree",
+      "SOURCE_SINGLE": "One tradition",
+      "UNAVAILABLE_TITLE": "What this reading could not tell you",
+      "SHARE": "Share this reading",
+      "SHARE_STOP": "Stop sharing",
+      "SHARE_NOTE": "A shared link shows the stones and the reasoning. It never shows your birth details.",
+      "CALENDAR_DAY": "Day {{day}}",
+      "CAUTION_BADGE": "Counselled against",
+      "CAUTION_TITLE": "What the traditions caution",
+      "NO_RECOMMENDATIONS_TITLE": "No stones ranked",
+      "NO_RECOMMENDATIONS": "Not enough of the chart could be read to rank anything. If you left the birth time out, adding it will usually change that.",
+      "GONE_TITLE": "This reading is no longer here",
+      "GONE": "Readings made without an account are kept for a while and then let go. Nothing was lost that cannot be made again — a new reading from the same birth details produces the same stones.",
+      "SHARE_START": "Create a share link",
+      "SHARE_LINK": "Share link",
+      "SHARE_COPY": "Copy",
+      "SHARE_COPIED": "Copied"
+    },
+    "TIER": {
+      "PRIMARY": "Primary",
+      "SECONDARY": "Secondary",
+      "SUPPORTIVE": "Supportive",
+      "CAUTION": "Counselled against"
+    },
+    "CONFIDENCE": {
+      "WELLATTESTED": "Plainly stated",
+      "QUALIFIED": "Stated with qualification",
+      "HEAVILYHEDGED": "Contested or heavily hedged",
+      "NOTE": "This describes how firmly the tradition states the association — not how likely it is to be true."
+    },
+    "UNAVAILABLE": {
+      "BIRTHTIMEUNKNOWN": "{{count}} associations need an exact birth time, so they were left out.",
+      "DIGNITYINCONSISTENTINSOURCE": "{{count}} associations rest on a placement the tradition states inconsistently, so they were left out.",
+      "TRADITIONDATAUNAVAILABLE": "{{count}} associations belong to a tradition not loaded in this reading.",
+      "RULEPENDINGHUMANCONFIRMATION": "{{count}} associations are awaiting review and are withheld until then."
+    },
+    "DESIGNER": {
+      "TITLE": "The bracelet designer",
+      "COMING_SOON": "Not open yet",
+      "PROVISIONAL_SIZING": "The sizing table is provisional and will change.",
+      "CHECKED_AT": "Checked against the live catalogue just now.",
+      "STRAND_LABEL": "Your bracelet. Use the arrow keys to move around the strand.",
+      "VIEW": "How you are looking at it",
+      "ZOOM": "Zoom",
+      "ZOOM_IN": "Zoom in",
+      "ZOOM_OUT": "Zoom out",
+      "RESET_VIEW": "Reset view",
+      "CLEAR": "Clear the bracelet",
+      "CLEARED": "Cleared.",
+      "SHORTENED": "That bracelet is shorter — {{count}} stones came off the end.",
+      "UNDO": "Undo",
+      "MOVED": "{{stone}} moved to position {{position}} of {{count}}.",
+      "SUMMARY": "{{beads}}, {{stones}}.",
+      "STONE_COUNT": {
+        "ONE": "{{count}} stone",
+        "OTHER": "{{count}} stones"
+      },
+      "WRIST": "Wrist",
+      "INNER": "Inner circumference",
+      "FIT": "Fit",
+      "BEAD_COUNT": {
+        "ONE": "{{count}} bead",
+        "OTHER": "{{count}} beads"
+      },
+      "UNDRAWN": "No bead image yet",
+      "PALETTE": "Your stones",
+      "PALETTE_SIZE": "Your chart names {{count}} stones.",
+      "PALETTE_EMPTY": "Your chart named no stones this engine can offer as beads. That is unusual — the reading itself explains what could and could not be read.",
+      "UNAVAILABLE_TITLE": "Not assessed",
+      "CAUTION_MARK": "!",
+      "CAUTION_ACCEPT": "I understand — add it",
+      "CAUTION_DECLINE": "Leave it off",
+      "CONTROLS": "Size and finish",
+      "DIAMETER": "Bead size",
+      "GRADE": "Finish",
+      "GRADE_STANDARD": "Standard",
+      "GRADE_PREMIUM": "Premium",
+      "GRADE_NOTE": "Finish describes how evenly the beads are cut and matched. It is not a price tier — nothing here is priced.",
+      "REVIEW": "Your bracelet",
+      "BEADS": "Beads",
+      "FILLED_OF": "{{filled}} of {{places}}",
+      "ROPE_FULL": "Every place on the bracelet is filled. Remove a stone, or change the wrist size or bead size, to make room.",
+      "TOO_LOOSE": "This is longer than the wrist you chose. Take a bead off, or pick a larger wrist size.",
+      "TOO_TIGHT": "This is shorter than the wrist you chose. Add a bead, or pick a smaller wrist size.",
+      "NOTHING_TO_REVIEW": "Add three beads and the ring will close.",
+      "MADE_TO_ORDER": "Every bracelet is strung by hand for the person who ordered it. The stones are gathered after you save this design, so it is made for you rather than taken off a shelf.",
+      "SAVE": "Save this design",
+      "SAVED": "Saved. Keep this reference.",
+      "BUILD_ANOTHER": "Build another",
+      "RESET": "Start over",
+      "REPLACING": "Choose a stone for position {{position}}.",
+      "BACK_TO_READING": "Back to your reading",
+      "EMPTY_STRAND": "Pick a stone to begin.",
+      "NEEDS_THREE": "{{count}} of 3. A bracelet needs at least three beads before it can close into a ring."
+    },
+    "STATE": {
+      "LOADING": "Working…",
+      "RETRY": "Try again",
+      "EMPTY_TITLE": "Nothing here yet",
+      "BACK_TO_READING": "Start a reading"
+    },
+    "ERRORS": {
+      "GEM_BIRTHDATA_INVALID": "Those birth details can't be used for a chart. Check the date — readings start from 1800 — and the place.",
+      "GEM_SESSION_NOT_FOUND": "This reading isn't available. It may have expired, or the link may not be yours.",
+      "GEM_TRADITION_DISABLED": "One of the traditions requested isn't available in this reading.",
+      "SESSION_NOT_FOUND": "This reading isn't available. It may have expired, or the link may not be yours.",
+      "MATERIAL_NOT_FOUND": "That stone isn't in the catalogue.",
+      "MATERIAL_INACTIVE": "That stone is no longer offered.",
+      "MATERIAL_FORBIDDEN_ON_SAFETY": "That stone can't be used here. It is classed as unsafe for skin contact, and that is not something the design can work around.",
+      "META_COMPONENT_UNKNOWN": "That information isn't available.",
+      "BEAD_CATALOG_EMPTY": "No beads are stocked yet, so nothing can be built. This isn't a fault — the catalogue simply hasn't arrived.",
+      "BEAD_VARIANT_UNAVAILABLE": "That bead isn't stocked in the size or grade chosen.",
+      "BRACELET_TEMPLATE_NOT_FOUND": "That bracelet style isn't available.",
+      "BRACELET_CONFIGURATION_NOT_FOUND": "That design isn't available.",
+      "GEOMETRY_QUANTISATION": "No whole number of beads fits that wrist at this bead size. A different bead size would solve it.",
+      "GEOMETRY_OUT_OF_RANGE": "That wrist measurement is outside what this style can be made in.",
+      "GEOMETRY_DEGENERATE": "Those beads can't form a closed bracelet.",
+      "NETWORK_UNREACHABLE": "We couldn't reach the service. Check your connection and try again.",
+      "SERVER_ERROR": "Something went wrong on our side. Nothing you entered was lost — try again.",
+      "RATE_LIMITED": "That's a few readings in quick succession. Please wait a moment and try again.",
+      "VALIDATION_FAILED": "Some of those details need correcting.",
+      "UNKNOWN": "Something unexpected happened. Try again."
+    },
+    "REASONS": {
+      "reason": {
+        "sign": {
+          "aries": {
+            "sun": {
+              "short": "Your Sun is in Aries",
+              "long": "In the western magical tradition these are the stones of Aries — the sign the Sun occupied at your birth."
+            }
+          },
+          "taurus": {
+            "sun": {
+              "short": "Your Sun is in Taurus",
+              "long": "In the western magical tradition these are the stones of Taurus — the sign the Sun occupied at your birth."
+            }
+          },
+          "gemini": {
+            "sun": {
+              "short": "Your Sun is in Gemini",
+              "long": "In the western magical tradition these are the stones of Gemini — the sign the Sun occupied at your birth."
+            }
+          },
+          "cancer": {
+            "sun": {
+              "short": "Your Sun is in Cancer",
+              "long": "In the western magical tradition these are the stones of Cancer — the sign the Sun occupied at your birth."
+            }
+          },
+          "leo": {
+            "sun": {
+              "short": "Your Sun is in Leo",
+              "long": "In the western magical tradition these are the stones of Leo — the sign the Sun occupied at your birth."
+            }
+          },
+          "virgo": {
+            "sun": {
+              "short": "Your Sun is in Virgo",
+              "long": "In the western magical tradition these are the stones of Virgo — the sign the Sun occupied at your birth."
+            }
+          },
+          "libra": {
+            "sun": {
+              "short": "Your Sun is in Libra",
+              "long": "In the western magical tradition these are the stones of Libra — the sign the Sun occupied at your birth."
+            }
+          },
+          "scorpio": {
+            "sun": {
+              "short": "Your Sun is in Scorpio",
+              "long": "In the western magical tradition these are the stones of Scorpio — the sign the Sun occupied at your birth."
+            }
+          },
+          "sagittarius": {
+            "sun": {
+              "short": "Your Sun is in Sagittarius",
+              "long": "In the western magical tradition these are the stones of Sagittarius — the sign the Sun occupied at your birth."
+            }
+          },
+          "capricorn": {
+            "sun": {
+              "short": "Your Sun is in Capricorn",
+              "long": "In the western magical tradition these are the stones of Capricorn — the sign the Sun occupied at your birth."
+            }
+          },
+          "aquarius": {
+            "sun": {
+              "short": "Your Sun is in Aquarius",
+              "long": "In the western magical tradition these are the stones of Aquarius — the sign the Sun occupied at your birth."
+            }
+          },
+          "pisces": {
+            "sun": {
+              "short": "Your Sun is in Pisces",
+              "long": "In the western magical tradition these are the stones of Pisces — the sign the Sun occupied at your birth."
+            }
+          }
+        },
+        "planet": {
+          "sun": {
+            "dignified": {
+              "short": "Your Sun is strongly placed",
+              "long": "The Sun sits in a sign this tradition counts as its own or its exaltation. Stones carrying the Sun are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Sun is weakly placed",
+              "long": "The Sun sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            }
+          },
+          "moon": {
+            "dignified": {
+              "short": "Your Moon is strongly placed",
+              "long": "The Moon sits in a sign this tradition counts as its own or its exaltation. Stones carrying the Moon are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Moon is weakly placed",
+              "long": "The Moon sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            },
+            "chartRuler": {
+              "short": "The Moon rules your chart",
+              "long": "The Moon governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+            }
+          },
+          "mercury": {
+            "dignified": {
+              "short": "Your Mercury is strongly placed",
+              "long": "Mercury sits in a sign this tradition counts as its own or its exaltation. Stones carrying Mercury are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Mercury is weakly placed",
+              "long": "Mercury sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            },
+            "chartRuler": {
+              "short": "Mercury rules your chart",
+              "long": "Mercury governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+            }
+          },
+          "venus": {
+            "dignified": {
+              "short": "Your Venus is strongly placed",
+              "long": "Venus sits in a sign this tradition counts as its own or its exaltation. Stones carrying Venus are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Venus is weakly placed",
+              "long": "Venus sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            },
+            "chartRuler": {
+              "short": "Venus rules your chart",
+              "long": "Venus governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+            }
+          },
+          "mars": {
+            "dignified": {
+              "short": "Your Mars is strongly placed",
+              "long": "Mars sits in a sign this tradition counts as its own or its exaltation. Stones carrying Mars are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Mars is weakly placed",
+              "long": "Mars sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            },
+            "chartRuler": {
+              "short": "Mars rules your chart",
+              "long": "Mars governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+            }
+          },
+          "jupiter": {
+            "dignified": {
+              "short": "Your Jupiter is strongly placed",
+              "long": "Jupiter sits in a sign this tradition counts as its own or its exaltation. Stones carrying Jupiter are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Jupiter is weakly placed",
+              "long": "Jupiter sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            },
+            "chartRuler": {
+              "short": "Jupiter rules your chart",
+              "long": "Jupiter governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+            }
+          },
+          "saturn": {
+            "dignified": {
+              "short": "Your Saturn is strongly placed",
+              "long": "Saturn sits in a sign this tradition counts as its own or its exaltation. Stones carrying Saturn are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Saturn is weakly placed",
+              "long": "Saturn sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            },
+            "chartRuler": {
+              "short": "Saturn rules your chart",
+              "long": "Saturn governs the sign that was rising at the moment you were born, which this tradition reads as the planet setting the tone of the whole chart. These are the stones it carries."
+            }
+          },
+          "uranus": {
+            "dignified": {
+              "short": "Your Uranus is strongly placed",
+              "long": "Uranus sits in a sign this tradition counts as its exaltation. Stones carrying Uranus are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Uranus is weakly placed",
+              "long": "Uranus sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            }
+          },
+          "neptune": {
+            "dignified": {
+              "short": "Your Neptune is strongly placed",
+              "long": "Neptune sits in a sign this tradition counts as its own or its exaltation. Stones carrying Neptune are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Neptune is weakly placed",
+              "long": "Neptune sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            }
+          },
+          "pluto": {
+            "dignified": {
+              "short": "Your Pluto is strongly placed",
+              "long": "Pluto sits in a sign this tradition counts as its exaltation. Stones carrying Pluto are read as answering to what is already well placed in you."
+            },
+            "supportive": {
+              "short": "Your Pluto is weakly placed",
+              "long": "Pluto sits in a sign this tradition counts as difficult for it. Where a planet is weakly placed, this tradition answers with support rather than warning — these stones are offered as its counterpart."
+            }
+          }
+        },
+        "element": {
+          "fire": {
+            "deficient": {
+              "short": "Fire is thin in your chart",
+              "long": "Few of your planets fall in the Fire signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+            }
+          },
+          "earth": {
+            "deficient": {
+              "short": "Earth is thin in your chart",
+              "long": "Few of your planets fall in the Earth signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+            }
+          },
+          "air": {
+            "deficient": {
+              "short": "Air is thin in your chart",
+              "long": "Few of your planets fall in the Air signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+            }
+          },
+          "water": {
+            "deficient": {
+              "short": "Water is thin in your chart",
+              "long": "Few of your planets fall in the Water signs. This tradition treats such a gap as something to answer rather than something wrong, and offers these stones toward it."
+            }
+          }
+        },
+        "energy": {
+          "projective": {
+            "corrective": {
+              "short": "Your chart leans receptive",
+              "long": "Most of your planets fall in signs this tradition reads as receptive. These stones carry the projective current it offers as the counterweight."
+            }
+          },
+          "receptive": {
+            "corrective": {
+              "short": "Your chart leans projective",
+              "long": "Most of your planets fall in signs this tradition reads as projective. These stones carry the receptive current it offers as the counterweight."
+            }
+          }
+        },
+        "prohibition": {
+          "aries": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "cancer": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "gemini": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "leo": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "virgo": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "venusAfflicted": {
+            "short": "Your Venus is weakly placed",
+            "long": "This tradition counsels against this stone for those whose Venus sits in a difficult sign. A caution rather than a rule, and the choice stays yours."
+          },
+          "libra": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "scorpio": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "sagittarius": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "capricorn": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "aquarius": {
+            "short": "Counselled against for your sign",
+            "long": "This tradition withholds these stones from those born under your Sun sign. It is a caution rather than a rule, and the choice stays yours."
+          },
+          "saturnAfflicted": {
+            "short": "Your Saturn is weakly placed",
+            "long": "This tradition counsels against these stones for those whose Saturn sits in a difficult sign. A caution rather than a rule, and the choice stays yours."
+          }
+        },
+        "calendar": {
+          "birthDay": {
+            "short": "The stone of your birth day",
+            "long": "The Georgian day-calendar gives every day of the year its own stone. This one belongs to the day you were born. It is a separate tradition from your chart, and is kept apart from it."
+          }
+        }
+      }
+    },
+    "TIER_NOTE": {
+      "PRIMARY": "The strongest associations the traditions make for this chart.",
+      "SECONDARY": "Supported, and by fewer or more qualified statements.",
+      "SUPPORTIVE": "Offered alongside the others rather than in their own right.",
+      "CAUTION": "Named with a warning attached."
+    },
+    "SHARED": {
+      "EYEBROW": "Shared with you",
+      "TITLE": "A reading",
+      "LEAD": "Someone shared their gemstone reading with you. It shows the stones and why each was chosen — never their birth details, and never their chart.",
+      "CTA": "Readings are calculated from a birth chart and explained by the tradition each recommendation comes from.",
+      "GONE_TITLE": "This link no longer works",
+      "GONE": "The link may have been withdrawn by whoever shared it, or the reading behind it may have been let go."
+    },
+    "TRADITION": {
+      "western-magical": "From the western magical tradition",
+      "chart-mechanics": "From western chart practice",
+      "calendar-ka": "From a calendar tradition of day-stones",
+      "crystal-healing": "From the modern crystal tradition",
+      "vedic": "From the Vedic tradition"
+    },
+    "CHART": {
+      "TITLE": "Your chart",
+      "TABLE_CAPTION": "Each body in your chart, with its sign, its house, and anything notable about its placement.",
+      "NO_BIRTH_TIME": "Without an exact birth time there is no rising sign, no houses and no chart ruler. They are left out rather than guessed at — a chart drawn from an assumed time looks just as confident and is usually wrong.",
+      "COL": {
+        "BODY": "Body",
+        "SIGN": "Sign",
+        "HOUSE": "House",
+        "NOTES": ""
+      },
+      "ANGLE": {
+        "ASCENDANT": "Rising sign",
+        "MIDHEAVEN": "Midheaven"
+      },
+      "RETROGRADE": "Retrograde",
+      "CHART_RULER": "Chart ruler",
+      "RULER_TITLE": "The ruler of your chart",
+      "RULERSHIP_SCHEME": {
+        "Traditional": "Resolved under the classical seven-planet rulerships.",
+        "Modern": "Resolved under the modern rulerships, which assign the outer planets.",
+        "HickeyPrimary": "Resolved under the western chart practice this reading follows."
+      },
+      "DIGNITY": {
+        "OWN": "In its own sign",
+        "EXALTED": "Exalted",
+        "DETRIMENT": "In detriment",
+        "FALL": "In fall"
+      },
+      "DIGNITY_STATE": {
+        "Stated": "The tradition states this plainly.",
+        "StatedButHedged": "The tradition describes this without naming it outright.",
+        "StatedInconsistent": "The tradition states this more than once, inconsistently.",
+        "NotStated": "The tradition assigns nothing here."
+      },
+      "DIGNITY_HEDGED_NOTE": "A star marks a placement the tradition describes rather than states outright. It is still used, and it counts for less.",
+      "ELEMENTS": "Elements",
+      "ELEMENT": {
+        "FIRE": "Fire",
+        "EARTH": "Earth",
+        "AIR": "Air",
+        "WATER": "Water"
+      },
+      "MODALITIES": "Modalities",
+      "MODALITY": {
+        "CARDINAL": "Cardinal",
+        "FIXED": "Fixed",
+        "MUTABLE": "Mutable"
+      },
+      "ENERGY": "Energy",
+      "ENERGY_PROJECTIVE": "Projective",
+      "ENERGY_RECEPTIVE": "Receptive",
+      "ENERGY_DOMINANT": {
+        "PROJECTIVE": "Projective energy predominates. In this tradition, receptive stones are offered to answer it.",
+        "RECEPTIVE": "Receptive energy predominates. In this tradition, projective stones are offered to answer it."
+      },
+      "ENERGY_BALANCED": "The two are evenly matched, so neither is read as dominant.",
+      "SIGN": {
+        "ARIES": "Aries",
+        "TAURUS": "Taurus",
+        "GEMINI": "Gemini",
+        "CANCER": "Cancer",
+        "LEO": "Leo",
+        "VIRGO": "Virgo",
+        "LIBRA": "Libra",
+        "SCORPIO": "Scorpio",
+        "SAGITTARIUS": "Sagittarius",
+        "CAPRICORN": "Capricorn",
+        "AQUARIUS": "Aquarius",
+        "PISCES": "Pisces"
+      },
+      "BODY": {
+        "SUN": "Sun",
+        "MOON": "Moon",
+        "MERCURY": "Mercury",
+        "VENUS": "Venus",
+        "MARS": "Mars",
+        "JUPITER": "Jupiter",
+        "SATURN": "Saturn",
+        "URANUS": "Uranus",
+        "NEPTUNE": "Neptune",
+        "PLUTO": "Pluto",
+        "CHIRON": "Chiron",
+        "NORTHNODE": "North Node",
+        "SOUTHNODE": "South Node",
+        "TRUENODE": "North Node",
+        "MEANNODE": "North Node",
+        "LILITH": "Lilith",
+        "CERES": "Ceres",
+        "PALLAS": "Pallas",
+        "JUNO": "Juno",
+        "VESTA": "Vesta"
+      },
+      "KEYS": {
+        "chart": {
+          "ruler": {
+            "rulesAscendant": "{{body}} rules {{sign}}, the sign that was rising when you were born, and in this tradition the ruler of the rising sign is read as the ruler of the whole chart."
+          }
+        }
+      }
+    }
   }
 }
