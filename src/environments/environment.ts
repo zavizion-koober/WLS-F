@@ -12,7 +12,7 @@ export const env = {
   },
 
   API_URLS: {
-    rest: '/api',
+    rest: '/api/v1',
     graphql: '/graphql',
   },
 

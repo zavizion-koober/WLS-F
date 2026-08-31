@@ -70,7 +70,7 @@ describe('sc-designer-page — clearing the board', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideRouter([]),
-        { provide: API_URLS, useValue: { rest: '/api' } },
+        { provide: API_URLS, useValue: { rest: '/api/v1' } },
         { provide: ReadingStore, useClass: ReadingStoreStub },
       ],
     });

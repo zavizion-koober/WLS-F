@@ -1,28 +1,4 @@
 {
-  "/api/gemstones": {
-    "target": "http://localhost:5080",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/api/bracelets": {
-    "target": "http://localhost:5080",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/api/knowledge": {
-    "target": "http://localhost:5080",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/api/meta": {
-    "target": "http://localhost:5080",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
   "/api": {
     "target": "http://localhost:5210",
     "secure": false,

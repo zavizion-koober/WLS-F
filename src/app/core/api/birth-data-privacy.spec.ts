@@ -51,7 +51,7 @@ describe('birth data privacy', () => {
         providers: [
           provideHttpClient(),
           provideHttpClientTesting(),
-          { provide: API_URLS, useValue: { rest: '/api' } },
+          { provide: API_URLS, useValue: { rest: '/api/v1' } },
         ],
       });
       gemstones = TestBed.inject(GemstonesApiService);
@@ -61,7 +61,7 @@ describe('birth data privacy', () => {
     it('puts no part of the birth input in the request url or query string', () => {
       gemstones.createSession({ birthInput: BIRTH }).subscribe();
 
-      const req = http.expectOne('/api/gemstones/sessions');
+      const req = http.expectOne('/api/v1/gemstones/sessions');
       const url = req.request.urlWithParams;
 
       for (const value of [
@@ -76,7 +76,7 @@ describe('birth data privacy', () => {
         expect(url).not.toContain(value);
       }
 
-      expect(url).toBe('/api/gemstones/sessions');
+      expect(url).toBe('/api/v1/gemstones/sessions');
       expect(req.request.body).toEqual({ birthInput: BIRTH });
       req.flush({});
     });
