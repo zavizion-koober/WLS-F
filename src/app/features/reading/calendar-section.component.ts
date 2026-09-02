@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 import { TranslatePipe } from '@ngx-translate/core';
 
 import type { CustomerCalendarReading, SharedCalendarReading } from '@core/models/gemstones.models';
+import { beadImage } from '@features/designer/strand/bead-image';
 
 /**
  * The calendar stone.
@@ -13,9 +14,7 @@ import type { CustomerCalendarReading, SharedCalendarReading } from '@core/model
  * showing six stones in a row would present a disagreement as a longer list.
  *
  * <b>A null `materialSlug` means the calendar names a stone the catalogue cannot
- * resolve.</b> The backend publishes the null rather than omitting the entry, and
- * so does this — "the list names something we cannot identify" is information,
- * and quietly showing five stones where the source printed six is not.
+ * resolve.</b>
  */
 @Component({
   selector: 'sc-calendar-section',
@@ -49,13 +48,18 @@ import type { CustomerCalendarReading, SharedCalendarReading } from '@core/model
             </p>
           }
 
-          <ul class="mt-2 flex flex-wrap gap-2">
+          <ul class="mt-3 flex flex-wrap gap-3">
             @for (stone of group.stones; track $index) {
               <li
-                class="rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-primary)] px-4 py-2 text-sm"
+                class="flex items-center gap-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-primary)] px-4 py-2.5 text-sm shadow-2xs hover:border-[#CBB26A]/60 transition-colors"
               >
+                @if (stone.materialSlug && stoneImage(stone.materialSlug); as href) {
+                  <div class="w-8 h-8 rounded-lg bg-[#F5F2EB] p-0.5 border border-[#E2DDD2] flex items-center justify-center shrink-0">
+                    <img [src]="href" [alt]="stone.canonicalNameEn || ''" class="w-full h-full object-contain filter drop-shadow-xs" />
+                  </div>
+                }
                 @if (stone.canonicalNameEn) {
-                  <span class="text-[var(--text-primary)]">{{ stone.canonicalNameEn }}</span>
+                  <span class="text-[var(--text-primary)] font-medium">{{ stone.canonicalNameEn }}</span>
                 } @else {
                   <span class="text-[var(--text-muted)]">
                     {{ 'STONECRAFT.READING.CALENDAR_UNRESOLVED' | translate }}
@@ -76,13 +80,17 @@ import type { CustomerCalendarReading, SharedCalendarReading } from '@core/model
 export class CalendarSectionComponent {
   public readonly reading = input.required<CustomerCalendarReading | SharedCalendarReading>();
 
+  protected stoneImage(slug: string): string | null {
+    return beadImage(slug);
+  }
+
   /**
    * Groups by calendar day, in the order the days first appear.
    *
    * One group on an ordinary date, two on a disputed one.
    */
   protected readonly byDay = computed(() => {
-    const groups = new Map<number, { day: number; stones: { canonicalNameEn: string | null }[] }>();
+    const groups = new Map<number, { day: number; stones: { materialSlug: string | null; canonicalNameEn: string | null }[] }>();
 
     for (const stone of this.reading().stones) {
       const existing = groups.get(stone.day);

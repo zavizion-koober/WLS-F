@@ -1,9 +1,11 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { LastReadingService } from '@core/services/last-reading.service';
+import { SavedBraceletsService } from '@core/services/saved-bracelets.service';
 import { LocaleService } from '@core/services/locale.service';
 import { getLocalizedName } from '@core/utils/translation.utils';
 import { SearchModalService } from '@core/services/search-modal.service';
@@ -68,6 +70,30 @@ import { IntentionsSelectors } from '@store/intentions/intentions.selectors';
           <app-icon name="arrow-right" [size]="13" customClass="text-[#8D8A81]" />
         </button>
 
+        <!-- Talisman Designer Feature Card -->
+        <a
+          [routerLink]="designerLink()"
+          (click)="close.emit()"
+          class="block p-4 rounded-xl bg-gradient-to-br from-[#0D2B1D] via-[#10523C] to-[#0A1A12] text-[#FCFBF9] border border-[#8A7029]/40 shadow-sm transition-transform active:scale-[0.98] cursor-pointer"
+        >
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[9.5px] uppercase tracking-widest text-[#CBB26A] font-semibold">
+              {{ 'NAVBAR.ATELIER_CRAFT' | translate }}
+            </span>
+            <span class="text-[#CBB26A] text-xs">✦</span>
+          </div>
+          <h4 class="font-display text-base font-bold text-[#FCFBF9]">
+            {{ 'NAVBAR.DESIGNER' | translate }}
+          </h4>
+          <p class="text-xs text-[#F4F1EA]/80 mt-1 leading-snug font-light">
+            {{ 'NAVBAR.DESIGNER_MOBILE_DESC' | translate }}
+          </p>
+          <div class="mt-3 inline-flex items-center gap-1.5 text-[11px] text-[#CBB26A] font-semibold uppercase tracking-wider">
+            <span>{{ 'NAVBAR.START_CRAFT' | translate }}</span>
+            <app-icon name="arrow-right" [size]="12" />
+          </div>
+        </a>
+
         <nav class="flex flex-col space-y-4">
           <a
             routerLink="/shop"
@@ -77,6 +103,32 @@ import { IntentionsSelectors } from '@store/intentions/intentions.selectors';
             <span>{{ 'NAVBAR.SHOP' | translate }}</span>
             <app-icon name="chevron-right" [size]="16" />
           </a>
+
+          <a
+            [routerLink]="designerLink()"
+            (click)="close.emit()"
+            class="text-sm uppercase tracking-widest font-semibold text-[#8A7029] hover:text-[#10523C] transition-colors flex items-center justify-between py-1"
+          >
+            <span class="flex items-center gap-1.5">
+              <span>✦</span>
+              <span>{{ 'NAVBAR.DESIGNER' | translate }}</span>
+            </span>
+            <app-icon name="chevron-right" [size]="16" />
+          </a>
+
+          @if (savedBracelets.count() > 0) {
+            <a
+              routerLink="/bracelets"
+              (click)="close.emit()"
+              class="text-sm uppercase tracking-widest font-semibold text-[#10523C] hover:text-[#8A7029] transition-colors flex items-center justify-between py-1"
+            >
+              <span class="flex items-center gap-1.5">
+                <span>✦</span>
+                <span>{{ 'STONECRAFT.PROMO.MY_BRACELETS' | translate }} ({{ savedBracelets.count() }})</span>
+              </span>
+              <app-icon name="chevron-right" [size]="16" />
+            </a>
+          }
 
           <a
             routerLink="/about"
@@ -162,64 +214,65 @@ import { IntentionsSelectors } from '@store/intentions/intentions.selectors';
               <app-icon name="user" [size]="16" />
               <span>{{ 'PROFILE.EYEBROW' | translate }}</span>
             </a>
-
             <button
               type="button"
               (click)="onLogout()"
-              class="text-xs text-[#8D8A81] hover:text-red-700 transition-colors cursor-pointer"
+              class="text-xs text-[#8D8A81] hover:text-red-700 font-medium"
             >
               {{ 'PROFILE.LOGOUT' | translate }}
             </button>
           </div>
         } @else {
-          <div class="flex items-center gap-3">
-            <a
-              routerLink="/login"
-              (click)="close.emit()"
-              class="flex-1 btn-primary py-2 text-center text-xs"
-            >
-              {{ 'AUTH.LOG_IN_BTN' | translate }}
-            </a>
-            <a
-              routerLink="/register"
-              (click)="close.emit()"
-              class="flex-1 btn-secondary py-2 text-center text-xs"
-            >
-              {{ 'AUTH.SIGN_UP' | translate }}
-            </a>
-          </div>
+          <a
+            routerLink="/auth/login"
+            (click)="close.emit()"
+            class="btn-secondary w-full text-center text-xs py-2.5 flex items-center justify-center gap-2"
+          >
+            <app-icon name="user" [size]="14" />
+            <span>{{ 'NAVBAR.LOGIN' | translate }}</span>
+          </a>
         }
 
-        <!-- Language switcher -->
-        <div class="flex items-center justify-center gap-4 pt-2 border-t border-[#E2DDD2]/60">
-          @for (lang of localeService.supported; track lang) {
-            <button
-              type="button"
-              (click)="localeService.setLocale(lang)"
-              [class.text-[#10523C]]="localeService.active() === lang"
-              [class.font-bold]="localeService.active() === lang"
-              [class.underline]="localeService.active() === lang"
-              class="uppercase px-2 py-1 text-xs text-[#5F5D56] hover:text-[#1A1A1D] cursor-pointer"
-            >
-              {{ lang }}
-            </button>
-          }
+        <!-- Language Selector -->
+        <div class="pt-2 border-t border-[#E2DDD2]/60 flex items-center justify-between">
+          <span class="text-xs text-[#8D8A81] font-medium">{{ 'NAVBAR.LANGUAGE' | translate }}</span>
+          <div class="flex items-center gap-2">
+            @for (lang of localeService.supported; track lang) {
+              <button
+                type="button"
+                (click)="localeService.setLocale(lang)"
+                [class.bg-[#10523C]]="localeService.active() === lang"
+                [class.text-[#FCFBF9]]="localeService.active() === lang"
+                [class.text-[#5F5D56]]="localeService.active() !== lang"
+                class="px-2 py-1 rounded text-xs uppercase font-medium transition-colors"
+              >
+                {{ lang }}
+              </button>
+            }
+          </div>
         </div>
       </div>
     </aside>
   `,
 })
 export class MobileMenuComponent {
-  public readonly isOpen = input<boolean>(false);
+  public readonly isOpen = input.required<boolean>();
   public readonly close = output<void>();
 
-  public readonly localeService = inject(LocaleService);
-  public readonly searchService = inject(SearchModalService);
   private readonly store = inject(Store);
+  private readonly searchService = inject(SearchModalService);
+  private readonly lastReading = inject(LastReadingService);
+  protected readonly savedBracelets = inject(SavedBraceletsService);
+  public readonly localeService = inject(LocaleService);
 
   public readonly isAuthenticated = this.store.selectSignal(AuthSelectors.isAuthenticated);
   public readonly categories = this.store.selectSignal(CategoriesSelectors.categories);
   public readonly intentions = this.store.selectSignal(IntentionsSelectors.intentions);
+
+  public readonly designerLink = computed(() => {
+    const id = this.lastReading.publicId();
+    return id ? ['/reading', id] : ['/reading'];
+  });
 
   public onOpenSearch(): void {
     this.close.emit();
@@ -227,8 +280,8 @@ export class MobileMenuComponent {
   }
 
   public onLogout(): void {
-    this.close.emit();
     this.store.dispatch(new Logout());
+    this.close.emit();
   }
 
   public getCategoryItemName(cat: any): string {

@@ -88,21 +88,30 @@ import { CartLine } from '@store/cart/cart.models';
           </div>
         } @else {
           @for (item of lines(); track item.productId) {
-            <div class="flex gap-4 p-3 bg-[#F4F1EA]/60 rounded-lg border border-[#E2DDD2]/70">
+            <div class="flex gap-4 p-3.5 bg-[#F4F1EA]/60 rounded-xl border border-[#E2DDD2]/70 shadow-2xs">
               <!-- Thumbnail -->
-              <img
-                [src]="item.imageUrl | assetUrl"
-                [alt]="item.name"
-                class="w-18 h-22 object-cover rounded bg-[#F4F1EA] shrink-0 border border-[#E2DDD2]"
-              />
+              <div class="w-18 h-22 rounded-lg bg-[#FCFBF9] border border-[#E2DDD2] shrink-0 overflow-hidden flex items-center justify-center p-1">
+                <img
+                  [src]="item.imageUrl | assetUrl"
+                  [alt]="item.name"
+                  class="w-full h-full object-contain"
+                />
+              </div>
 
               <!-- Info -->
               <div class="flex flex-col flex-1 min-w-0 justify-between">
                 <div>
                   <div class="flex items-start justify-between gap-2">
-                    <h3 class="text-sm font-semibold text-[#1A1A1D] font-body product-title line-clamp-1">
-                      {{ item.name }}
-                    </h3>
+                    <div>
+                      @if (item.customBracelet) {
+                        <span class="inline-block text-[9px] uppercase tracking-wider font-semibold text-[#8A7029] mb-0.5">
+                          ✦ {{ 'STONECRAFT.NAV.DESIGNER' | translate }}
+                        </span>
+                      }
+                      <h3 class="text-sm font-semibold text-[#1A1A1D] font-body product-title line-clamp-1">
+                        {{ item.name }}
+                      </h3>
+                    </div>
 
                     <button
                       type="button"
@@ -114,7 +123,22 @@ import { CartLine } from '@store/cart/cart.models';
                     </button>
                   </div>
 
-                  <p class="text-xs font-semibold text-[#10523C] mt-0.5">
+                  @if (item.customBracelet; as custom) {
+                    <p class="text-[11px] text-[#5F5D56] line-clamp-1 mt-0.5">
+                      {{ formatCustomDetails(custom) }}
+                    </p>
+                    <a
+                      [routerLink]="['/designer', custom.readingPublicId]"
+                      [queryParams]="{ braceletId: custom.id }"
+                      (click)="onClose()"
+                      class="inline-flex items-center gap-1 text-[10.5px] uppercase tracking-wider font-semibold text-[#10523C] hover:text-[#8A7029] mt-1 transition-colors"
+                    >
+                      <span>{{ 'STONECRAFT.ACTIONS.EDIT_CONFIG' | translate }}</span>
+                      <app-icon name="arrow-right" [size]="10" />
+                    </a>
+                  }
+
+                  <p class="text-xs font-semibold text-[#10523C] mt-1">
                     {{ item.price | price }}
                   </p>
                 </div>
@@ -196,5 +220,13 @@ export class CartDrawerComponent {
 
   public onRemoveItem(line: CartLine): void {
     this.store.dispatch(new RemoveFromCart(line.productId, line.itemId));
+  }
+
+  public formatCustomDetails(custom: any): string {
+    const stonesSummary = custom.stones
+      ?.map((s: any) => `${s.name} (${s.count})`)
+      .slice(0, 3)
+      .join(', ');
+    return `${stonesSummary || 'Custom stones'} • ${custom.wristMm}mm`;
   }
 }

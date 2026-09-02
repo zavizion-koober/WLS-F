@@ -8,12 +8,13 @@ import {
 } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { isError, isLoading, isSuccess } from '@core/api/request-state';
 import { LastReadingService } from '@core/services/last-reading.service';
 import { ApiErrorComponent } from '@shared/components/api-error.component';
+import { ScStepWizardComponent } from '@shared/components/sc-step-wizard.component';
 
 import {
   emptyBirthForm,
@@ -36,10 +37,36 @@ import { ReadingStore } from './reading.store';
 @Component({
   selector: 'sc-birth-input-page',
   standalone: true,
-  imports: [DecimalPipe, FormsModule, TranslatePipe, ApiErrorComponent],
+  imports: [DecimalPipe, FormsModule, RouterLink, TranslatePipe, ApiErrorComponent, ScStepWizardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <main class="atelier-container max-w-2xl py-14 md:py-20">
+    <main class="atelier-container max-w-2xl py-10 md:py-16">
+      <sc-step-wizard [currentStep]="1" [publicId]="resumeId()" />
+
+      @if (resumeId(); as prevId) {
+        <div
+          class="mb-8 p-4 sm:p-5 rounded-xl bg-[#FCFBF9] border border-[#CBB26A]/60 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        >
+          <div class="space-y-1">
+            <span class="text-[10px] uppercase tracking-widest text-[#8A7029] font-semibold flex items-center gap-1.5">
+              <span>✦</span>
+              <span>{{ 'STONECRAFT.BIRTH.RESUME_TITLE' | translate }}</span>
+            </span>
+            <p class="text-xs text-[#5F5D56] leading-relaxed">
+              {{ 'STONECRAFT.BIRTH.RESUME_DESC' | translate }}
+            </p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+            <a
+              [routerLink]="['/designer', prevId]"
+              class="btn-primary text-xs py-2 px-4 text-center w-full sm:w-auto"
+            >
+              {{ 'STONECRAFT.BIRTH.RESUME_CTA' | translate }} →
+            </a>
+          </div>
+        </div>
+      }
+
       <p class="text-eyebrow text-[var(--gold-muted)]">
         {{ 'STONECRAFT.NAV.READING' | translate }}
       </p>
@@ -293,6 +320,11 @@ export class BirthInputPage {
   protected readonly places = inject(PlaceLookupService);
   private readonly router = inject(Router);
   private readonly lastReading = inject(LastReadingService);
+
+  /**
+   * The reading this device already has, if any.
+   */
+  protected readonly resumeId = this.lastReading.publicId;
 
   protected readonly earliest = '1800-01-01';
 

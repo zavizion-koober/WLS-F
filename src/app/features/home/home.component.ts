@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocaleService } from '@core/services/locale.service';
 import { getLocalizedName, getLocalizedDescription } from '@core/utils/translation.utils';
 import { ProductsSelectors } from '@store/products/products.selectors';
-import { LoadBestSellers } from '@store/products/products.actions';
+import { LoadBestSellers, LoadProducts } from '@store/products/products.actions';
 import { CategoriesSelectors } from '@store/categories/categories.selectors';
 import { LoadCategories } from '@store/categories/categories.actions';
 import { IntentionsSelectors } from '@store/intentions/intentions.selectors';
@@ -17,6 +17,8 @@ import { LoadingSkeletonComponent } from '@shared/components/loading-skeleton/lo
 import { IconComponent } from '@shared/components/icon/icon.component';
 import { AssetUrlPipe } from '@shared/pipes/asset-url.pipe';
 import { CustomBraceletSectionComponent } from './custom-bracelet-section.component';
+import { PopularProductsSectionComponent } from './popular-products-section.component';
+import { FeaturedCategoriesSectionComponent } from './featured-categories-section.component';
 import { PricePipe } from '@shared/pipes/price.pipe';
 import { BestSellerPeriod } from 'src/generated/graphql';
 import { ProductListItem } from '@store/products/products.models';
@@ -36,16 +38,18 @@ import { IntentionItem } from '@store/intentions/intentions.models';
     AssetUrlPipe,
     PricePipe,
     CustomBraceletSectionComponent,
+    PopularProductsSectionComponent,
+    FeaturedCategoriesSectionComponent,
   ],
   template: `
-    <div class="space-y-20 sm:space-y-28 lg:space-y-36 pb-24">
+    <div class="flex flex-col w-full">
       <!-- 1. EDITORIAL HERO SECTION -->
-      <section class="atelier-container pt-8 sm:pt-14 lg:pt-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <section class="atelier-container pt-6 sm:pt-10 lg:pt-14 pb-10 sm:pb-14 lg:pb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           
           <!-- Left Column: Editorial Typography & Manifesto (40% desktop) -->
-          <div class="lg:col-span-5 flex flex-col items-start space-y-6 sm:space-y-8">
-            <div class="space-y-3">
+          <div class="lg:col-span-5 flex flex-col items-start space-y-6 sm:space-y-7">
+            <div class="space-y-2.5">
               <span class="text-eyebrow text-[#8A7029]">
                 {{ 'HOME.HERO.SUBTITLE' | translate }}
               </span>
@@ -59,7 +63,7 @@ import { IntentionItem } from '@store/intentions/intentions.models';
               {{ 'HOME.HERO.DESC' | translate }}
             </p>
 
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 w-full sm:w-auto">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1 w-full sm:w-auto">
               <a routerLink="/shop" class="btn-primary">
                 {{ 'HOME.HERO.SHOP_CTA' | translate }} →
               </a>
@@ -73,7 +77,7 @@ import { IntentionItem } from '@store/intentions/intentions.models';
             </div>
 
             <!-- Materiality callout -->
-            <div class="pt-4 border-t border-[#E2DDD2] w-full flex items-center justify-between text-[11px] uppercase tracking-widest text-[#8D8A81]">
+            <div class="pt-4 sm:pt-5 border-t border-[#E2DDD2] w-full flex items-center justify-between text-[10.5px] sm:text-[11px] uppercase tracking-widest text-[#8D8A81]">
               <span>{{ 'HOME.HERO.PILLARS.HAND_POURED' | translate }}</span>
               <span>•</span>
               <span>{{ 'HOME.HERO.PILLARS.BOTANICAL_ESSENCES' | translate }}</span>
@@ -92,7 +96,7 @@ import { IntentionItem } from '@store/intentions/intentions.models';
               (touchend)="onTouchEnd($event)"
             >
               <!-- Carousel Stage -->
-              <div class="relative w-full h-[370px] xs:h-[410px] sm:h-[450px] lg:h-[480px] flex items-center justify-center overflow-hidden">
+              <div class="relative w-full h-[380px] xs:h-[420px] sm:h-[460px] lg:h-[490px] flex items-center justify-center overflow-hidden">
                 @if (heroProducts().length === 0) {
                   <!-- Fallback Card -->
                   <div class="w-[240px] xs:w-[270px] sm:w-[300px] lg:w-[330px] aspect-[4/5] rounded-xl overflow-hidden shadow-lg bg-[#F5F2EB] border border-[#E2DDD2]/70 relative">
@@ -191,7 +195,7 @@ import { IntentionItem } from '@store/intentions/intentions.models';
 
               <!-- Dynamic Indicator Lines (Active Expands / Others Shrink) -->
               @if (heroProducts().length > 1) {
-                <div class="flex items-center justify-center gap-1.5 sm:gap-2 mt-5" role="tablist" aria-label="Product slides">
+                <div class="flex items-center justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-5" role="tablist" aria-label="Product slides">
                   @for (prod of heroProducts(); track prod.id; let idx = $index) {
                     <button
                       type="button"
@@ -217,78 +221,25 @@ import { IntentionItem } from '@store/intentions/intentions.models';
         </div>
       </section>
 
-      <!-- 2. DISCOVERY: PATH 1 - SHOP BY CATEGORY -->
-      <section class="atelier-container">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-[#E2DDD2] gap-4">
-          <div>
-            <span class="text-eyebrow text-[#8A7029]">
-              {{ 'HOME.FEATURED_CATEGORIES.SUBTITLE' | translate }}
-            </span>
-            <h2 class="font-display text-section-title font-bold text-[#1A1A1D] mt-1">
-              {{ 'HOME.FEATURED_CATEGORIES.TITLE' | translate }}
-            </h2>
-          </div>
+      <!-- 2. POPULAR / BESTSELLERS HIGHLIGHT (EDITORIAL CAROUSEL) -->
+      <app-popular-products-section />
 
-          <a routerLink="/shop" class="btn-editorial-link">
-            {{ 'HOME.FEATURED_CATEGORIES.VIEW_ALL' | translate }}
-          </a>
-        </div>
+      <!-- 3. DISCOVERY: PATH 1 - SHOP BY CATEGORY (EDITORIAL SHOWCASE) -->
+      <app-featured-categories-section />
 
-        @if (categoriesLoading() && categories().length === 0) {
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            @for (i of [1, 2, 3, 4]; track i) {
-              <app-loading-skeleton height="240px" customClass="rounded-lg" />
-            }
-          </div>
-        } @else if (categories().length > 0) {
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            @for (cat of categories(); track cat.id) {
-              <a
-                [routerLink]="['/shop']"
-                [queryParams]="{ categoryId: cat.id }"
-                class="group relative flex flex-col bg-[#FCFBF9] border border-[#E2DDD2] rounded-lg overflow-hidden transition-all duration-300 hover:border-[#8A7029] hover:shadow-md cursor-pointer"
-              >
-                <div class="w-full aspect-[4/3] bg-[#F4F1EA] overflow-hidden">
-                  <img
-                    [src]="cat.imageUrl | assetUrl"
-                    [alt]="getCategoryItemName(cat)"
-                    class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
-                <div class="p-4 sm:p-5 flex items-center justify-between">
-                  <div>
-                    <h3 class="font-body text-base sm:text-lg font-semibold text-[#1A1A1D] group-hover:text-[#10523C] transition-colors category-title">
-                      {{ getCategoryItemName(cat) }}
-                    </h3>
-                    @if (getCategoryItemDesc(cat)) {
-                      <p class="text-xs text-[#5F5D56] line-clamp-1 mt-0.5 font-body">
-                        {{ getCategoryItemDesc(cat) }}
-                      </p>
-                    }
-                  </div>
-                  <span class="text-[#8D8A81] group-hover:text-[#10523C] group-hover:translate-x-1 transition-all">
-                    <app-icon name="arrow-right" [size]="16" />
-                  </span>
-                </div>
-              </a>
-            }
-          </div>
-        }
-      </section>
-
-      <!-- 3. SELECTED OBJECTS (BEST SELLERS) -->
-      <section class="atelier-container">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-[#E2DDD2] gap-4">
-          <div>
+      <!-- 4. SELECTED OBJECTS (BEST SELLERS) -->
+      <section class="atelier-container py-10 sm:py-14 lg:py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 pb-4 sm:pb-5 border-b border-[#E2DDD2] gap-4">
+          <div class="space-y-1.5">
             <span class="text-eyebrow text-[#8A7029]">
               {{ 'HOME.BEST_SELLERS.SUBTITLE' | translate }}
             </span>
-            <h2 class="font-display text-section-title font-bold text-[#1A1A1D] mt-1">
+            <h2 class="font-display text-section-title font-bold text-[#1A1A1D] tracking-tight">
               {{ 'HOME.BEST_SELLERS.TITLE' | translate }}
             </h2>
           </div>
 
-          <a routerLink="/shop" class="btn-editorial-link">
+          <a routerLink="/shop" class="btn-editorial-link shrink-0">
             {{ 'HOME.BEST_SELLERS.EXPLORE_ALL' | translate }}
           </a>
         </div>
@@ -309,88 +260,86 @@ import { IntentionItem } from '@store/intentions/intentions.models';
       </section>
 
       <!--
-        3b. THE BRACELET FLOW.
-
+        5. THE BRACELET FLOW.
         Placed between the product grids and the intention shop, and styled as a
-        band rather than a grid: this is made to order, not something on a shelf,
-        and it should not read like the rows of candles above it.
+        band rather than a grid: this is made to order, not something on a shelf.
       -->
       <app-custom-bracelet-section />
 
-      <!-- 4. DISCOVERY: PATH 2 - SHOP BY INTENTION (EDITORIAL FOCUS) -->
-      <section class="bg-[#FCFBF9] border-y border-[#E2DDD2] py-16 sm:py-24">
-        <div class="atelier-container">
-          <div class="max-w-2xl mb-12">
+      <!-- 6. DISCOVERY: PATH 2 - SHOP BY INTENTION (EDITORIAL FOCUS) -->
+      <section class="atelier-container py-10 sm:py-14 lg:py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 pb-4 sm:pb-5 border-b border-[#E2DDD2] gap-4">
+          <div class="max-w-xl space-y-1.5">
             <span class="text-eyebrow text-[#8A7029]">
               {{ 'HOME.INTENTION_SHOP.SUBTITLE' | translate }}
             </span>
-            <h2 class="font-display text-section-title font-bold text-[#1A1A1D] mt-2 mb-3">
+            <h2 class="font-display text-section-title font-bold text-[#1A1A1D] tracking-tight">
               {{ 'HOME.INTENTION_SHOP.TITLE' | translate }}
             </h2>
-            <p class="text-sm text-[#5F5D56] leading-relaxed">
+            <p class="text-xs sm:text-sm text-[#5F5D56] leading-relaxed font-body font-light pt-0.5">
               {{ 'HOME.INTENTION_SHOP.DESC' | translate }}
             </p>
           </div>
+        </div>
 
-          <!-- Intention selector tabs -->
-          <div class="flex flex-wrap items-center gap-3 mb-10">
-            @for (intent of intentions(); track intent.id) {
-              <button
-                type="button"
-                (click)="selectIntention(intent.id)"
-                [class.bg-[#10523C]]="selectedIntentionId() === intent.id"
-                [class.text-[#FCFBF9]]="selectedIntentionId() === intent.id"
-                [class.border-[#10523C]]="selectedIntentionId() === intent.id"
-                [class.bg-[#FCFBF9]]="selectedIntentionId() !== intent.id"
-                [class.text-[#1A1A1D]]="selectedIntentionId() !== intent.id"
-                [class.border-[#E2DDD2]]="selectedIntentionId() !== intent.id"
-                class="px-5 py-2.5 rounded-full border text-xs uppercase tracking-widest font-semibold transition-all duration-200 hover:border-[#10523C] cursor-pointer shadow-2xs"
-              >
-                {{ getIntentionItemName(intent) }}
-              </button>
-            }
-          </div>
-
-          <!-- Intention Selected Products -->
-          @if (selectedIntentionProductsLoading()) {
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-              @for (i of [1, 2, 3, 4]; track i) {
-                <app-loading-skeleton height="380px" customClass="rounded-lg" />
-              }
-            </div>
-          } @else if (selectedIntentionProducts().length > 0) {
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
-              @for (prod of selectedIntentionProducts(); track prod.id) {
-                <app-product-card [product]="prod" class="h-full" />
-              }
-            </div>
-          } @else {
-            <div class="text-center py-12 text-sm text-[#8D8A81]">
-              {{ 'HOME.INTENTION_SHOP.EMPTY' | translate }}
-            </div>
+        <!-- Intention selector tabs -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-8 sm:mb-10">
+          @for (intent of intentions(); track intent.id) {
+            <button
+              type="button"
+              (click)="selectIntention(intent.id)"
+              [class.bg-[#10523C]]="selectedIntentionId() === intent.id"
+              [class.text-[#FCFBF9]]="selectedIntentionId() === intent.id"
+              [class.border-[#10523C]]="selectedIntentionId() === intent.id"
+              [class.bg-[#FCFBF9]]="selectedIntentionId() !== intent.id"
+              [class.text-[#1A1A1D]]="selectedIntentionId() !== intent.id"
+              [class.border-[#E2DDD2]]="selectedIntentionId() !== intent.id"
+              class="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border text-[11px] sm:text-xs uppercase tracking-widest font-semibold transition-all duration-200 hover:border-[#10523C] cursor-pointer shadow-2xs"
+            >
+              {{ getIntentionItemName(intent) }}
+            </button>
           }
         </div>
+
+        <!-- Intention Selected Products -->
+        @if (selectedIntentionProductsLoading()) {
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            @for (i of [1, 2, 3, 4]; track i) {
+              <app-loading-skeleton height="380px" customClass="rounded-lg" />
+            }
+          </div>
+        } @else if (selectedIntentionProducts().length > 0) {
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
+            @for (prod of selectedIntentionProducts(); track prod.id) {
+              <app-product-card [product]="prod" class="h-full" />
+            }
+          </div>
+        } @else {
+          <div class="text-center py-12 text-sm text-[#8D8A81]">
+            {{ 'HOME.INTENTION_SHOP.EMPTY' | translate }}
+          </div>
+        }
       </section>
 
-      <!-- 5. EDITORIAL MANIFESTO / PHILOSOPHY -->
-      <section class="atelier-container">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div class="lg:col-span-4 space-y-4">
+      <!-- 7. EDITORIAL MANIFESTO / PHILOSOPHY -->
+      <section class="atelier-container py-10 sm:py-14 lg:py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          <div class="lg:col-span-4 space-y-3.5">
             <span class="text-eyebrow text-[#8A7029]">
               {{ 'HOME.PHILOSOPHY.SUBTITLE' | translate }}
             </span>
-            <h2 class="font-display text-3xl sm:text-4xl font-bold text-[#1A1A1D]">
+            <h2 class="font-display text-section-title font-bold text-[#1A1A1D] tracking-tight">
               {{ 'HOME.PHILOSOPHY.TITLE' | translate }}
             </h2>
-            <p class="text-sm text-[#5F5D56] leading-relaxed">
+            <p class="text-sm text-[#5F5D56] leading-relaxed italic font-light pl-3.5 border-l-2 border-[#CBB26A]">
               {{ 'HOME.PHILOSOPHY.QUOTE' | translate }}
             </p>
           </div>
 
-          <div class="lg:col-span-8">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
-              <div class="space-y-2.5 p-6 rounded-xl bg-[#FCFBF9] border border-[#E2DDD2]">
-                <span class="text-xs uppercase tracking-widest text-[#8A7029] font-bold">
+          <div class="lg:col-span-8 space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+              <div class="space-y-2 p-5 sm:p-6 rounded-xl bg-[#FCFBF9] border border-[#E2DDD2] shadow-2xs">
+                <span class="text-xs uppercase tracking-widest text-[#8A7029] font-bold block">
                   {{ 'HOME.PHILOSOPHY.PILLARS.I_TITLE' | translate }}
                 </span>
                 <p class="text-xs text-[#5F5D56] leading-relaxed">
@@ -398,8 +347,8 @@ import { IntentionItem } from '@store/intentions/intentions.models';
                 </p>
               </div>
 
-              <div class="space-y-2.5 p-6 rounded-xl bg-[#FCFBF9] border border-[#E2DDD2]">
-                <span class="text-xs uppercase tracking-widest text-[#8A7029] font-bold">
+              <div class="space-y-2 p-5 sm:p-6 rounded-xl bg-[#FCFBF9] border border-[#E2DDD2] shadow-2xs">
+                <span class="text-xs uppercase tracking-widest text-[#8A7029] font-bold block">
                   {{ 'HOME.PHILOSOPHY.PILLARS.II_TITLE' | translate }}
                 </span>
                 <p class="text-xs text-[#5F5D56] leading-relaxed">
@@ -407,8 +356,8 @@ import { IntentionItem } from '@store/intentions/intentions.models';
                 </p>
               </div>
 
-              <div class="space-y-2.5 p-6 rounded-xl bg-[#FCFBF9] border border-[#E2DDD2]">
-                <span class="text-xs uppercase tracking-widest text-[#8A7029] font-bold">
+              <div class="space-y-2 p-5 sm:p-6 rounded-xl bg-[#FCFBF9] border border-[#E2DDD2] shadow-2xs">
+                <span class="text-xs uppercase tracking-widest text-[#8A7029] font-bold block">
                   {{ 'HOME.PHILOSOPHY.PILLARS.III_TITLE' | translate }}
                 </span>
                 <p class="text-xs text-[#5F5D56] leading-relaxed">
@@ -417,7 +366,7 @@ import { IntentionItem } from '@store/intentions/intentions.models';
               </div>
             </div>
 
-            <div class="pt-6">
+            <div class="pt-2">
               <a routerLink="/about" class="btn-editorial-link">
                 {{ 'HOME.PHILOSOPHY.CTA' | translate }}
               </a>
@@ -426,23 +375,23 @@ import { IntentionItem } from '@store/intentions/intentions.models';
         </div>
       </section>
 
-      <!-- 6. EDITORIAL NEWSLETTER / THRESHOLD BANNER -->
-      <section class="atelier-container">
-        <div class="bg-[#0D2B1D] text-[#FCFBF9] rounded-2xl p-8 sm:p-14 lg:p-20 text-center relative overflow-hidden border border-[#8A7029]/30 shadow-xl">
-          <div class="max-w-xl mx-auto space-y-6 relative z-10">
-            <span class="text-[11px] uppercase tracking-[0.25em] text-[#CBB26A] font-semibold">
+      <!-- 8. EDITORIAL NEWSLETTER / THRESHOLD BANNER -->
+      <section class="atelier-container pt-8 sm:pt-12 lg:pt-14 pb-16 sm:pb-20 lg:pb-24">
+        <div class="bg-[#0D2B1D] text-[#FCFBF9] rounded-2xl p-8 sm:p-12 lg:p-16 text-center relative overflow-hidden border border-[#8A7029]/30 shadow-xl">
+          <div class="max-w-xl mx-auto space-y-4 sm:space-y-5 relative z-10">
+            <span class="text-eyebrow text-[#CBB26A] font-semibold">
               {{ 'HOME.NEWSLETTER.SUBTITLE' | translate }}
             </span>
 
-            <h2 class="font-display text-2xl sm:text-4xl font-bold tracking-tight">
+            <h2 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#FCFBF9]">
               {{ 'HOME.NEWSLETTER.TITLE' | translate }}
             </h2>
 
-            <p class="text-sm text-[#F4F1EA]/80 leading-relaxed font-light">
+            <p class="text-xs sm:text-sm text-[#F4F1EA]/80 leading-relaxed font-light">
               {{ 'HOME.NEWSLETTER.DESC' | translate }}
             </p>
 
-            <div class="pt-4">
+            <div class="pt-2 sm:pt-3">
               <a routerLink="/shop" class="btn-gold-accent px-8 py-3.5 inline-block text-xs uppercase tracking-widest font-semibold shadow-lg">
                 {{ 'HOME.NEWSLETTER.CTA' | translate }} →
               </a>
@@ -513,7 +462,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     // Initial data dispatches (reuses store cache if already loaded)
     this.store.dispatch(new LoadCategories());
     this.store.dispatch(new LoadIntentions());
-    this.store.dispatch(new LoadBestSellers({ period: BestSellerPeriod.AllTime, take: 8 }));
+    this.store.dispatch(new LoadBestSellers({ period: BestSellerPeriod.AllTime, take: 24 }));
+    this.store.dispatch(new LoadProducts({ skip: 0, take: 24 }));
 
     // Automatically select first intention reactively
     effect(() => {

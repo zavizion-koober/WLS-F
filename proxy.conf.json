@@ -5,23 +5,8 @@
     "changeOrigin": true,
     "logLevel": "debug"
   },
-  "/v1": {
-    "target": "http://localhost:5210/api",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
   "/graphql": {
     "target": "http://localhost:5210",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-  "/bff": {
-    "target": "http://localhost:5210",
-    "pathRewrite": {
-      "^/bff": ""
-    },
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

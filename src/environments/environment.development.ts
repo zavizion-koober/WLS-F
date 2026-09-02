@@ -12,7 +12,7 @@ export const env = {
   },
 
   API_URLS: {
-    rest: '/api/v1',
+    rest: '/api',
     graphql: '/graphql',
   },
   SERVER_API_FALLBACK_BASE: 'http://localhost:5210' as string | undefined,

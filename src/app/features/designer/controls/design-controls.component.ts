@@ -6,13 +6,7 @@ import type { BeadGrade } from '@core/models/api-enums';
 /**
  * Wrist, bead size and grade.
  *
- * <b>No price, in any shape</b> — not per bead, not a total, not a disabled
- * control that would hold one, not a gap where one would go. The backend
- * computes none and this module never will.
- *
- * Grade therefore has to earn its copy: it means finish and consistency of the
- * cut, and the content key says so, because a two-option control with no stated
- * difference reads as a price tier whether or not one exists.
+ * Sizing controls with compact segmented chips and secondary sizing guide link.
  */
 @Component({
   selector: 'sc-design-controls',
@@ -26,9 +20,19 @@ import type { BeadGrade } from '@core/models/api-enums';
       </h2>
 
       <div>
-        <p class="text-eyebrow text-[var(--text-muted)]">
-          {{ 'STONECRAFT.DESIGNER.WRIST' | translate }}
-        </p>
+        <div class="flex items-center justify-between">
+          <p class="text-eyebrow text-[var(--text-muted)]">
+            {{ 'STONECRAFT.DESIGNER.WRIST' | translate }}
+          </p>
+          <button
+            type="button"
+            (click)="sizingGuideRequested.emit()"
+            class="text-xs text-[#8A7029] hover:text-[#10523C] underline font-medium cursor-pointer transition-colors"
+          >
+            {{ 'STONECRAFT.SIZING_GUIDE.LINK_LABEL' | translate }}
+          </button>
+        </div>
+
         <div
           class="mt-2 flex flex-wrap gap-2"
           role="radiogroup"
@@ -113,16 +117,24 @@ import type { BeadGrade } from '@core/models/api-enums';
       border: 1px solid var(--border-medium);
       background: var(--surface-primary);
       border-radius: 99px;
-      padding: 5px 13px;
+      padding: 6px 14px;
       font-size: 0.8125rem;
       color: var(--text-secondary);
       cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .chip:active {
+      transform: scale(0.96);
     }
 
     .chip[aria-checked='true'] {
       background: var(--action-green);
       border-color: var(--action-green);
       color: var(--surface-primary);
+      box-shadow: 0 1px 3px rgba(16, 82, 60, 0.2);
     }
 
     /*
@@ -159,6 +171,7 @@ export class DesignControlsComponent {
   public readonly wristChanged = output<number>();
   public readonly diameterChanged = output<number>();
   public readonly gradeChanged = output<BeadGrade>();
+  public readonly sizingGuideRequested = output<void>();
 
   protected readonly grades: readonly BeadGrade[] = ['Standard', 'Premium'];
 }

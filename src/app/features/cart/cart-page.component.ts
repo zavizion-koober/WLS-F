@@ -76,36 +76,71 @@ import { CartLine } from '@store/cart/cart.models';
             @for (item of lines(); track item.productId) {
               <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 bg-[#FCFBF9] border border-[#E2DDD2] rounded-xl shadow-xs">
                 <!-- Product info & image -->
-                <div class="flex items-center gap-5">
-                  <a [routerLink]="['/product', item.productId]" class="shrink-0">
-                    <img
-                      [src]="item.imageUrl | assetUrl"
-                      [alt]="item.name"
-                      class="w-20 h-26 object-cover rounded-lg bg-[#F4F1EA] border border-[#E2DDD2]"
-                    />
-                  </a>
+                <div class="flex items-center gap-5 min-w-0">
+                  @if (item.customBracelet; as custom) {
+                    <div class="w-20 h-26 rounded-lg bg-[#F4F1EA] border border-[#E2DDD2] shrink-0 flex items-center justify-center p-2">
+                      <img
+                        [src]="item.imageUrl | assetUrl"
+                        [alt]="item.name"
+                        class="w-full h-full object-contain"
+                      />
+                    </div>
 
-                  <div class="space-y-1">
-                    <h3 class="font-body text-base sm:text-lg font-semibold text-[#1A1A1D] hover:text-[#10523C] transition-colors product-title">
-                      <a [routerLink]="['/product', item.productId]">
+                    <div class="space-y-1 min-w-0">
+                      <span class="inline-block text-[9px] uppercase tracking-widest font-semibold text-[#8A7029]">
+                        ✦ {{ 'STONECRAFT.NAV.DESIGNER' | translate }}
+                      </span>
+                      <h3 class="font-body text-base sm:text-lg font-semibold text-[#1A1A1D] product-title">
                         {{ item.name }}
-                      </a>
-                    </h3>
-
-                    <p class="text-sm font-semibold text-[#10523C]">
-                      {{ item.price | price }}
-                    </p>
-
-                    @if (item.stockQuantity <= 5) {
-                      <p class="text-[11px] text-[#8A7029]">
-                        {{ 'PRODUCT_DETAIL.ONLY_STOCK' | translate: { count: item.stockQuantity } }}
+                      </h3>
+                      <p class="text-xs text-[#5F5D56]">
+                        {{ formatCustomDetails(custom) }}
                       </p>
-                    }
-                  </div>
+                      <div class="pt-1">
+                        <a
+                          [routerLink]="['/designer', custom.readingPublicId]"
+                          [queryParams]="{ braceletId: custom.id }"
+                          class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#10523C] hover:text-[#8A7029] transition-colors"
+                        >
+                          <span>{{ 'STONECRAFT.ACTIONS.EDIT_CONFIG' | translate }}</span>
+                          <app-icon name="arrow-right" [size]="12" />
+                        </a>
+                      </div>
+                      <p class="text-sm font-semibold text-[#10523C] pt-1">
+                        {{ item.price | price }}
+                      </p>
+                    </div>
+                  } @else {
+                    <a [routerLink]="['/product', item.productId]" class="shrink-0">
+                      <img
+                        [src]="item.imageUrl | assetUrl"
+                        [alt]="item.name"
+                        class="w-20 h-26 object-cover rounded-lg bg-[#F4F1EA] border border-[#E2DDD2]"
+                      />
+                    </a>
+
+                    <div class="space-y-1">
+                      <h3 class="font-body text-base sm:text-lg font-semibold text-[#1A1A1D] hover:text-[#10523C] transition-colors product-title">
+                        <a [routerLink]="['/product', item.productId]">
+                          {{ item.name }}
+                        </a>
+                      </h3>
+
+                      <p class="text-sm font-semibold text-[#10523C]">
+                        {{ item.price | price }}
+                      </p>
+
+                      @if (item.stockQuantity <= 5) {
+                        <p class="text-[11px] text-[#8A7029]">
+                          {{ 'PRODUCT_DETAIL.ONLY_STOCK' | translate: { count: item.stockQuantity } }}
+                        </p>
+                      }
+                    </div>
+                  }
                 </div>
 
                 <!-- Controls & Total -->
-                <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto pt-4 sm:pt-0 border-t sm:border-t-0 border-[#E2DDD2]/60">
+                <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto pt-4 sm:pt-0 border-t sm:border-t-0 border-[#E2DDD2]/60 shrink-0">
                   <app-quantity-selector
                     [value]="item.quantity"
                     [max]="item.stockQuantity || 99"
@@ -192,5 +227,13 @@ export class CartPageComponent {
 
   public onClearCart(): void {
     this.store.dispatch(new ClearCart());
+  }
+
+  public formatCustomDetails(custom: any): string {
+    const stonesSummary = custom.stones
+      ?.map((s: any) => `${s.name} (${s.count})`)
+      .slice(0, 4)
+      .join(', ');
+    return `${stonesSummary || 'Custom stones'} • Wrist: ${custom.wristMm}mm • Beads: ${custom.diameterMm}mm`;
   }
 }

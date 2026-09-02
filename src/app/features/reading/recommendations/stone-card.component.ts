@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, signal } from '@an
 import { TranslatePipe } from '@ngx-translate/core';
 
 import type { CustomerRecommendation, SharedRecommendation } from '@core/models/gemstones.models';
+import { beadImage } from '@features/designer/strand/bead-image';
 
 import { cautionReasonKeys, requiresCautionNotice } from '../tier-grouping';
 
@@ -11,15 +12,9 @@ import { cautionReasonKeys, requiresCautionNotice } from '../tier-grouping';
  * <b>Progressive disclosure, and the split is the backend's.</b> Each reason key
  * has a `short` and a `long`; the short sits on the card as a label with no
  * sentence-ending period, and the long — one or two sentences — is behind
- * "discover more". That is not a UI preference, it is how the copy was written,
- * and rendering the long form on the card would turn a scannable list of fifteen
- * stones into an essay.
+ * "discover more".
  *
- * <b>A cautioned stone can never render without its warning.</b> The predicate
- * and the key extraction both live in `tier-grouping`, in one place, so a card
- * cannot forget — and so that the owner projection's `cautions[{reasonKey}]` and
- * the shared projection's bare `cautionReasonKeys[]` are handled once rather
- * than at every call site.
+ * <b>A cautioned stone can never render without its warning.</b>
  */
 @Component({
   selector: 'sc-stone-card',
@@ -28,109 +23,134 @@ import { cautionReasonKeys, requiresCautionNotice } from '../tier-grouping';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <article
-      class="rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-primary)] px-5 py-5 transition-shadow hover:shadow-[0_4px_12px_rgba(13,43,29,0.12)]"
+      class="group relative rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-5 transition-all duration-300 hover:border-[#CBB26A]/70 hover:shadow-[0_8px_24px_rgba(13,43,29,0.08)] flex flex-col justify-between"
       [attr.data-slug]="stone().materialSlug"
     >
-      <header class="flex items-start justify-between gap-4">
-        <h4 class="font-display text-card-title text-[var(--text-primary)]">
-          {{ stone().canonicalNameEn }}
-        </h4>
-
-        @if (isCautioned()) {
-          <span
-            class="text-eyebrow shrink-0 rounded-[3px] border border-[var(--gold)] px-2 py-1 text-[var(--gold-muted)]"
+      <div>
+        <header class="flex items-start gap-4">
+          <!-- Bead Image Preview -->
+          <div
+            class="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-xl bg-[#F5F2EB] border border-[#E2DDD2]/80 p-1.5 flex items-center justify-center overflow-hidden shadow-2xs group-hover:border-[#CBB26A]/60 transition-colors"
           >
-            {{ 'STONECRAFT.READING.CAUTION_BADGE' | translate }}
-          </span>
-        }
-      </header>
-
-      <!-- The trust signals, in the backend's own terms -->
-      <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[var(--text-muted)]">
-        <span [title]="'STONECRAFT.CONFIDENCE.NOTE' | translate">
-          {{ 'STONECRAFT.CONFIDENCE.' + stone().confidenceBand.toUpperCase() | translate }}
-        </span>
-        <span aria-hidden="true">·</span>
-        <span>
-          @if (stone().independentSourceCount > 1) {
-            {{
-              'STONECRAFT.READING.SOURCES_AGREE'
-                | translate: { count: stone().independentSourceCount }
-            }}
-          } @else {
-            {{ 'STONECRAFT.READING.SOURCE_SINGLE' | translate }}
-          }
-        </span>
-      </p>
-
-      <!-- Short reasons: one line each, no period. They are labels. -->
-      <ul class="mt-4 space-y-1.5">
-        @for (reason of stone().reasons; track reason.reasonKey + reason.traditionKey) {
-          <li class="flex gap-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-            <span
-              class="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--gold)]"
-              aria-hidden="true"
-            ></span>
-            <span>{{ 'STONECRAFT.REASONS.' + reason.reasonKey + '.short' | translate }}</span>
-          </li>
-        }
-      </ul>
-
-      @if (expanded()) {
-        <div class="mt-4 space-y-3 border-t border-[var(--border-subtle)] pt-4">
-          @for (reason of stone().reasons; track reason.reasonKey + reason.traditionKey) {
-            <div>
-              <p class="text-sm leading-relaxed text-[var(--text-primary)]">
-                {{ 'STONECRAFT.REASONS.' + reason.reasonKey + '.long' | translate }}
-              </p>
-              <p class="mt-1 text-xs text-[var(--text-muted)]">
-                {{ 'STONECRAFT.TRADITION.' + reason.traditionKey | translate }}
-              </p>
-            </div>
-          }
-
-          @if (disagreement(); as d) {
-            <p
-              class="rounded-lg bg-[var(--surface-secondary)] px-4 py-3 text-sm leading-relaxed text-[var(--text-secondary)]"
-            >
-              {{ 'STONECRAFT.REASONS.' + d.reasonKey + '.long' | translate }}
-            </p>
-          }
-        </div>
-      }
-
-      <!--
-        The warning is NOT behind the disclosure. A cautioned stone shown with its
-        caution one click away is a cautioned stone shown without its caution.
-      -->
-      @if (isCautioned()) {
-        <div class="mt-4 border-t border-[var(--border-subtle)] pt-4" data-testid="caution-notice">
-          <p class="text-eyebrow text-[var(--gold-muted)]">
-            {{ 'STONECRAFT.READING.CAUTION_TITLE' | translate }}
-          </p>
-          <ul class="mt-2 space-y-1.5">
-            @for (key of cautionKeys(); track key) {
-              <li class="text-sm leading-relaxed text-[var(--text-secondary)]">
-                {{ 'STONECRAFT.REASONS.' + key + '.long' | translate }}
-              </li>
+            @if (imagePath(); as href) {
+              <img
+                [src]="href"
+                [alt]="stone().canonicalNameEn"
+                loading="lazy"
+                class="w-full h-full object-contain filter drop-shadow-[0_4px_6px_rgba(0,0,0,0.15)] transition-transform duration-500 ease-out group-hover:scale-110"
+              />
+            } @else {
+              <span
+                class="w-10 h-10 rounded-full border border-dashed border-[#8D8A81]/50 flex items-center justify-center text-[#8D8A81] text-[10px]"
+              >
+                ✦
+              </span>
             }
-          </ul>
-        </div>
-      }
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-start justify-between gap-2">
+              <h4 class="font-display text-base sm:text-lg font-bold text-[var(--text-primary)] leading-snug">
+                {{ stone().canonicalNameEn }}
+              </h4>
+
+              @if (isCautioned()) {
+                <span
+                  class="text-[10px] uppercase tracking-wider shrink-0 rounded-[3px] border border-[var(--gold)] px-2 py-0.5 text-[var(--gold-muted)] font-semibold"
+                >
+                  {{ 'STONECRAFT.READING.CAUTION_BADGE' | translate }}
+                </span>
+              }
+            </div>
+
+            <!-- The trust signals, in the backend's own terms -->
+            <p class="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-xs text-[var(--text-muted)]">
+              <span [title]="'STONECRAFT.CONFIDENCE.NOTE' | translate">
+                {{ 'STONECRAFT.CONFIDENCE.' + stone().confidenceBand.toUpperCase() | translate }}
+              </span>
+              <span aria-hidden="true">•</span>
+              <span>
+                @if (stone().independentSourceCount > 1) {
+                  {{
+                    'STONECRAFT.READING.SOURCES_AGREE'
+                      | translate: { count: stone().independentSourceCount }
+                  }}
+                } @else {
+                  {{ 'STONECRAFT.READING.SOURCE_SINGLE' | translate }}
+                }
+              </span>
+            </p>
+          </div>
+        </header>
+
+        <!-- Short reasons: one line each, no period. They are labels. -->
+        <ul class="mt-4 space-y-1.5">
+          @for (reason of stone().reasons; track reason.reasonKey + reason.traditionKey) {
+            <li class="flex gap-2 text-xs sm:text-sm leading-relaxed text-[var(--text-secondary)]">
+              <span
+                class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gold)]"
+                aria-hidden="true"
+              ></span>
+              <span>{{ 'STONECRAFT.REASONS.' + reason.reasonKey + '.short' | translate }}</span>
+            </li>
+          }
+        </ul>
+
+        @if (expanded()) {
+          <div class="mt-4 space-y-3 border-t border-[var(--border-subtle)] pt-4">
+            @for (reason of stone().reasons; track reason.reasonKey + reason.traditionKey) {
+              <div>
+                <p class="text-sm leading-relaxed text-[var(--text-primary)]">
+                  {{ 'STONECRAFT.REASONS.' + reason.reasonKey + '.long' | translate }}
+                </p>
+                <p class="mt-1 text-xs text-[var(--text-muted)]">
+                  {{ 'STONECRAFT.TRADITION.' + reason.traditionKey | translate }}
+                </p>
+              </div>
+            }
+
+            @if (disagreement(); as d) {
+              <p
+                class="rounded-lg bg-[var(--surface-secondary)] px-4 py-3 text-sm leading-relaxed text-[var(--text-secondary)]"
+              >
+                {{ 'STONECRAFT.REASONS.' + d.reasonKey + '.long' | translate }}
+              </p>
+            }
+          </div>
+        }
+
+        <!-- The warning is NOT behind the disclosure -->
+        @if (isCautioned()) {
+          <div class="mt-4 border-t border-[var(--border-subtle)] pt-4" data-testid="caution-notice">
+            <p class="text-eyebrow text-[var(--gold-muted)]">
+              {{ 'STONECRAFT.READING.CAUTION_TITLE' | translate }}
+            </p>
+            <ul class="mt-2 space-y-1.5">
+              @for (key of cautionKeys(); track key) {
+                <li class="text-sm leading-relaxed text-[var(--text-secondary)]">
+                  {{ 'STONECRAFT.REASONS.' + key + '.long' | translate }}
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
 
       @if (stone().reasons.length > 0) {
-        <button
-          type="button"
-          class="btn-editorial-link mt-4"
-          [attr.aria-expanded]="expanded()"
-          (click)="expanded.set(!expanded())"
-        >
-          @if (expanded()) {
-            {{ 'STONECRAFT.READING.DISCOVER_LESS' | translate }}
-          } @else {
-            {{ 'STONECRAFT.READING.DISCOVER_MORE' | translate }}
-          }
-        </button>
+        <div class="pt-3 mt-4 border-t border-[#E2DDD2]/60">
+          <button
+            type="button"
+            class="btn-editorial-link"
+            [attr.aria-expanded]="expanded()"
+            (click)="expanded.set(!expanded())"
+          >
+            @if (expanded()) {
+              {{ 'STONECRAFT.READING.DISCOVER_LESS' | translate }}
+            } @else {
+              {{ 'STONECRAFT.READING.DISCOVER_MORE' | translate }}
+            }
+          </button>
+        </div>
       }
     </article>
   `,
@@ -166,4 +186,13 @@ export class StoneCardComponent {
   protected readonly cautionKeys = computed(() => cautionReasonKeys(this.stone()));
 
   protected readonly disagreement = computed(() => this.stone().disagreement);
+
+  /**
+   * Resolves artwork for this stone using representativeSlug first, falling back to materialSlug.
+   */
+  protected readonly imagePath = computed(() => {
+    const s = this.stone();
+    return beadImage(s.representativeSlug) ?? beadImage(s.materialSlug);
+  });
 }
+

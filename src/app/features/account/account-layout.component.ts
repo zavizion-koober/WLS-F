@@ -68,6 +68,14 @@ import { IconComponent } from '@shared/components/icon/icon.component';
           </a>
 
           <a
+            routerLink="/bracelets"
+            class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-xs uppercase tracking-widest text-[#5F5D56] hover:text-[#1A1A1D] hover:bg-[#F4F1EA] transition-all"
+          >
+            <app-icon name="sparkles" [size]="16" />
+            <span>{{ 'STONECRAFT.NAV.MY_BRACELETS' | translate }}</span>
+          </a>
+
+          <a
             routerLink="/account/addresses"
             routerLinkActive="bg-[#0D2B1D] text-[#FCFBF9] font-medium"
             class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-xs uppercase tracking-widest text-[#5F5D56] hover:text-[#1A1A1D] hover:bg-[#F4F1EA] transition-all"

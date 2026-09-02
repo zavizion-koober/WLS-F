@@ -12,6 +12,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { API_URLS } from '@core/http/api-urls.token';
 import { ReadingStore } from '@features/reading/reading.store';
+import { SavedBraceletsService } from '@core/services/saved-bracelets.service';
 
 import bundle from '../../../../public/i18n/content/en.json';
 
@@ -70,7 +71,7 @@ describe('sc-designer-page — clearing the board', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideRouter([]),
-        { provide: API_URLS, useValue: { rest: '/api/v1' } },
+        { provide: API_URLS, useValue: { rest: '/api' } },
         { provide: ReadingStore, useClass: ReadingStoreStub },
       ],
     });
@@ -341,5 +342,40 @@ describe('sc-designer-page — clearing the board', () => {
     fixture.detectChanges();
 
     expect(query('undo-offer')).toBeNull();
+  });
+
+  it('allows editing a saved bracelet without reverting on changes', () => {
+    const savedService = TestBed.inject(SavedBraceletsService);
+    savedService.saveBracelet({
+      id: 'saved-bracelet-1',
+      name: 'Custom Talisman',
+      readingPublicId: 'session-1',
+      wristMm: 170,
+      diameterMm: 8,
+      grade: 'Standard',
+      strand: [
+        { materialSlug: 'onyx', diameterMm: 8, grade: 'Standard' },
+        { materialSlug: 'amethyst', diameterMm: 8, grade: 'Standard' },
+      ],
+    });
+
+    const saved = savedService.getById('saved-bracelet-1')!;
+    store.loadSavedBracelet(saved);
+    fixture.detectChanges();
+
+    expect(store.wristMm()).toBe(170);
+    expect(store.strand().length).toBe(2);
+
+    // Change wrist size
+    store.wristMm.set(165);
+    fixture.detectChanges();
+
+    expect(store.wristMm()).toBe(165);
+
+    // Clear
+    query('clear-board')!.click();
+    fixture.detectChanges();
+
+    expect(store.strand()).toEqual([]);
   });
 });

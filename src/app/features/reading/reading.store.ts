@@ -133,6 +133,12 @@ export class ReadingStore {
    * request that looks free until it is rate limited.
    */
   loadSession(publicId: string): void {
+    if (!publicId || publicId === 'guest' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(publicId)) {
+      this.createState.set({ status: 'idle' });
+      this.sessionState.set({ status: 'idle' });
+      return;
+    }
+
     if (this.createdId() === publicId && isSuccess(this.createState())) {
       return;
     }

@@ -3,6 +3,12 @@
     "HOME": "Home",
     "SHOP": "Shop",
     "INTENTIONS": "Intentions",
+    "DESIGNER": "Custom Bracelet",
+    "ANNOUNCEMENT": "Create a custom bracelet tailored to your birth chart",
+    "ANNOUNCEMENT_CTA": "Create Yours",
+    "ATELIER_CRAFT": "Bespoke Atelier",
+    "DESIGNER_MOBILE_DESC": "Select stones from your birth chart and customize your fit",
+    "START_CRAFT": "Create Yours",
     "OUR_STORY": "Our Story",
     "FAQ": "FAQ",
     "CONTACT": "Contact",
@@ -248,10 +254,19 @@
         "III_DESC": "The shift in internal state. Our tools serve as mirrors, catalyzing the physical alignment of health, love, harmony, and abundance."
       }
     },
+    "POPULAR": {
+      "TITLE": "Popular",
+      "SUBTITLE": "Featured Objects",
+      "ADD_TO_CART": "ADD TO CART",
+      "ADDED": "ADDED",
+      "VIEW_ALL": "View All"
+    },
     "FEATURED_CATEGORIES": {
-      "SUBTITLE": "Curated Realms",
-      "TITLE": "Shop by Category",
-      "VIEW_ALL": "View All Products →"
+      "SUBTITLE": "The Four Foundations",
+      "TITLE": "Curated Collections",
+      "DESC": "Each vessel and sacred object is crafted in harmony with lunar phases and astrological cycles.",
+      "VIEW_ALL": "Explore All Objects →",
+      "EXPLORE": "Explore Realm"
     },
     "BEST_SELLERS": {
       "SUBTITLE": "Most Coveted Rituals",
@@ -413,6 +428,7 @@
       "INCREASE": "Increase quantity",
       "DECREASE": "Decrease quantity",
       "MAX_STOCK": "Maximum stock reached",
+      "ADD_TO_BAG": "Add to Bag",
       "ADDED_TO_BAG": "Item added to bag"
     },
     "ADDRESS": {
@@ -523,14 +539,288 @@
     }
   },
   "STONECRAFT": {
+    "ACTIONS": {
+      "SAVE_BRACELET": "Save Bracelet",
+      "UPDATE_BRACELET": "Update Bracelet",
+      "SAVING": "Saving...",
+      "SAVED": "Saved",
+      "ADD_TO_CART": "Add to Cart",
+      "BACK_TO_READING": "Back to Reading",
+      "BACK_TO_BRACELETS": "Back to My Bracelets",
+      "EDIT_CONFIG": "Edit Configuration",
+      "CONTINUE_DESIGNING": "Continue Designing",
+      "DUPLICATE": "Duplicate",
+      "DELETE": "Delete",
+      "RENAME": "Rename",
+      "HIDE": "Hide"
+    },
+    "DESIGNER": {
+      "HEADER_TITLE": "Customize Your Bracelet",
+      "UNSAVED_CHANGES": "Unsaved changes",
+      "SELECTED_STONES": "Selected Stones",
+      "YOUR_TALISMAN": "Your Bespoke Talisman",
+      "REVIEW_ORDER_CTA": "Review & Order",
+      "AUTO_ARRANGE": "Auto Arrange",
+      "AUTO_ARRANGE_DESC": "Symmetrically balances current stones on the strand",
+      "RESET_RECOMMENDED": "Preset",
+      "SAVED_LOCAL": "Bracelet design saved to My Bracelets",
+      "TITLE": "Custom Bracelet",
+      "BACK_TO_PALETTE": "Back to stone palette",
+      "START_NEW": "Start a new bracelet",
+      "COMING_SOON": "Not open yet",
+      "PROVISIONAL_SIZING": "The sizing table is provisional and will change.",
+      "CHECKED_AT": "Checked against the live catalogue just now.",
+      "STRAND_LABEL": "Your bracelet. Use the arrow keys to move around the strand.",
+      "VIEW": "How you are looking at it",
+      "ZOOM": "Zoom",
+      "ZOOM_IN": "Zoom in",
+      "ZOOM_OUT": "Zoom out",
+      "RESET_VIEW": "Reset view",
+      "CLEAR": "Clear",
+      "CLEARED": "Cleared.",
+      "SHORTENED": "That bracelet is shorter — {{count}} stones came off the end.",
+      "UNDO": "Undo",
+      "MOVED": "{{stone}} moved to position {{position}} of {{count}}.",
+      "SUMMARY": "{{beads}}, {{stones}}.",
+      "STONE_COUNT": {
+        "ONE": "{{count}} stone",
+        "OTHER": "{{count}} stones"
+      },
+      "WRIST": "Wrist",
+      "INNER": "Inner circumference",
+      "FIT": "Fit",
+      "BEAD_COUNT": {
+        "ONE": "{{count}} bead",
+        "OTHER": "{{count}} beads"
+      },
+      "UNDRAWN": "No bead image yet",
+      "PALETTE": "Your stones",
+      "PALETTE_SIZE": "Your chart names {{count}} stones.",
+      "PALETTE_EMPTY": "Your chart named no stones this engine can offer as beads. That is unusual — the reading itself explains what could and could not be read.",
+      "UNAVAILABLE_TITLE": "Not assessed",
+      "CAUTION_MARK": "!",
+      "CAUTION_ACCEPT": "I understand — add it",
+      "CAUTION_DECLINE": "Leave it off",
+      "CONTROLS": "Size and finish",
+      "DIAMETER": "Bead size",
+      "GRADE": "Finish",
+      "GRADE_STANDARD": "Standard",
+      "GRADE_PREMIUM": "Premium",
+      "GRADE_NOTE": "Finish describes how evenly the beads are cut and matched. It is not a price tier — nothing here is priced.",
+      "REVIEW": "Your bracelet",
+      "BEADS": "Beads",
+      "FILLED_OF": "{{filled}} of {{places}}",
+      "ROPE_FULL": "Every place on the bracelet is filled. Remove a stone, or change the wrist size or bead size, to make room.",
+      "TOO_LOOSE": "This is longer than the wrist you chose. Take a bead off, or pick a larger wrist size.",
+      "TOO_TIGHT": "This is shorter than the wrist you chose. Add a bead, or pick a smaller wrist size.",
+      "NOTHING_TO_REVIEW": "Add three beads and the ring will close.",
+      "MADE_TO_ORDER": "Every bracelet is strung by hand for the person who ordered it. The stones are gathered after you save this design, so it is made for you rather than taken off a shelf.",
+      "SAVE": "Save this design",
+      "SAVED": "Saved. Keep this reference.",
+      "BUILD_ANOTHER": "Build another",
+      "RESET": "Start over",
+      "REPLACING": "Choose a stone for position {{position}}.",
+      "BACK_TO_READING": "Back to your reading",
+      "EMPTY_STRAND": "Pick a stone to begin.",
+      "NEEDS_THREE": "{{count}} of 3. A bracelet needs at least three beads before it can close into a ring."
+    },
     "NAV": {
+      "MY_BRACELETS": "My Bracelets",
       "READING": "Reading",
-      "DESIGNER": "Designer",
+      "DESIGNER": "Custom Bracelet",
       "SHARED": "Shared reading"
     },
+    "PROMO": {
+      "MY_BRACELETS": "My Bracelets",
+      "START_NEW": "Start new bracelet",
+      "SUBTITLE": "Made to order",
+      "TITLE": "A bracelet strung from your own chart",
+      "DESC": "Tell us when and where you were born. We read the chart, and the traditions name the stones that answer it — each one traceable to the book it came from. Then you choose which of them to string, and at what size.",
+      "POINT_ONE_TITLE": "Your chart, not a birth month",
+      "POINT_ONE_DESC": "The stones follow the whole chart — the rising sign, the ruling planet, where the weight of it sits.",
+      "POINT_TWO_TITLE": "Every stone cites its source",
+      "POINT_TWO_DESC": "Each recommendation traces back to a named book and a page, so you can see why it was offered.",
+      "POINT_THREE_TITLE": "Strung to your wrist",
+      "POINT_THREE_DESC": "You pick the stones and the bead size; the fit is solved for the wrist you give us.",
+      "CTA": "Read my chart",
+      "CTA_RESUME": "Continue my reading",
+      "RESUME_NOTE": "You started a reading on this device.",
+      "NOTE": "Nothing is taken from stock. Stones are sourced and the bracelet strung after you order."
+    },
+    "CHART": {
+      "PROFILE_EYEBROW": "Your Personal Astrological Profile",
+      "VIEW_STONES_CTA": "View My Recommended Stones",
+      "HIDE_FULL": "Hide Full Ephemeris Chart",
+      "EXPLORE_FULL": "Explore Full Ephemeris Chart",
+      "SUN_TITLE": "Sun Sign",
+      "SUN_DESC": "Core essence, conscious vitality, and life force.",
+      "MOON_TITLE": "Moon Sign",
+      "MOON_DESC": "Inner emotional landscape, instinct, and intuition.",
+      "RISING_TITLE": "Rising Sign (Ascendant)",
+      "RISING_DESC": "Outer persona, worldly presentation, and physical vehicle.",
+      "TIME_UNKNOWN_SHORT": "Birth time unknown",
+      "RISING_TIME_NEEDED": "Requires exact birth time to compute rising sign and house cusps.",
+      "COMPLETE_TABLE": "Complete Planetary Placements & House Manifest",
+      "TITLE": "Your chart",
+      "TABLE_CAPTION": "Each body in your chart, with its sign, its house, and anything notable about its placement.",
+      "NO_BIRTH_TIME": "Without an exact birth time there is no rising sign, no houses and no chart ruler. They are left out rather than guessed at — a chart drawn from an assumed time looks just as confident and is usually wrong.",
+      "COL": {
+        "BODY": "Body",
+        "SIGN": "Sign",
+        "HOUSE": "House",
+        "NOTES": ""
+      },
+      "ANGLE": {
+        "ASCENDANT": "Rising sign",
+        "MIDHEAVEN": "Midheaven"
+      },
+      "RETROGRADE": "Retrograde",
+      "CHART_RULER": "Chart ruler",
+      "RULER_TITLE": "The ruler of your chart",
+      "RULERSHIP_SCHEME": {
+        "Traditional": "Resolved under the classical seven-planet rulerships.",
+        "Modern": "Resolved under the modern rulerships, which assign the outer planets.",
+        "HickeyPrimary": "Resolved under the western chart practice this reading follows."
+      },
+      "DIGNITY": {
+        "OWN": "In its own sign",
+        "EXALTED": "Exalted",
+        "DETRIMENT": "In detriment",
+        "FALL": "In fall"
+      },
+      "DIGNITY_STATE": {
+        "Stated": "The tradition states this plainly.",
+        "StatedButHedged": "The tradition describes this without naming it outright.",
+        "StatedInconsistent": "The tradition states this more than once, inconsistently.",
+        "NotStated": "The tradition assigns nothing here."
+      },
+      "DIGNITY_HEDGED_NOTE": "A star marks a placement the tradition describes rather than states outright. It is still used, and it counts for less.",
+      "ELEMENTS": "Elements",
+      "ELEMENT": {
+        "FIRE": "Fire",
+        "EARTH": "Earth",
+        "AIR": "Air",
+        "WATER": "Water"
+      },
+      "MODALITIES": "Modalities",
+      "MODALITY": {
+        "CARDINAL": "Cardinal",
+        "FIXED": "Fixed",
+        "MUTABLE": "Mutable"
+      },
+      "ENERGY": "Energy",
+      "ENERGY_PROJECTIVE": "Projective",
+      "ENERGY_RECEPTIVE": "Receptive",
+      "ENERGY_DOMINANT": {
+        "PROJECTIVE": "Projective energy predominates. In this tradition, receptive stones are offered to answer it.",
+        "RECEPTIVE": "Receptive energy predominates. In this tradition, projective stones are offered to answer it."
+      },
+      "ENERGY_BALANCED": "The two are evenly matched, so neither is read as dominant.",
+      "SIGN": {
+        "ARIES": "Aries",
+        "TAURUS": "Taurus",
+        "GEMINI": "Gemini",
+        "CANCER": "Cancer",
+        "LEO": "Leo",
+        "VIRGO": "Virgo",
+        "LIBRA": "Libra",
+        "SCORPIO": "Scorpio",
+        "SAGITTARIUS": "Sagittarius",
+        "CAPRICORN": "Capricorn",
+        "AQUARIUS": "Aquarius",
+        "PISCES": "Pisces"
+      },
+      "BODY": {
+        "SUN": "Sun",
+        "MOON": "Moon",
+        "MERCURY": "Mercury",
+        "VENUS": "Venus",
+        "MARS": "Mars",
+        "JUPITER": "Jupiter",
+        "SATURN": "Saturn",
+        "URANUS": "Uranus",
+        "NEPTUNE": "Neptune",
+        "PLUTO": "Pluto",
+        "CHIRON": "Chiron",
+        "NORTHNODE": "North Node",
+        "SOUTHNODE": "South Node",
+        "TRUENODE": "North Node",
+        "MEANNODE": "North Node",
+        "LILITH": "Lilith",
+        "CERES": "Ceres",
+        "PALLAS": "Pallas",
+        "JUNO": "Juno",
+        "VESTA": "Vesta"
+      },
+      "KEYS": {
+        "chart": {
+          "ruler": {
+            "rulesAscendant": "{{body}} rules {{sign}}, the sign that was rising when you were born, and in this tradition the ruler of the rising sign is read as the ruler of the whole chart."
+          }
+        }
+      }
+    },
+    "RECOMMENDED_BRACELET": {
+      "EYEBROW": "Bespoke Preset Composition",
+      "TITLE": "Your Recommended Bracelet",
+      "DESC": "A balanced synthesis generated from your highest-affinity primary stones. You can customize this starting composition or build from scratch.",
+      "CUSTOMIZE_CTA": "Customize My Bracelet",
+      "SCRATCH_CTA": "Start from scratch"
+    },
+    "SIZING_GUIDE": {
+      "EYEBROW": "Sizing & Fit Guide",
+      "TITLE": "How to Measure Your Wrist",
+      "LINK_LABEL": "Sizing Guide",
+      "STEP1_TITLE": "1. Wrap a flexible tape or paper strip",
+      "STEP1_DESC": "Wrap snug around your wrist bone without adding extra slack.",
+      "STEP2_TITLE": "2. Mark and measure the exact length",
+      "STEP2_DESC": "Lay the paper strip flat against a ruler to read the circumference in millimeters (mm).",
+      "STEP3_TITLE": "3. Select your exact measurement",
+      "STEP3_DESC": "Choose your snug wrist size. Our geometry engine automatically calculates the necessary ease for elastic and bead thickness.",
+      "GOT_IT": "Got It"
+    },
+    "REVIEW_MODAL": {
+      "EYEBROW": "Bespoke Manifest Review",
+      "TITLE": "Review Your Talisman",
+      "SUBTITLE": "Verify your stone arrangement, wrist sizing, and consecrated components before placing in your ritual bag.",
+      "NAME_LABEL": "Talisman Name",
+      "NAME_PLACEHOLDER": "e.g. Celestial Harmony Talisman",
+      "STONES_TITLE": "Included Sacred Stones",
+      "ADD_TO_BAG": "Add to Ritual Bag",
+      "KEEP_EDITING": "Keep Editing"
+    },
+    "MY_BRACELETS": {
+      "EYEBROW": "Bespoke Atelier Collection",
+      "TITLE": "My Custom Bracelets",
+      "SUBTITLE": "Your saved designs, drafts, and consecrated talisman configurations.",
+      "CREATE_NEW": "Create New Bracelet",
+      "EMPTY_TITLE": "No saved bracelets yet",
+      "EMPTY_DESC": "Read your astrological birth chart and design your first personalized talisman bracelet.",
+      "START_FIRST": "Read My Chart & Begin"
+    },
+    "STATUS": {
+      "DRAFT": "Draft",
+      "SAVED": "Saved",
+      "IN_CART": "In Bag",
+      "ORDERED": "Ordered"
+    },
+    "MESSAGES": {
+      "DUPLICATED": "Bracelet design duplicated successfully.",
+      "DELETED": "Bracelet design deleted.",
+      "DELETE_CONFIRM": "Are you sure you want to delete this saved bracelet design?"
+    },
+    "STEPS": {
+      "NAV_LABEL": "Custom bracelet creation steps",
+      "BIRTH": "1. Birth details",
+      "PALETTE": "2. Stone palette",
+      "BRACELET": "3. Custom bracelet"
+    },
     "BIRTH": {
-      "TITLE": "Your birth details",
-      "LEAD": "The reading is calculated from where and when you were born. Nothing here is stored in a link, and nothing is shared unless you choose to share it.",
+      "TITLE": "Craft your bespoke talisman bracelet",
+      "LEAD": "The stones for your bracelet are selected based on your astrological birth chart. Enter your date, time and place of birth.",
+      "RESUME_TITLE": "Previous reading found",
+      "RESUME_DESC": "You can continue customizing your previous bracelet or enter details for a new one below.",
+      "RESUME_CTA": "Continue previous bracelet",
       "DATE_LABEL": "Date of birth",
       "TIME_LABEL": "Time of birth",
       "TIME_UNKNOWN": "I don't know my birth time",
@@ -584,9 +874,12 @@
       "SHARE_LINK": "Share link",
       "SHARE_COPY": "Copy",
       "SHARE_COPIED": "Copied",
-      "DESIGN_TITLE": "Build a bracelet from these stones",
-      "DESIGN_DESC": "Choose which of the stones above to string, and the size that fits your wrist.",
-      "DESIGN_CTA": "Open the designer"
+      "DESIGN_TITLE": "Craft a bracelet from these stones",
+      "DESIGN_DESC": "Choose which stones above to string and the size that fits your wrist.",
+      "DESIGN_CTA": "Create your bracelet",
+      "READY_TITLE": "Stone palette ready",
+      "READY_HEADING": "Your astrological stones have been selected",
+      "READY_DESC": "Stones recommended for your chart have been ranked. You can proceed directly to crafting your bracelet or explore each stone below."
     },
     "TIER": {
       "PRIMARY": "Primary",
@@ -605,65 +898,6 @@
       "DIGNITYINCONSISTENTINSOURCE": "{{count}} associations rest on a placement the tradition states inconsistently, so they were left out.",
       "TRADITIONDATAUNAVAILABLE": "{{count}} associations belong to a tradition not loaded in this reading.",
       "RULEPENDINGHUMANCONFIRMATION": "{{count}} associations are awaiting review and are withheld until then."
-    },
-    "DESIGNER": {
-      "TITLE": "The bracelet designer",
-      "COMING_SOON": "Not open yet",
-      "PROVISIONAL_SIZING": "The sizing table is provisional and will change.",
-      "CHECKED_AT": "Checked against the live catalogue just now.",
-      "STRAND_LABEL": "Your bracelet. Use the arrow keys to move around the strand.",
-      "VIEW": "How you are looking at it",
-      "ZOOM": "Zoom",
-      "ZOOM_IN": "Zoom in",
-      "ZOOM_OUT": "Zoom out",
-      "RESET_VIEW": "Reset view",
-      "CLEAR": "Clear the bracelet",
-      "CLEARED": "Cleared.",
-      "SHORTENED": "That bracelet is shorter — {{count}} stones came off the end.",
-      "UNDO": "Undo",
-      "MOVED": "{{stone}} moved to position {{position}} of {{count}}.",
-      "SUMMARY": "{{beads}}, {{stones}}.",
-      "STONE_COUNT": {
-        "ONE": "{{count}} stone",
-        "OTHER": "{{count}} stones"
-      },
-      "WRIST": "Wrist",
-      "INNER": "Inner circumference",
-      "FIT": "Fit",
-      "BEAD_COUNT": {
-        "ONE": "{{count}} bead",
-        "OTHER": "{{count}} beads"
-      },
-      "UNDRAWN": "No bead image yet",
-      "PALETTE": "Your stones",
-      "PALETTE_SIZE": "Your chart names {{count}} stones.",
-      "PALETTE_EMPTY": "Your chart named no stones this engine can offer as beads. That is unusual — the reading itself explains what could and could not be read.",
-      "UNAVAILABLE_TITLE": "Not assessed",
-      "CAUTION_MARK": "!",
-      "CAUTION_ACCEPT": "I understand — add it",
-      "CAUTION_DECLINE": "Leave it off",
-      "CONTROLS": "Size and finish",
-      "DIAMETER": "Bead size",
-      "GRADE": "Finish",
-      "GRADE_STANDARD": "Standard",
-      "GRADE_PREMIUM": "Premium",
-      "GRADE_NOTE": "Finish describes how evenly the beads are cut and matched. It is not a price tier — nothing here is priced.",
-      "REVIEW": "Your bracelet",
-      "BEADS": "Beads",
-      "FILLED_OF": "{{filled}} of {{places}}",
-      "ROPE_FULL": "Every place on the bracelet is filled. Remove a stone, or change the wrist size or bead size, to make room.",
-      "TOO_LOOSE": "This is longer than the wrist you chose. Take a bead off, or pick a larger wrist size.",
-      "TOO_TIGHT": "This is shorter than the wrist you chose. Add a bead, or pick a smaller wrist size.",
-      "NOTHING_TO_REVIEW": "Add three beads and the ring will close.",
-      "MADE_TO_ORDER": "Every bracelet is strung by hand for the person who ordered it. The stones are gathered after you save this design, so it is made for you rather than taken off a shelf.",
-      "SAVE": "Save this design",
-      "SAVED": "Saved. Keep this reference.",
-      "BUILD_ANOTHER": "Build another",
-      "RESET": "Start over",
-      "REPLACING": "Choose a stone for position {{position}}.",
-      "BACK_TO_READING": "Back to your reading",
-      "EMPTY_STRAND": "Pick a stone to begin.",
-      "NEEDS_THREE": "{{count}} of 3. A bracelet needs at least three beads before it can close into a ring."
     },
     "STATE": {
       "LOADING": "Working…",
@@ -1013,121 +1247,6 @@
       "calendar-ka": "From a calendar tradition of day-stones",
       "crystal-healing": "From the modern crystal tradition",
       "vedic": "From the Vedic tradition"
-    },
-    "CHART": {
-      "TITLE": "Your chart",
-      "TABLE_CAPTION": "Each body in your chart, with its sign, its house, and anything notable about its placement.",
-      "NO_BIRTH_TIME": "Without an exact birth time there is no rising sign, no houses and no chart ruler. They are left out rather than guessed at — a chart drawn from an assumed time looks just as confident and is usually wrong.",
-      "COL": {
-        "BODY": "Body",
-        "SIGN": "Sign",
-        "HOUSE": "House",
-        "NOTES": ""
-      },
-      "ANGLE": {
-        "ASCENDANT": "Rising sign",
-        "MIDHEAVEN": "Midheaven"
-      },
-      "RETROGRADE": "Retrograde",
-      "CHART_RULER": "Chart ruler",
-      "RULER_TITLE": "The ruler of your chart",
-      "RULERSHIP_SCHEME": {
-        "Traditional": "Resolved under the classical seven-planet rulerships.",
-        "Modern": "Resolved under the modern rulerships, which assign the outer planets.",
-        "HickeyPrimary": "Resolved under the western chart practice this reading follows."
-      },
-      "DIGNITY": {
-        "OWN": "In its own sign",
-        "EXALTED": "Exalted",
-        "DETRIMENT": "In detriment",
-        "FALL": "In fall"
-      },
-      "DIGNITY_STATE": {
-        "Stated": "The tradition states this plainly.",
-        "StatedButHedged": "The tradition describes this without naming it outright.",
-        "StatedInconsistent": "The tradition states this more than once, inconsistently.",
-        "NotStated": "The tradition assigns nothing here."
-      },
-      "DIGNITY_HEDGED_NOTE": "A star marks a placement the tradition describes rather than states outright. It is still used, and it counts for less.",
-      "ELEMENTS": "Elements",
-      "ELEMENT": {
-        "FIRE": "Fire",
-        "EARTH": "Earth",
-        "AIR": "Air",
-        "WATER": "Water"
-      },
-      "MODALITIES": "Modalities",
-      "MODALITY": {
-        "CARDINAL": "Cardinal",
-        "FIXED": "Fixed",
-        "MUTABLE": "Mutable"
-      },
-      "ENERGY": "Energy",
-      "ENERGY_PROJECTIVE": "Projective",
-      "ENERGY_RECEPTIVE": "Receptive",
-      "ENERGY_DOMINANT": {
-        "PROJECTIVE": "Projective energy predominates. In this tradition, receptive stones are offered to answer it.",
-        "RECEPTIVE": "Receptive energy predominates. In this tradition, projective stones are offered to answer it."
-      },
-      "ENERGY_BALANCED": "The two are evenly matched, so neither is read as dominant.",
-      "SIGN": {
-        "ARIES": "Aries",
-        "TAURUS": "Taurus",
-        "GEMINI": "Gemini",
-        "CANCER": "Cancer",
-        "LEO": "Leo",
-        "VIRGO": "Virgo",
-        "LIBRA": "Libra",
-        "SCORPIO": "Scorpio",
-        "SAGITTARIUS": "Sagittarius",
-        "CAPRICORN": "Capricorn",
-        "AQUARIUS": "Aquarius",
-        "PISCES": "Pisces"
-      },
-      "BODY": {
-        "SUN": "Sun",
-        "MOON": "Moon",
-        "MERCURY": "Mercury",
-        "VENUS": "Venus",
-        "MARS": "Mars",
-        "JUPITER": "Jupiter",
-        "SATURN": "Saturn",
-        "URANUS": "Uranus",
-        "NEPTUNE": "Neptune",
-        "PLUTO": "Pluto",
-        "CHIRON": "Chiron",
-        "NORTHNODE": "North Node",
-        "SOUTHNODE": "South Node",
-        "TRUENODE": "North Node",
-        "MEANNODE": "North Node",
-        "LILITH": "Lilith",
-        "CERES": "Ceres",
-        "PALLAS": "Pallas",
-        "JUNO": "Juno",
-        "VESTA": "Vesta"
-      },
-      "KEYS": {
-        "chart": {
-          "ruler": {
-            "rulesAscendant": "{{body}} rules {{sign}}, the sign that was rising when you were born, and in this tradition the ruler of the rising sign is read as the ruler of the whole chart."
-          }
-        }
-      }
-    },
-    "PROMO": {
-      "SUBTITLE": "Made to order",
-      "TITLE": "A bracelet strung from your own chart",
-      "DESC": "Tell us when and where you were born. We read the chart, and the traditions name the stones that answer it — each one traceable to the book it came from. Then you choose which of them to string, and at what size.",
-      "POINT_ONE_TITLE": "Your chart, not a birth month",
-      "POINT_ONE_DESC": "The stones follow the whole chart — the rising sign, the ruling planet, where the weight of it sits.",
-      "POINT_TWO_TITLE": "Every stone cites its source",
-      "POINT_TWO_DESC": "Each recommendation traces back to a named book and a page, so you can see why it was offered.",
-      "POINT_THREE_TITLE": "Strung to your wrist",
-      "POINT_THREE_DESC": "You pick the stones and the bead size; the fit is solved for the wrist you give us.",
-      "CTA": "Read my chart",
-      "CTA_RESUME": "Continue my reading",
-      "RESUME_NOTE": "You started a reading on this device.",
-      "NOTE": "Nothing is taken from stock. Stones are sourced and the bracelet strung after you order."
     }
   }
 }

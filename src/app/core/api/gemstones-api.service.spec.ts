@@ -37,7 +37,7 @@ describe('API layer state transitions', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: API_URLS, useValue: { rest: '/api/v1' } },
+        { provide: API_URLS, useValue: { rest: '/api' } },
       ],
     });
     gemstones = TestBed.inject(GemstonesApiService);
@@ -59,7 +59,7 @@ describe('API layer state transitions', () => {
     // screen bound to this never renders an empty frame first.
     expect(states.map((s) => s.status)).toEqual(['loading']);
 
-    http.expectOne('/api/v1/gemstones/sessions').flush({ publicId: 'abc' });
+    http.expectOne('/api/gemstones/sessions').flush({ publicId: 'abc' });
 
     expect(states.map((s) => s.status)).toEqual(['loading', 'success']);
     expect(states[1]).toMatchObject({ status: 'success', value: { publicId: 'abc' } });
@@ -69,7 +69,7 @@ describe('API layer state transitions', () => {
     const states = record(gemstones.getSession('nope'));
 
     http
-      .expectOne('/api/v1/gemstones/sessions/nope')
+      .expectOne('/api/gemstones/sessions/nope')
       .flush(
         { status: 404, detail: 'Not found, not yours, or expired.', code: 'GEM_SESSION_NOT_FOUND' },
         { status: 404, statusText: 'Not Found' },
@@ -92,7 +92,7 @@ describe('API layer state transitions', () => {
     const states = record(bracelets.getSizing());
 
     http
-      .expectOne('/api/v1/bracelets/sizing')
+      .expectOne('/api/bracelets/sizing')
       .flush({ status: 400, detail: 'refused', code }, { status: 400, statusText: 'Bad Request' });
 
     const last = states.at(-1);
@@ -106,7 +106,7 @@ describe('API layer state transitions', () => {
     // status 0: nothing arrived. Distinct from a 5xx, where a server answered
     // and failed — one is worth retrying immediately, the other is not.
     http
-      .expectOne((r) => r.url === '/api/v1/gemstones/materials')
+      .expectOne((r) => r.url === '/api/gemstones/materials')
       .error(new ProgressEvent('error'), { status: 0, statusText: 'Unknown Error' });
 
     expect(states.at(-1)).toMatchObject({
@@ -119,7 +119,7 @@ describe('API layer state transitions', () => {
     const states = record(gemstones.listMaterials());
 
     http
-      .expectOne((r) => r.url === '/api/v1/gemstones/materials')
+      .expectOne((r) => r.url === '/api/gemstones/materials')
       .flush(
         { status: 500, title: 'Internal Server Error', detail: 'An unexpected error occurred.' },
         { status: 500, statusText: 'Internal Server Error' },
@@ -134,7 +134,7 @@ describe('API layer state transitions', () => {
   it('reads Retry-After off a 429', () => {
     const states = record(gemstones.createSession(BIRTH));
 
-    http.expectOne('/api/v1/gemstones/sessions').flush(null, {
+    http.expectOne('/api/gemstones/sessions').flush(null, {
       status: 429,
       statusText: 'Too Many Requests',
       headers: new HttpHeaders({ 'Retry-After': '30' }),
@@ -150,7 +150,7 @@ describe('API layer state transitions', () => {
     const states = record(gemstones.createSession(BIRTH));
 
     // FluentValidation's shape: per-property messages and no `code`.
-    http.expectOne('/api/v1/gemstones/sessions').flush(
+    http.expectOne('/api/gemstones/sessions').flush(
       {
         title: 'Validation Error',
         status: 400,
@@ -174,7 +174,7 @@ describe('API layer state transitions', () => {
     const states = record(gemstones.listMaterials());
 
     http
-      .expectOne((r) => r.url === '/api/v1/gemstones/materials')
+      .expectOne((r) => r.url === '/api/gemstones/materials')
       .flush(
         { status: 400, code: 'SOMETHING_NEW_THE_BACKEND_ADDED' },
         { status: 400, statusText: 'Bad Request' },
@@ -189,9 +189,9 @@ describe('API layer state transitions', () => {
     it('posts birth data in the body and puts nothing in the url', () => {
       gemstones.createSession(BIRTH).subscribe();
 
-      const req: TestRequest = http.expectOne('/api/v1/gemstones/sessions');
+      const req: TestRequest = http.expectOne('/api/gemstones/sessions');
       expect(req.request.method).toBe('POST');
-      expect(req.request.urlWithParams).toBe('/api/v1/gemstones/sessions');
+      expect(req.request.urlWithParams).toBe('/api/gemstones/sessions');
       expect(req.request.body).toEqual(BIRTH);
       req.flush({});
     });
@@ -199,7 +199,7 @@ describe('API layer state transitions', () => {
     it('sends share as a query flag', () => {
       gemstones.setSessionShared('pid', true).subscribe();
 
-      const req = http.expectOne((r) => r.url === '/api/v1/gemstones/sessions/pid/share');
+      const req = http.expectOne((r) => r.url === '/api/gemstones/sessions/pid/share');
       expect(req.request.method).toBe('PUT');
       expect(req.request.params.get('share')).toBe('true');
       req.flush({});
@@ -208,7 +208,7 @@ describe('API layer state transitions', () => {
     it('keeps false and 0 in query params instead of dropping them', () => {
       gemstones.listMaterials({ isActive: false, page: 0 }).subscribe();
 
-      const req = http.expectOne((r) => r.url === '/api/v1/gemstones/materials');
+      const req = http.expectOne((r) => r.url === '/api/gemstones/materials');
       expect(req.request.params.get('isActive')).toBe('false');
       expect(req.request.params.get('page')).toBe('0');
       req.flush({
@@ -224,7 +224,7 @@ describe('API layer state transitions', () => {
     it('omits undefined query params entirely', () => {
       gemstones.listMaterials({ tradition: undefined, planet: 'Venus' }).subscribe();
 
-      const req = http.expectOne((r) => r.url === '/api/v1/gemstones/materials');
+      const req = http.expectOne((r) => r.url === '/api/gemstones/materials');
       expect(req.request.params.has('tradition')).toBe(false);
       expect(req.request.params.get('planet')).toBe('Venus');
       req.flush({

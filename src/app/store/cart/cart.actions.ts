@@ -1,3 +1,5 @@
+import type { SavedBracelet } from '@core/models/saved-bracelet.models';
+
 export class LoadCart {
   static readonly type = '[Cart] Load Cart';
 }
@@ -7,6 +9,14 @@ export class AddToCart {
   constructor(
     public productId: string,
     public quantity = 1,
+    public openDrawer = true,
+  ) {}
+}
+
+export class AddCustomBraceletToCart {
+  static readonly type = '[Cart] Add Custom Bracelet To Cart';
+  constructor(
+    public bracelet: SavedBracelet,
     public openDrawer = true,
   ) {}
 }

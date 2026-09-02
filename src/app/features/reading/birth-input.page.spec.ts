@@ -32,7 +32,7 @@ describe('sc-birth-input-page', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideRouter([]),
-        { provide: API_URLS, useValue: { rest: '/api/v1' } },
+        { provide: API_URLS, useValue: { rest: '/api' } },
       ],
     });
 
@@ -98,10 +98,10 @@ describe('sc-birth-input-page', () => {
   it('posts the birth input in the body, with nothing in the url', () => {
     submitValid();
 
-    const request = http.expectOne('/api/v1/gemstones/sessions');
+    const request = http.expectOne('/api/gemstones/sessions');
 
     expect(request.request.method).toBe('POST');
-    expect(request.request.urlWithParams).toBe('/api/v1/gemstones/sessions');
+    expect(request.request.urlWithParams).toBe('/api/gemstones/sessions');
     expect(request.request.body.birthInput.localDate).toBe('1990-05-14');
 
     request.flush({
@@ -117,7 +117,7 @@ describe('sc-birth-input-page', () => {
 
     submitValid();
     http
-      .expectOne('/api/v1/gemstones/sessions')
+      .expectOne('/api/gemstones/sessions')
       .flush({ publicId: 'fdc0bbe0-2986-4e19-a327-41c1f79f5a11', anonymousSessionId: null, expiresAtUtc: null, result: {} });
 
     fixture.detectChanges();
@@ -137,7 +137,7 @@ describe('sc-birth-input-page', () => {
     submitValid();
 
     http
-      .expectOne('/api/v1/gemstones/sessions')
+      .expectOne('/api/gemstones/sessions')
       .flush(
         { status: 400, detail: 'unusable', code: 'GEM_BIRTHDATA_INVALID' },
         { status: 400, statusText: 'Bad Request' },
@@ -152,7 +152,7 @@ describe('sc-birth-input-page', () => {
   it('surfaces the per-field messages on a validation failure', () => {
     submitValid();
 
-    http.expectOne('/api/v1/gemstones/sessions').flush(
+    http.expectOne('/api/gemstones/sessions').flush(
       {
         title: 'Validation Error',
         status: 400,
@@ -171,7 +171,7 @@ describe('sc-birth-input-page', () => {
   it('offers a retry on a rate limit and not on a refusal', () => {
     submitValid();
     http
-      .expectOne('/api/v1/gemstones/sessions')
+      .expectOne('/api/gemstones/sessions')
       .flush(null, { status: 429, statusText: 'Too Many Requests' });
     fixture.detectChanges();
 
@@ -182,7 +182,7 @@ describe('sc-birth-input-page', () => {
   it('never writes birth data anywhere that outlives the tab', () => {
     submitValid();
     http
-      .expectOne('/api/v1/gemstones/sessions')
+      .expectOne('/api/gemstones/sessions')
       .flush({ publicId: 'fdc0bbe0-2986-4e19-a327-41c1f79f5a11', anonymousSessionId: null, expiresAtUtc: null, result: {} });
 
     const persisted = [

@@ -1,10 +1,11 @@
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { GetCartGQL, GetCartProductsGQL, Language, Zodiac } from 'src/generated/graphql';
 
 import { Locale, LocaleService } from '@core/services/locale.service';
+import { beadImage } from '@features/designer/strand/bead-image';
 import { CartLine, GuestCartItem } from './cart.models';
 
 const GUEST_CART_KEY = 'witchlab_guest_cart';
@@ -58,7 +59,12 @@ export class CartService {
   }
 
   public merge(items: GuestCartItem[]): Observable<void> {
-    return this.http.post<void>('/api/v1/cart/merge', { items });
+    // Only standard product items are sent to server merge
+    const standardItems = items.filter((i) => !i.customBracelet);
+    if (standardItems.length === 0) {
+      return of(undefined);
+    }
+    return this.http.post<void>('/api/v1/cart/merge', { items: standardItems });
   }
 
   public getServerCart(): Observable<CartLine[]> {
@@ -78,20 +84,46 @@ export class CartService {
       return of([]);
     }
 
-    const ids = items.map((item) => item.productId);
+    const standardItems = items.filter((i) => !i.customBracelet);
+    const customItems = items.filter((i) => !!i.customBracelet);
+
+    const customLines: CartLine[] = customItems.map((item) => {
+      const bracelet = item.customBracelet!;
+      const primarySlug = bracelet.stones[0]?.slug;
+      const beadImg = primarySlug ? beadImage(primarySlug) : null;
+
+      return {
+        itemId: null,
+        productId: item.productId,
+        quantity: item.quantity,
+        name: bracelet.name,
+        price: bracelet.price,
+        imageUrl: beadImg,
+        stockQuantity: 99,
+        customBracelet: bracelet,
+      };
+    });
+
+    if (standardItems.length === 0) {
+      return of(customLines);
+    }
+
+    const ids = standardItems.map((item) => item.productId);
 
     return this.getCartProductsGQL
       .fetch({ variables: { ids, language: this.language() }, fetchPolicy: 'network-only' })
       .pipe(
         map((result) => {
           const products = result.data?.products?.items ?? [];
-          return items
+          const lines = standardItems
             .map((item) => {
               const product = products.find((p) => p.id === item.productId);
               return product ? this.toLine(product, item.quantity, null) : null;
             })
             .filter((line): line is CartLine => line !== null);
+          return [...customLines, ...lines];
         }),
+        catchError(() => of(customLines)),
       );
   }
 

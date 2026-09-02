@@ -63,7 +63,7 @@ import { beadImage } from '../strand/bead-image';
           tooltips — and it names the two things that make room, because "full"
           without a way out is just a dead end.
         -->
-        @if (full()) {
+        @if (full() && replacing() === null) {
           <p
             class="mt-4 rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-secondary)] px-4 py-3 text-sm leading-relaxed text-[var(--text-secondary)]"
             data-testid="palette-full"
@@ -81,7 +81,7 @@ import { beadImage } from '../strand/bead-image';
                 class="stone w-full rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-2 text-center"
                 [attr.data-slug]="stone.materialSlug"
                 [attr.aria-label]="label(stone)"
-                [disabled]="full()"
+                [disabled]="full() && replacing() === null"
                 (click)="stonePicked.emit(stone)"
               >
                 @if (image(stone.representativeSlug); as href) {
@@ -193,6 +193,7 @@ export class PalettePanelComponent {
    * press it.
    */
   public readonly full = input<boolean>(false);
+  public readonly replacing = input<number | null>(null);
 
   /**
    * The groups worth putting in front of a person.

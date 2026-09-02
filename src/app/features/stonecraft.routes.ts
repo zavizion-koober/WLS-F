@@ -4,16 +4,7 @@ import type { Routes } from '@angular/router';
  * StoneCraft's routes, mounted inside WLS-F's root layout.
  *
  * **Birth data never appears in a URL.** It is posted to the API, and the
- * `publicId` in the response is what routes. A URL is the single leakiest thing
- * in a browser — it lands in history, in the referrer header, in server access
- * logs, in a screenshot, in a pasted link — and date-plus-time-plus-place is
- * close to a unique identifier for a living person. There is no query parameter
- * on `/reading` for a reason, and `app.routes.spec.ts` asserts none appears.
- *
- * Exported as a static array rather than hidden behind `loadChildren` on
- * purpose: the two privacy specs walk the route table to prove no parameter
- * could carry birth data, and a lazily-loaded child table is invisible to them.
- * The components are still lazy — `loadComponent` per route.
+ * `publicId` in the response is what routes.
  */
 export const stonecraftRoutes: Routes = [
   {
@@ -30,9 +21,7 @@ export const stonecraftRoutes: Routes = [
   {
     /**
      * A shared reading. Server-rendered: a link someone sends to a friend should
-     * produce a preview and should not need JavaScript to say what it is. The
-     * shared projection contains no birth data, so rendering it on our server
-     * discloses nothing.
+     * produce a preview and should not need JavaScript to say what it is.
      */
     path: 'shared/:shareToken',
     loadComponent: () =>
@@ -49,10 +38,18 @@ export const stonecraftRoutes: Routes = [
   },
   {
     /**
-     * The designer. `publicId` is the reading's, opaque and carrying nothing —
-     * the same identifier `/reading/:publicId` uses, and for the same reason.
+     * The designer. `publicId` is the reading's, opaque and carrying nothing.
      */
     path: 'designer/:publicId',
     loadComponent: () => import('@features/designer/designer.page').then((m) => m.DesignerPage),
+  },
+  {
+    /**
+     * My saved bespoke bracelets collection. Client-rendered.
+     */
+    path: 'bracelets',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('@features/bracelets/my-bracelets.page').then((m) => m.MyBraceletsPageComponent),
   },
 ];

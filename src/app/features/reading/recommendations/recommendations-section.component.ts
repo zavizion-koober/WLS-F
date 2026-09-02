@@ -6,52 +6,56 @@ import type { CustomerRecommendation, SharedRecommendation } from '@core/models/
 import { ScEmptyStateComponent } from '@shared/components/sc-empty-state.component';
 
 import { groupByTier } from '../tier-grouping';
-
+import { RecommendedBraceletPreviewComponent } from './recommended-bracelet-preview.component';
 import { StoneCardComponent } from './stone-card.component';
 
 type AnyRecommendation = CustomerRecommendation | SharedRecommendation;
 
 /**
  * The ranked recommendations, grouped by tier.
- *
- * The order is the backend's — `Primary`, `Secondary`, `Supportive` — and so is
- * the order inside each group, because the engine already ranked by score against
- * evidence. Re-sorting here would replace a ranking computed from the corpus with
- * one computed from whatever number the UI happened to reach for.
- *
- * `Caution` is not a fourth group. The cautioned stones are a separate list on the
- * response and get their own section, presented as counsel.
  */
 @Component({
   selector: 'sc-recommendations-section',
   standalone: true,
-  imports: [RouterLink, TranslatePipe, StoneCardComponent, ScEmptyStateComponent],
+  imports: [
+    RouterLink,
+    TranslatePipe,
+    StoneCardComponent,
+    ScEmptyStateComponent,
+    RecommendedBraceletPreviewComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="mt-14" aria-labelledby="recommendations-heading">
       <h2
         id="recommendations-heading"
-        class="font-display text-section-title text-[var(--brand-green)]"
+        class="font-display text-section-title text-[#10523C]"
       >
         {{ 'STONECRAFT.READING.RECOMMENDED_TITLE' | translate }}
       </h2>
 
       @if (groups().length === 0) {
-        <!--
-          A real state, not a placeholder. The engine can rank nothing when the
-          birth data supports too few rules, and saying so beats an empty page.
-        -->
         <sc-empty-state
           [title]="'STONECRAFT.READING.NO_RECOMMENDATIONS_TITLE' | translate"
           [description]="'STONECRAFT.READING.NO_RECOMMENDATIONS' | translate"
         />
       } @else {
+        <!-- Recommended Bracelet Major Transition (Starting Composition) -->
+        @if (designPublicId(); as publicId) {
+          @if (isCustomerRecommendations(recommendations())) {
+            <sc-recommended-bracelet-preview
+              [recommendations]="asCustomerRecommendations(recommendations())"
+              [publicId]="publicId"
+            />
+          }
+        }
+
         @for (group of groups(); track group.tier) {
-          <div class="mt-8">
-            <h3 class="text-eyebrow text-[var(--gold-muted)]">
+          <div class="mt-10">
+            <h3 class="text-eyebrow text-[#8A7029]">
               {{ 'STONECRAFT.TIER.' + group.tier.toUpperCase() | translate }}
             </h3>
-            <p class="mt-1 text-sm leading-relaxed text-[var(--text-muted)]">
+            <p class="mt-1 text-xs sm:text-sm leading-relaxed text-[#5F5D56]">
               {{ 'STONECRAFT.TIER_NOTE.' + group.tier.toUpperCase() | translate }}
             </p>
 
@@ -63,29 +67,15 @@ type AnyRecommendation = CustomerRecommendation | SharedRecommendation;
           </div>
         }
 
-        <!--
-          The door into the designer, and the only one in the app.
-
-          Drawn only on the branch that has groups, on purpose: a reading that
-          ranked nothing has no palette, and D21 says a designer with no palette
-          has nothing honest to show — not an empty state, and not a fallback
-          listing the whole catalogue. Offering the door anyway would send
-          someone to a screen that cannot open.
-
-          (Written without the block sigil: the template parser reads one inside
-          an HTML comment as real control flow, and the file stops compiling.)
-
-          No price, because none exists to show: the backend computes none, and a
-          bracelet is quoted after the stones are sourced.
-        -->
+        <!-- Bottom Door into Designer -->
         @if (designPublicId(); as publicId) {
           <div
-            class="mt-12 rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-primary)] p-6 sm:p-8"
+            class="mt-12 rounded-xl border border-[#E2DDD2] bg-[#FCFBF9] p-6 sm:p-8 shadow-xs"
           >
-            <h3 class="font-display text-card-title text-[var(--brand-green)]">
+            <h3 class="font-display text-card-title text-[#10523C]">
               {{ 'STONECRAFT.READING.DESIGN_TITLE' | translate }}
             </h3>
-            <p class="mt-2 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)]">
+            <p class="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-[#5F5D56]">
               {{ 'STONECRAFT.READING.DESIGN_DESC' | translate }}
             </p>
             <a
@@ -104,14 +94,15 @@ type AnyRecommendation = CustomerRecommendation | SharedRecommendation;
 export class RecommendationsSectionComponent {
   public readonly recommendations = input.required<readonly AnyRecommendation[]>();
 
-  /**
-   * The owner's reading id, when there is one.
-   *
-   * Null on a shared reading, which is read through a `shareToken` the designer
-   * cannot use — and echoing an id that could is exactly what the shared
-   * projection exists never to do.
-   */
   public readonly designPublicId = input<string | null>(null);
 
   protected readonly groups = computed(() => groupByTier(this.recommendations()));
+
+  protected isCustomerRecommendations(recs: readonly AnyRecommendation[]): boolean {
+    return recs.length > 0 && 'cautions' in recs[0];
+  }
+
+  protected asCustomerRecommendations(recs: readonly AnyRecommendation[]): readonly CustomerRecommendation[] {
+    return recs as readonly CustomerRecommendation[];
+  }
 }

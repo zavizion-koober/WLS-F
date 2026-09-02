@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { LastReadingService } from '@core/services/last-reading.service';
 import { LocaleService } from '@core/services/locale.service';
 
 @Component({
@@ -45,6 +46,12 @@ import { LocaleService } from '@core/services/locale.service';
               <li>
                 <a routerLink="/shop" class="hover:text-[#CBB26A] transition-colors">
                   {{ 'NAVBAR.SHOP' | translate }}
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="designerLink()" class="hover:text-[#CBB26A] transition-colors flex items-center gap-1.5 text-[#CBB26A]">
+                  <span>✦</span>
+                  <span>{{ 'NAVBAR.DESIGNER' | translate }}</span>
                 </a>
               </li>
               <li>
@@ -157,4 +164,7 @@ import { LocaleService } from '@core/services/locale.service';
 })
 export class FooterComponent {
   public readonly localeService = inject(LocaleService);
+  private readonly lastReading = inject(LastReadingService);
+
+  public readonly designerLink = computed(() => ['/reading']);
 }

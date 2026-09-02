@@ -39,6 +39,10 @@ export const serverRoutes: ServerRoute[] = [
     path: 'designer/:publicId',
     renderMode: RenderMode.Client,
   },
+  {
+    path: 'bracelets',
+    renderMode: RenderMode.Client,
+  },
 
   /*
     The one StoneCraft route rendered on our server, and the reason SSR is worth

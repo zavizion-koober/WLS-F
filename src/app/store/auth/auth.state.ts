@@ -23,6 +23,7 @@ import {
 } from './auth.actions';
 import { LoadCart, MergeGuestCart } from '@store/cart/cart.actions';
 import { NotificationService } from '@core/services/notification.service';
+import { SavedBraceletsService } from '@core/services/saved-bracelets.service';
 
 @State<AuthStateModel>({
   name: 'auth',
@@ -41,6 +42,7 @@ export class AuthState {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly notification = inject(NotificationService);
   private readonly translate = inject(TranslateService);
+  private readonly savedBracelets = inject(SavedBraceletsService);
 
   @Action(Login)
   login(ctx: StateContext<AuthStateModel>, action: Login) {
@@ -73,6 +75,9 @@ export class AuthState {
           tap((user) => {
             ctx.patchState({ user, loading: false });
             ctx.dispatch(new MergeGuestCart());
+            this.savedBracelets.syncWithBackend().subscribe({
+              error: (e) => console.warn('Saved bracelets sync failed:', e),
+            });
             this.notification.success(
               this.translate.instant('MESSAGES.AUTH.LOGIN_SUCCESS'),
               this.translate.instant('MESSAGES.TITLES.SUCCESS'),
@@ -108,6 +113,9 @@ export class AuthState {
           tap((user) => {
             ctx.patchState({ user, loading: false });
             ctx.dispatch(new MergeGuestCart());
+            this.savedBracelets.syncWithBackend().subscribe({
+              error: (e) => console.warn('Saved bracelets sync failed:', e),
+            });
             this.notification.success(
               this.translate.instant('MESSAGES.AUTH.LOGIN_SUCCESS'),
               this.translate.instant('MESSAGES.TITLES.SUCCESS'),
@@ -139,6 +147,9 @@ export class AuthState {
           tap((user) => {
             ctx.patchState({ user, loading: false });
             ctx.dispatch(new MergeGuestCart());
+            this.savedBracelets.syncWithBackend().subscribe({
+              error: (e) => console.warn('Saved bracelets sync failed:', e),
+            });
             this.notification.success(
               this.translate.instant('MESSAGES.AUTH.LOGIN_SUCCESS'),
               this.translate.instant('MESSAGES.TITLES.SUCCESS'),
@@ -193,6 +204,9 @@ export class AuthState {
           tap((user) => {
             ctx.patchState({ user, loading: false });
             ctx.dispatch(new MergeGuestCart());
+            this.savedBracelets.syncWithBackend().subscribe({
+              error: (e) => console.warn('Saved bracelets sync failed:', e),
+            });
             this.notification.success(
               this.translate.instant('MESSAGES.AUTH.EMAIL_VERIFIED'),
               this.translate.instant('MESSAGES.TITLES.SUCCESS'),

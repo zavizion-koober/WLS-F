@@ -18,6 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CartService } from './cart.service';
 import { CartStateModel, GuestCartItem } from './cart.models';
 import {
+  AddCustomBraceletToCart,
   AddToCart,
   ClearCart,
   CloseCartDrawer,
@@ -30,6 +31,7 @@ import {
 } from './cart.actions';
 import { AuthSelectors } from '@store/auth/auth.selectors';
 import { NotificationService } from '@core/services/notification.service';
+import { SavedBraceletsService } from '@core/services/saved-bracelets.service';
 
 @State<CartStateModel>({
   name: 'cart',
@@ -42,6 +44,7 @@ import { NotificationService } from '@core/services/notification.service';
 @Injectable()
 export class CartState {
   private readonly cartService = inject(CartService);
+  private readonly savedBraceletsService = inject(SavedBraceletsService);
   private readonly store = inject(Store);
   private readonly notification = inject(NotificationService);
   private readonly translate = inject(TranslateService);
@@ -85,8 +88,21 @@ export class CartState {
     ctx.patchState({ loading: true });
 
     if (isAuth) {
+      const guestCustomItems = this.cartService.readGuest().filter((i) => !!i.customBracelet);
       return this.cartService.getServerCart().pipe(
-        tap((lines) => ctx.patchState({ lines, loading: false })),
+        switchMap((serverLines) => {
+          if (guestCustomItems.length === 0) {
+            ctx.patchState({ lines: serverLines, loading: false });
+            return of(serverLines);
+          }
+          return this.cartService.getGuestLines(guestCustomItems).pipe(
+            map((customLines) => {
+              const combined = [...customLines, ...serverLines];
+              ctx.patchState({ lines: combined, loading: false });
+              return combined;
+            }),
+          );
+        }),
         catchError(() => {
           ctx.patchState({ loading: false });
           return of([]);
@@ -107,7 +123,6 @@ export class CartState {
   @Action(AddToCart)
   addToCart(ctx: StateContext<CartStateModel>, action: AddToCart) {
     const isAuth = this.store.selectSnapshot(AuthSelectors.isAuthenticated);
-    const state = ctx.getState();
 
     if (action.openDrawer) {
       ctx.patchState({ drawerOpen: true });
@@ -141,6 +156,35 @@ export class CartState {
         }),
       );
     }
+  }
+
+  @Action(AddCustomBraceletToCart)
+  addCustomBraceletToCart(ctx: StateContext<CartStateModel>, action: AddCustomBraceletToCart) {
+    if (action.openDrawer) {
+      ctx.patchState({ drawerOpen: true });
+    }
+
+    const productId = `custom-bracelet-${action.bracelet.id}`;
+    const guestItems = this.cartService.readGuest();
+    const guestIndex = guestItems.findIndex((i) => i.productId === productId);
+
+    if (guestIndex >= 0) {
+      guestItems[guestIndex].quantity += 1;
+      guestItems[guestIndex].customBracelet = action.bracelet;
+    } else {
+      guestItems.push({ productId, quantity: 1, customBracelet: action.bracelet });
+    }
+
+    this.cartService.writeGuest(guestItems);
+    this.savedBraceletsService.updateStatus(action.bracelet.id, 'in_cart');
+
+    return ctx.dispatch(new LoadCart()).pipe(
+      tap(() => {
+        this.notification.success(
+          this.translate.instant('CHECKOUT.CART.ADDED_TO_BAG', { defaultValue: 'Custom bracelet added to ritual bag' }),
+        );
+      }),
+    );
   }
 
   @Action(UpdateCartQuantity)
@@ -197,6 +241,10 @@ export class CartState {
       );
     } else {
       let guestItems = this.cartService.readGuest();
+      const removedItem = guestItems.find((i) => i.productId === action.productId);
+      if (removedItem?.customBracelet) {
+        this.savedBraceletsService.updateStatus(removedItem.customBracelet.id, 'saved');
+      }
       guestItems = guestItems.filter((i) => i.productId !== action.productId);
       this.cartService.writeGuest(guestItems);
       return of(undefined);
@@ -227,7 +275,13 @@ export class CartState {
 
     return this.cartService.merge(guestItems).pipe(
       tap(() => {
-        this.cartService.clearGuest();
+        // Keep custom bracelets in guest storage if any
+        const customItems = guestItems.filter((i) => !!i.customBracelet);
+        if (customItems.length > 0) {
+          this.cartService.writeGuest(customItems);
+        } else {
+          this.cartService.clearGuest();
+        }
       }),
       switchMap(() => ctx.dispatch(new LoadCart())),
       catchError(() => {

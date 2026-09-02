@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { isRetryable } from '@core/api/api-failure';
 import { ApiErrorComponent } from '@shared/components/api-error.component';
 import { ScEmptyStateComponent } from '@shared/components/sc-empty-state.component';
 import { ScLoadingSkeletonComponent } from '@shared/components/sc-loading-skeleton.component';
+import { ScStepWizardComponent } from '@shared/components/sc-step-wizard.component';
 
 import { CalendarSectionComponent } from './calendar-section.component';
 import { ChartSectionComponent } from './chart/chart-section.component';
@@ -31,10 +33,12 @@ import { UnavailableSectionComponent } from './unavailable-section.component';
   selector: 'sc-reading-page',
   standalone: true,
   imports: [
+    RouterLink,
     TranslatePipe,
     ApiErrorComponent,
     ScEmptyStateComponent,
     ScLoadingSkeletonComponent,
+    ScStepWizardComponent,
     ChartSectionComponent,
     RecommendationsSectionComponent,
     CautionsSectionComponent,
@@ -44,7 +48,9 @@ import { UnavailableSectionComponent } from './unavailable-section.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <main class="atelier-container py-14 md:py-20">
+    <main class="atelier-container py-10 md:py-16 pb-24">
+      <sc-step-wizard [currentStep]="2" [publicId]="publicId()" />
+
       @if (store.isLoading()) {
         <div class="space-y-4" data-testid="reading-loading" aria-busy="true">
           <sc-loading-skeleton height="42px" customClass="max-w-sm" />
@@ -90,8 +96,32 @@ import { UnavailableSectionComponent } from './unavailable-section.component';
           <p class="mt-3 text-xs text-[var(--text-muted)]">
             {{ 'STONECRAFT.READING.RULEPACK' | translate: { version: reading.rulePackVersion } }}
           </p>
-          <div class="gold-rule mt-8"></div>
+          <div class="gold-rule mt-6"></div>
         </header>
+
+        <!-- Quick Action: Proceed directly to bracelet craft -->
+        <div
+          class="mt-8 p-5 sm:p-6 rounded-xl bg-gradient-to-r from-[#0D2B1D] via-[#10523C] to-[#0A1A12] text-[#FCFBF9] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-[#8A7029]/30 shadow-md"
+        >
+          <div class="space-y-1">
+            <span class="text-[10px] uppercase tracking-widest text-[#CBB26A] font-semibold flex items-center gap-1">
+              <span>✦</span>
+              <span>{{ 'STONECRAFT.READING.READY_TITLE' | translate }}</span>
+            </span>
+            <h2 class="font-display text-base sm:text-lg font-bold text-[#FCFBF9]">
+              {{ 'STONECRAFT.READING.READY_HEADING' | translate }}
+            </h2>
+            <p class="text-xs text-[#F4F1EA]/80 max-w-xl leading-relaxed font-light">
+              {{ 'STONECRAFT.READING.READY_DESC' | translate }}
+            </p>
+          </div>
+          <a
+            [routerLink]="['/designer', publicId()]"
+            class="btn-gold-accent text-xs px-6 py-3 uppercase tracking-wider font-semibold whitespace-nowrap shadow-sm cursor-pointer w-full sm:w-auto text-center shrink-0"
+          >
+            {{ 'STONECRAFT.READING.DESIGN_CTA' | translate }} →
+          </a>
+        </div>
 
         <sc-chart-section [chart]="reading.chart" />
 
@@ -109,6 +139,26 @@ import { UnavailableSectionComponent } from './unavailable-section.component';
         <sc-unavailable-section [groups]="reading.unavailable" />
 
         <sc-share-panel [publicId]="publicId()" />
+
+        <!-- Mobile Sticky CTA to Designer -->
+        <div
+          class="fixed bottom-0 inset-x-0 bg-[#0D2B1D]/95 backdrop-blur-md p-3.5 border-t border-[#8A7029]/40 z-30 lg:hidden shadow-2xl flex items-center justify-between gap-3"
+        >
+          <div class="truncate">
+            <span class="text-[10px] uppercase tracking-wider text-[#CBB26A] font-semibold block truncate">
+              {{ 'STONECRAFT.READING.READY_TITLE' | translate }}
+            </span>
+            <span class="text-xs text-[#FCFBF9] font-medium truncate block">
+              {{ 'STONECRAFT.STEPS.BRACELET' | translate }}
+            </span>
+          </div>
+          <a
+            [routerLink]="['/designer', publicId()]"
+            class="btn-gold-accent text-xs px-4 py-2 uppercase tracking-wider font-semibold whitespace-nowrap shrink-0 shadow-sm"
+          >
+            {{ 'STONECRAFT.READING.DESIGN_CTA' | translate }} →
+          </a>
+        </div>
       }
     </main>
   `,

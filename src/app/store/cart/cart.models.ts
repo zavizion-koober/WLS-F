@@ -1,8 +1,10 @@
 import { Zodiac } from 'src/generated/graphql';
+import type { SavedBracelet } from '@core/models/saved-bracelet.models';
 
 export interface GuestCartItem {
   productId: string;
   quantity: number;
+  customBracelet?: SavedBracelet | null;
 }
 
 export interface CartLine {
@@ -16,6 +18,7 @@ export interface CartLine {
   zodiac?: Zodiac | null;
   categoryId?: string | null;
   intentionId?: string | null;
+  customBracelet?: SavedBracelet | null;
 }
 
 export interface CartStateModel {
